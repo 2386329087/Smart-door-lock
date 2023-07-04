@@ -91,6 +91,6 @@ C_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Peripheral/src/%.o: ../Peripheral/src/%.c
-	@	@	riscv-none-embed-gcc -march=rv32imacxw -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Debug" -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Core" -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\User" -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Peripheral\inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@	@	riscv-none-embed-gcc -march=rv32imacxw -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -I"E:\DOC\git\zhizhangmengsuo-1\Debug" -I"E:\DOC\git\zhizhangmengsuo-1\Core" -I"E:\DOC\git\zhizhangmengsuo-1\User" -I"E:\DOC\git\zhizhangmengsuo-1\Peripheral\inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@	@
 

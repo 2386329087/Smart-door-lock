@@ -53,7 +53,7 @@ all: 智障门锁.elf secondary-outputs
 
 # 工具调用
 智障门锁.elf: $(OBJS) $(USER_OBJS)
-	@	@	riscv-none-embed-gcc -march=rv32imacxw -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -T "E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Ld\Link.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"智障门锁.map" --specs=nano.specs --specs=nosys.specs -o "智障门锁.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	@	@	riscv-none-embed-gcc -march=rv32imacxw -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -T "E:\DOC\git\zhizhangmengsuo-1\Ld\Link.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"智障门锁.map" --specs=nano.specs --specs=nosys.specs -o "智障门锁.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@	@
 智障门锁.hex: 智障门锁.elf
 	@	riscv-none-embed-objcopy -O ihex "智障门锁.elf"  "智障门锁.hex"
