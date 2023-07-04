@@ -1,3 +1,4 @@
+void test();
 void main(){
     
 }
