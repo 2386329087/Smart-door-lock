@@ -1,6 +1,8 @@
 #include <AS608.h>
 #include "debug.h"
 
+uint8_t test;
+
 uint8_t as608_receive_data[128];    //存放指纹返回信息
 uint8_t as608_receive_count;
 
@@ -25,11 +27,13 @@ void AS608_PIN_Init(void)
         GPIO_InitTypeDef  GPIO_InitStructure;
         USART_InitTypeDef USART_InitStructure;
         NVIC_InitTypeDef  NVIC_InitStructure;
+
         //开启时钟
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART8, ENABLE);
         GPIO_PinRemapConfig(GPIO_FullRemap_USART8, ENABLE);
+
         /* USART8 TX-->E14 RX-->E15*/
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -37,10 +41,11 @@ void AS608_PIN_Init(void)
         GPIO_Init(GPIOE, &GPIO_InitStructure);
 
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
-        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
         GPIO_Init(GPIOE, &GPIO_InitStructure);
 
-        USART_InitStructure.USART_BaudRate = 115200;                    // 波特率
+        USART_InitStructure.USART_BaudRate = 57600;                    // 波特率
         USART_InitStructure.USART_WordLength = USART_WordLength_8b;     // 数据位 8
         USART_InitStructure.USART_StopBits = USART_StopBits_1;          // 停止位 1
         USART_InitStructure.USART_Parity = USART_Parity_No;             // 无校验
@@ -50,6 +55,8 @@ void AS608_PIN_Init(void)
         USART_Init(UART8, &USART_InitStructure);
 
         USART_ITConfig(UART8, USART_IT_RXNE, ENABLE);
+
+        NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
         NVIC_InitStructure.NVIC_IRQChannel = UART8_IRQn;
         NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
@@ -80,7 +87,7 @@ void AS608_PIN_Init(void)
             NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;
             NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
             NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
             NVIC_Init(&NVIC_InitStructure);
 }
 
@@ -92,10 +99,13 @@ void Uart8_SendData(uint8_t Data)
 
 void UART8_IRQHandler(void)
 {
-    if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
+    if(USART_GetITStatus(UART8, USART_IT_RXNE) != RESET)
     {
         as608_receive_data[as608_receive_count] = USART_ReceiveData(UART8);
         as608_receive_count++;
+//        test=USART_ReceiveData(UART8);
+//        Uart8_SendData(test);
+        USART_ClearITPendingBit(UART8, USART_IT_RXNE);
     }
 }
 

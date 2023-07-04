@@ -39,7 +39,6 @@
 int main(void)
 {
 
-
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
 	Delay_Init();
@@ -53,8 +52,8 @@ int main(void)
 
 	while(1)
     {
-	   as608_find_fingerprints_num();
-	   delay_ms(1000);
+	    as608_find_fingerprints_num();
+	    Delay_Ms(1000);
 	}
 }
 
