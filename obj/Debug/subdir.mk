@@ -16,6 +16,6 @@ C_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Debug/%.o: ../Debug/%.c
-	@	@	riscv-none-embed-gcc -march=rv32imacxw -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -I"E:\新桌面\临时改动\ch32\测试\智障门锁\Debug" -I"E:\新桌面\临时改动\ch32\测试\智障门锁\Core" -I"E:\新桌面\临时改动\ch32\测试\智障门锁\User" -I"E:\新桌面\临时改动\ch32\测试\智障门锁\Peripheral\inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@	@	riscv-none-embed-gcc -march=rv32imacxw -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Debug" -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Core" -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\User" -I"E:\新桌面\临时改动\ch32\测试\git\zhizhangmengsuo\Peripheral\inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@	@
 
