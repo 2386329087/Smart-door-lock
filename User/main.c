@@ -53,8 +53,7 @@ int main(void)
 
 	while(1)
     {
-        //test
-        //main
+        
 	   as608_find_fingerprints_num();
 	   delay_ms(1000);
 	}
