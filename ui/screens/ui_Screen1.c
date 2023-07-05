@@ -10,39 +10,29 @@ void ui_Screen1_screen_init(void)
     ui_Screen1 = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Screen1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
+    ui_TextArea2 = lv_textarea_create(ui_Screen1);
+    lv_obj_set_height(ui_TextArea2, 36);
+    lv_obj_set_width(ui_TextArea2, lv_pct(100));
+    lv_obj_set_align(ui_TextArea2, LV_ALIGN_TOP_MID);
+    lv_textarea_set_placeholder_text(ui_TextArea2, "Placeholder...");
+
+    ui_Keyboard2 = lv_keyboard_create(ui_Screen1);
+    lv_keyboard_set_mode(ui_Keyboard2, LV_KEYBOARD_MODE_NUMBER);
+    lv_obj_set_height(ui_Keyboard2, 170);
+    lv_obj_set_width(ui_Keyboard2, lv_pct(100));
+    lv_obj_set_align(ui_Keyboard2, LV_ALIGN_BOTTOM_MID);
+
     ui_Label2 = lv_label_create(ui_Screen1);
     lv_obj_set_width(ui_Label2, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label2, "你好世界!");
+    lv_obj_set_x(ui_Label2, -8);
+    lv_obj_set_y(ui_Label2, 45);
+    lv_obj_set_align(ui_Label2, LV_ALIGN_TOP_MID);
+    lv_label_set_text(ui_Label2, "请输入密码");
     lv_obj_set_style_text_font(ui_Label2, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Spinner2 = lv_spinner_create(ui_Screen1, 1000, 90);
-    lv_obj_set_width(ui_Spinner2, 80);
-    lv_obj_set_height(ui_Spinner2, 80);
-    lv_obj_set_x(ui_Spinner2, -2);
-    lv_obj_set_y(ui_Spinner2, -59);
-    lv_obj_set_align(ui_Spinner2, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Spinner2, LV_OBJ_FLAG_CLICKABLE);      /// Flags
-
-    ui_Button2 = lv_btn_create(ui_Screen1);
-    lv_obj_set_width(ui_Button2, 100);
-    lv_obj_set_height(ui_Button2, 50);
-    lv_obj_set_x(ui_Button2, -57);
-    lv_obj_set_y(ui_Button2, 73);
-    lv_obj_set_align(ui_Button2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button1 = lv_btn_create(ui_Screen1);
-    lv_obj_set_width(ui_Button1, 100);
-    lv_obj_set_height(ui_Button1, 50);
-    lv_obj_set_x(ui_Button1, 60);
-    lv_obj_set_y(ui_Button1, 73);
-    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
+    lv_keyboard_set_textarea(ui_Keyboard2, ui_TextArea2);
+    lv_obj_add_event_cb(ui_Keyboard2, ui_event_Keyboard2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Screen1, ui_event_Screen1, LV_EVENT_ALL, NULL);
 
 }

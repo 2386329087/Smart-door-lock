@@ -12,10 +12,15 @@
 void ui_Screen1_screen_init(void);
 void ui_event_Screen1(lv_event_t * e);
 lv_obj_t * ui_Screen1;
+lv_obj_t * ui_TextArea2;
+void ui_event_Keyboard2(lv_event_t * e);
+lv_obj_t * ui_Keyboard2;
 lv_obj_t * ui_Label2;
-lv_obj_t * ui_Spinner2;
-lv_obj_t * ui_Button2;
-lv_obj_t * ui_Button1;
+
+// SCREEN: ui_Screen2
+void ui_Screen2_screen_init(void);
+lv_obj_t * ui_Screen2;
+lv_obj_t * ui_Label1;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -37,6 +42,14 @@ void ui_event_Screen1(lv_event_t * e)
         screen1_init(e);
     }
 }
+void ui_event_Keyboard2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_READY) {
+        submit_password(e);
+    }
+}
 
 ///////////////////// SCREENS ////////////////////
 
@@ -47,6 +60,7 @@ void ui_init(void)
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ui_Screen1_screen_init();
+    ui_Screen2_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Screen1);
 }

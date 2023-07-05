@@ -10,7 +10,7 @@
   "ranges": [
     "0x20-0x7f"
   ],
-  "symbols": "你好世界",
+  "symbols": "请输入密码正确错误主界面",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }

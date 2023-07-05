@@ -4,10 +4,23 @@
 // Project name: SmartDoorLock
 
 #include "ui.h"
-
+// #include "task.h"
+// #include "FreeRTOS.h"
 void screen1_init(lv_event_t * e)
 {
 	lv_group_remove_all_objs(lv_group_get_default());
-    lv_group_add_obj(lv_group_get_default(),ui_Button1);
-    lv_group_add_obj(lv_group_get_default(),ui_Button2);
+    lv_group_add_obj(lv_group_get_default(),ui_Keyboard2);
+}
+
+void submit_password(lv_event_t * e)
+{
+	if (strcmp(lv_textarea_get_text(ui_TextArea2),"123")==0)
+    {
+        lv_label_set_text(ui_Label2,"密码正确");
+        _ui_screen_change(ui_Screen2, LV_SCR_LOAD_ANIM_MOVE_LEFT, 1000, 500);
+        
+    }else{
+        lv_label_set_text(ui_Label2,"密码错误");
+    }
+    
 }
