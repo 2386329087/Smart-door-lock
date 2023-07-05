@@ -15,7 +15,7 @@
 /*********************
  *      DEFINES
  *********************/
-#define MY_DISP_HOR_RES    320
+#define MY_DISP_HOR_RES    240
 #define MY_DISP_VER_RES    240
 #ifndef MY_DISP_HOR_RES
     #warning Please define or replace the macro MY_DISP_HOR_RES with the actual screen width, default value 320 is used for now.
