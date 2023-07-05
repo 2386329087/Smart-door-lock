@@ -18,7 +18,8 @@
 #include "debug.h"
 #include "FreeRTOS.h"
 #include "task.h"
-
+#include "lvgl.h"
+#include "lv_port_disp.h"
 /* Global define */
 #define TASK1_TASK_PRIO     5
 #define TASK1_STK_SIZE      256
@@ -109,7 +110,9 @@ int main(void)
 	printf("SystemClk:%d\r\n",SystemCoreClock);
 	printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 	printf("FreeRTOS Kernel Version:%s\r\n",tskKERNEL_VERSION_NUMBER);
-
+    lv_init();
+    lv_port_disp_init();
+    //ui_init();
 	GPIO_Toggle_INIT();
 	/* create two task */
     xTaskCreate((TaskFunction_t )task2_task,
