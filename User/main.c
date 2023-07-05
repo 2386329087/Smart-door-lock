@@ -51,9 +51,9 @@ void lvgl_timer_task(void *pvParameters)
             printf("task2 entry\r\n");
             xSemaphoreGive(uart2_mutex_handler);
         }
-
+        lv_timer_handler();
         // printf("task2 entry\r\n");
-        vTaskDelay(pdMS_TO_TICKS(16));
+        vTaskDelay(pdMS_TO_TICKS(20));
     }
 }
 
