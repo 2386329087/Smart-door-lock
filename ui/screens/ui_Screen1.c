@@ -25,4 +25,24 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_align(ui_Spinner2, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Spinner2, LV_OBJ_FLAG_CLICKABLE);      /// Flags
 
+    ui_Button2 = lv_btn_create(ui_Screen1);
+    lv_obj_set_width(ui_Button2, 100);
+    lv_obj_set_height(ui_Button2, 50);
+    lv_obj_set_x(ui_Button2, -57);
+    lv_obj_set_y(ui_Button2, 73);
+    lv_obj_set_align(ui_Button2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Button2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_Button2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Button1 = lv_btn_create(ui_Screen1);
+    lv_obj_set_width(ui_Button1, 100);
+    lv_obj_set_height(ui_Button1, 50);
+    lv_obj_set_x(ui_Button1, 60);
+    lv_obj_set_y(ui_Button1, 73);
+    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    lv_obj_add_event_cb(ui_Screen1, ui_event_Screen1, LV_EVENT_ALL, NULL);
+
 }

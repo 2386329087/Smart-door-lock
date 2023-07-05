@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+void screen1_init(lv_event_t * e);
+
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif

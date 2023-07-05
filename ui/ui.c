@@ -10,9 +10,12 @@
 
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
+void ui_event_Screen1(lv_event_t * e);
 lv_obj_t * ui_Screen1;
 lv_obj_t * ui_Label2;
 lv_obj_t * ui_Spinner2;
+lv_obj_t * ui_Button2;
+lv_obj_t * ui_Button1;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -26,6 +29,14 @@ lv_obj_t * ui____initial_actions0;
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event_Screen1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        screen1_init(e);
+    }
+}
 
 ///////////////////// SCREENS ////////////////////
 

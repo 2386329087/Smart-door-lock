@@ -16,9 +16,12 @@ extern "C" {
 #include "ui_events.h"
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
+void ui_event_Screen1(lv_event_t * e);
 extern lv_obj_t * ui_Screen1;
 extern lv_obj_t * ui_Label2;
 extern lv_obj_t * ui_Spinner2;
+extern lv_obj_t * ui_Button2;
+extern lv_obj_t * ui_Button1;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_FONT_DECLARE(ui_font_chinese);

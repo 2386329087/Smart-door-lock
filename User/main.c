@@ -20,6 +20,7 @@
 #include "task.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
+#include "lv_port_indev.h"
 #include "semphr.h"
 #include "ui.h" 
 #include "keyboard.h"
@@ -27,6 +28,7 @@
 
 
 /* Global Variable */
+lv_group_t *group;
 TaskHandle_t lvgl_tick_Task_Handler;
 TaskHandle_t lvgl_timer_Task_Handler;
 TaskHandle_t Task1_Handler;
@@ -43,6 +45,7 @@ void lvgl_tick_task(void *pvParameters)
 void lvgl_timer_task(void *pvParameters)
 {
     lv_port_disp_init();
+    lv_port_indev_init();
     ui_init();
     
     while(1)
@@ -85,6 +88,10 @@ int main(void)
 	printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 	printf("FreeRTOS Kernel Version:%s\r\n",tskKERNEL_VERSION_NUMBER);
     lv_init();
+    
+    group=lv_group_create();
+    lv_group_set_default(group);
+    
     
 
     uart2_mutex_handler= xSemaphoreCreateMutex();
