@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "debug.h": "c",
+        "freertos.h": "c",
+        "task.h": "c",
+        "keyboard.h": "c",
+        "semphr.h": "c",
+        "lv_port_disp.h": "c",
+        "lvgl.h": "c"
+    }
+}
