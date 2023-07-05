@@ -35,10 +35,6 @@ void lvgl_tick_task(void *pvParameters)
 {
     while(1)
     {
-        // if(xSemaphoreTake(uart2_mutex_handler,pdMS_TO_TICKS(100))==pdPASS){
-        //     printf("task1 entry\r\n");
-        //     xSemaphoreGive(uart2_mutex_handler);
-        // }
         lv_tick_inc(2);
         vTaskDelay(pdMS_TO_TICKS(2));
     }
@@ -46,15 +42,18 @@ void lvgl_tick_task(void *pvParameters)
 
 void lvgl_timer_task(void *pvParameters)
 {
+    lv_port_disp_init();
+    ui_init();
+    
     while(1)
     {
         lv_timer_handler();
-        vTaskDelay(pdMS_TO_TICKS(20));
+        vTaskDelay(pdMS_TO_TICKS(33));
     }
 }
 void task1(void *pvParameters)
 {
-    
+    keyboard_Pin_Init();
     uint8_t r=1;
     while(1)
     {
@@ -86,9 +85,8 @@ int main(void)
 	printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 	printf("FreeRTOS Kernel Version:%s\r\n",tskKERNEL_VERSION_NUMBER);
     lv_init();
-    lv_port_disp_init();
-    ui_init();
-    keyboard_Pin_Init();
+    
+
     uart2_mutex_handler= xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task,"lvgl_tick_task",512,NULL,14,&lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task,"lvgl_timer_task",2100,NULL,5,&lvgl_timer_Task_Handler);

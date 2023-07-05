@@ -14,6 +14,15 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_width(ui_Label2, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label2, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Label2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label2, "helloworld!");
+    lv_label_set_text(ui_Label2, "你好世界!");
+    lv_obj_set_style_text_font(ui_Label2, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Spinner2 = lv_spinner_create(ui_Screen1, 1000, 90);
+    lv_obj_set_width(ui_Spinner2, 80);
+    lv_obj_set_height(ui_Spinner2, 80);
+    lv_obj_set_x(ui_Spinner2, -2);
+    lv_obj_set_y(ui_Spinner2, -59);
+    lv_obj_set_align(ui_Spinner2, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Spinner2, LV_OBJ_FLAG_CLICKABLE);      /// Flags
 
 }
