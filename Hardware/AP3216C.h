@@ -3,7 +3,7 @@
 
 #include "debug.h"
 
-#define AP3216C_ADDR    0X1E	//AP3216CÆ÷¼þIICµØÖ·
+#define AP3216C_ADDR    0X1E
 
 u8 AP3216C_Init(void);
 u8 AP3216C_WriteOneByte(u8 reg, u8 data);

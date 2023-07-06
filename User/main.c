@@ -20,75 +20,52 @@
 #include "task.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
+#include "lv_port_indev.h"
+#include "semphr.h"
+#include "ui.h" 
+#include "keyboard.h"
 /* Global define */
-#define TASK1_TASK_PRIO     5
-#define TASK1_STK_SIZE      256
-#define TASK2_TASK_PRIO     5
-#define TASK2_STK_SIZE      256
+
 
 /* Global Variable */
-TaskHandle_t Task1Task_Handler;
-TaskHandle_t Task2Task_Handler;
-
-
-/*********************************************************************
- * @fn      GPIO_Toggle_INIT
- *
- * @brief   Initializes GPIOA.0/1
- *
- * @return  none
- */
-void GPIO_Toggle_INIT(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStructure={0};
-
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-  GPIO_Init(GPIOA, &GPIO_InitStructure);
-}
-
-
-/*********************************************************************
- * @fn      task1_task
- *
- * @brief   task1 program.
- *
- * @param  *pvParameters - Parameters point of task1
- *
- * @return  none
- */
-void task1_task(void *pvParameters)
+lv_group_t *group;
+TaskHandle_t lvgl_tick_Task_Handler;
+TaskHandle_t lvgl_timer_Task_Handler;
+TaskHandle_t Task1_Handler;
+SemaphoreHandle_t uart2_mutex_handler;
+void lvgl_tick_task(void *pvParameters)
 {
     while(1)
     {
-        printf("task1 entry\r\n");
-        GPIO_SetBits(GPIOA, GPIO_Pin_0);
-        vTaskDelay(250);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_0);
-        vTaskDelay(250);
+        lv_tick_inc(2);
+        vTaskDelay(pdMS_TO_TICKS(2));
     }
 }
 
-/*********************************************************************
- * @fn      task2_task
- *
- * @brief   task2 program.
- *
- * @param  *pvParameters - Parameters point of task2
- *
- * @return  none
- */
-void task2_task(void *pvParameters)
+void lvgl_timer_task(void *pvParameters)
 {
+    lv_port_disp_init();
+    lv_port_indev_init();
+    ui_init();
+    
     while(1)
     {
-        printf("task2 entry\r\n");
-        GPIO_ResetBits(GPIOA, GPIO_Pin_1);
-        vTaskDelay(500);
-        GPIO_SetBits(GPIOA, GPIO_Pin_1);
-        vTaskDelay(500);
+        lv_timer_handler();
+        vTaskDelay(pdMS_TO_TICKS(33));
+    }
+}
+void task1(void *pvParameters)
+{
+    keyboard_Pin_Init();
+    uint8_t r=1;
+    while(1)
+    {
+        r= keyboard_uint_scan();
+        if(xSemaphoreTake(uart2_mutex_handler,pdMS_TO_TICKS(100))==pdPASS){
+            printf("key:%d\n",r);   
+            xSemaphoreGive(uart2_mutex_handler);
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 
@@ -111,23 +88,16 @@ int main(void)
 	printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 	printf("FreeRTOS Kernel Version:%s\r\n",tskKERNEL_VERSION_NUMBER);
     lv_init();
-    lv_port_disp_init();
-    //ui_init();
-	GPIO_Toggle_INIT();
-	/* create two task */
-    xTaskCreate((TaskFunction_t )task2_task,
-                        (const char*    )"task2",
-                        (uint16_t       )TASK2_STK_SIZE,
-                        (void*          )NULL,
-                        (UBaseType_t    )TASK2_TASK_PRIO,
-                        (TaskHandle_t*  )&Task2Task_Handler);
+    
+    group=lv_group_create();
+    lv_group_set_default(group);
+    
+    
 
-    xTaskCreate((TaskFunction_t )task1_task,
-                    (const char*    )"task1",
-                    (uint16_t       )TASK1_STK_SIZE,
-                    (void*          )NULL,
-                    (UBaseType_t    )TASK1_TASK_PRIO,
-                    (TaskHandle_t*  )&Task1Task_Handler);
+    uart2_mutex_handler= xSemaphoreCreateMutex();
+    xTaskCreate(lvgl_tick_task,"lvgl_tick_task",512,NULL,14,&lvgl_tick_Task_Handler);
+    xTaskCreate(lvgl_timer_task,"lvgl_timer_task",2100,NULL,5,&lvgl_timer_Task_Handler);
+    xTaskCreate(task1,"task1",256,NULL,5,&Task1_Handler);
     vTaskStartScheduler();
 
 	while(1)

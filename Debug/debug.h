@@ -27,9 +27,13 @@
 
 /* DEBUG UATR Definition */
 #ifndef DEBUG
-#define DEBUG   DEBUG_UART1
+#define DEBUG   DEBUG_UART2
 #endif
 
+#ifndef USE_FREERTOS
+//是否使用操作系统
+#define USE_FREERTOS 1
+#endif
 
 void Delay_Init(void);
 void Delay_Us (uint32_t n);

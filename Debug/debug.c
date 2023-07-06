@@ -12,8 +12,14 @@
 *******************************************************************************/
 #include "debug.h"
 
+#if(USE_FREERTOS)
+#include "FreeRTOS.h"
+#include "task.h"
+
+#else
 static uint8_t  p_us = 0;
 static uint16_t p_ms = 0;
+#endif
 
 /*********************************************************************
  * @fn      Delay_Init
@@ -24,8 +30,13 @@ static uint16_t p_ms = 0;
  */
 void Delay_Init(void)
 {
+    #if(USE_FREERTOS)
+
+    #else
     p_us = SystemCoreClock / 8000000;
     p_ms = (uint16_t)p_us * 1000;
+    #endif
+
 }
 
 /*********************************************************************
@@ -39,6 +50,10 @@ void Delay_Init(void)
  */
 void Delay_Us(uint32_t n)
 {
+    #if(USE_FREERTOS)
+    uint32_t i=144*n;
+    while(--i);
+    #else
     uint32_t i;
 
     SysTick->SR &= ~(1 << 0);
@@ -51,6 +66,7 @@ void Delay_Us(uint32_t n)
     while((SysTick->SR & (1 << 0)) != (1 << 0))
         ;
     SysTick->CTLR &= ~(1 << 0);
+    #endif
 }
 
 /*********************************************************************
@@ -64,6 +80,9 @@ void Delay_Us(uint32_t n)
  */
 void Delay_Ms(uint32_t n)
 {
+    #if(USE_FREERTOS)
+    vTaskDelay(pdMS_TO_TICKS(n));
+    #else
     uint32_t i;
 
     SysTick->SR &= ~(1 << 0);
@@ -76,6 +95,7 @@ void Delay_Ms(uint32_t n)
     while((SysTick->SR & (1 << 0)) != (1 << 0))
         ;
     SysTick->CTLR &= ~(1 << 0);
+    #endif
 }
 
 /*********************************************************************
