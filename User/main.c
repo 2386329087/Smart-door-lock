@@ -19,9 +19,12 @@
 */
 
 #include "debug.h"
-#include "LCD.h"
+#include "lcd_st7789.h"
 #include "keyboard.h"
 #include "AS608.h"
+#include "ov.h"
+#include "AP3216C.h"
+
 /* Global typedef */
 
 /* Global define */
@@ -38,6 +41,7 @@
  */
 int main(void)
 {
+    uint16_t a,b,c;
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
@@ -48,12 +52,15 @@ int main(void)
 	printf("This is printf example\r\n");
 
 	AS608_PIN_Init();
-	keyboard_Pin_Init();         //�紥����������������������ƣ����ٴ������
+
+	keyboard_Pin_Init();
+
+	AP3216C_Init();
 
 	while(1)
     {
 	    as608_find_fingerprints_num();
-	    Delay_Ms(1000);
+	    delay_ms(1000);
 	}
 }
 
