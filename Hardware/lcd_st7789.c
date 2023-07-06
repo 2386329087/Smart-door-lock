@@ -426,6 +426,12 @@ void LCD_DrawPoint(u16 x, u16 y)
     LCD_WriteHalfWord(FORE_COLOR);
 }
 
+void LCD_DrawPoint_color(u16 x, u16 y,u16 color)
+{
+    LCD_AddressSetWrite(x, y, x, y);
+    LCD_WriteHalfWord(color);
+}
+
 /**
  * display a point on the lcd using the given colour.
  *

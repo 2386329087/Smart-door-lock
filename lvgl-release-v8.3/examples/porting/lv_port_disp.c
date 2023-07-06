@@ -11,7 +11,7 @@
  *********************/
 #include "lv_port_disp.h"
 #include <stdbool.h>
-#include "LCD.h"
+#include "lcd_st7789.h"
 /*********************
  *      DEFINES
  *********************/
@@ -132,7 +132,7 @@ void lv_port_disp_init(void)
 /*Initialize your display and the required peripherals.*/
 static void disp_init(void)
 {
-    lcd_init();
+    LCD_Init();
 }
 
 volatile bool disp_flush_enabled = true;
@@ -164,7 +164,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
         for(y = area->y1; y <= area->y2; y++) {
             for(x = area->x1; x <= area->x2; x++) {
                 /*Put a pixel to the display. For example:*/
-                lcd_draw_point_color(x,y,color_p->full);
+                LCD_DrawPoint_color(x,y,color_p->full);
                 color_p++;
             }
         }

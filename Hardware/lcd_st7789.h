@@ -62,6 +62,7 @@ void LCD_Dot(u16 x, u16 y, u16 color);
 void LCD_Fill(u16 x_start, u16 y_start, u16 x_end, u16 y_end, u16 color);
 
 void LCD_DrawPoint(u16 x, u16 y);
+void LCD_DrawPoint_color(u16 x, u16 y,u16 color);
 void LCD_DrawCircle(u16 x0, u16 y0, u8 r);
 void LCD_DrawLine(u16 x1, u16 y1, u16 x2, u16 y2);
 void LCD_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2, u8 inFill);

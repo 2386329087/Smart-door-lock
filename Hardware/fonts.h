@@ -8,6 +8,8 @@
 #ifndef USER_FONTS_H_
 #define USER_FONTS_H_
 
+#include "debug.h"
+
 #define ASC2_1608
 #define ASC2_2412
 #define ASC2_3216
