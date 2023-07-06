@@ -95,8 +95,7 @@ void AS608_PIN_Init(void)
 void Uart8_SendData(uint8_t Data)
 {
     USART_SendData(UART8, Data);
-    while (USART_GetFlagStatus(UART8, USART_FLAG_TXE) == RESET)
-        ;
+    while (USART_GetFlagStatus(UART8, USART_FLAG_TXE) == RESET);
 }
 
 void UART8_IRQHandler(void)

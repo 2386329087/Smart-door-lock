@@ -8,6 +8,8 @@
 #ifndef USER_OV2640_REGS_H_
 #define USER_OV2640_REGS_H_
 
+#include "debug.h"
+
 #define QCIF_WIDTH 176
 #define QCIF_HEIGHT 144
 #define QVGA_WIDTH 320

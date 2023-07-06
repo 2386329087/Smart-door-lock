@@ -24,6 +24,7 @@
 #include "AS608.h"
 #include "ov.h"
 #include "AP3216C.h"
+#include "DHT11.h"
 
 /* Global typedef */
 
@@ -41,6 +42,8 @@
  */
 int main(void)
 {
+    uint8_t i;
+
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
 	Delay_Init();
@@ -55,9 +58,13 @@ int main(void)
 
 	AP3216C_Init();
 
+	DHT11_Init();
+
 	while(1)
     {
-
+	    i=keyboard_uint_scan();
+	    printf("%d\r\n",i);
+	    Delay_Ms(500);
 	}
 }
 
