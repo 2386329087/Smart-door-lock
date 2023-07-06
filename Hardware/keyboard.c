@@ -110,5 +110,5 @@ uint8_t keyboard_uint_scan(void)
                 case(0x4000) : return 0X0F ; break;       //#
                 case(0x8000) : return 0x0D ; break;       //D
             }
-            return 0x80;                             //无按键返回
+            return 0xff;                             //无按键返回
 }

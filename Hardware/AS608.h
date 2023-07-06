@@ -4,8 +4,8 @@
 #include "debug.h"
 #include <string.h>
 
-#define OPEN_USART2_RECEIVE     USART_ITConfig(UART8, USART_IT_RXNE, ENABLE)
-#define CLOSE_USART2_RECEIVE    USART_ITConfig(UART8, USART_IT_RXNE, DISABLE)
+#define OPEN_UART8_RECEIVE     USART_ITConfig(UART8, USART_IT_RXNE, ENABLE)
+#define CLOSE_UART8_RECEIVE    USART_ITConfig(UART8, USART_IT_RXNE, DISABLE)
 
 #define     AS608_WAK_RCC                   RCC_APB2Periph_GPIOB
 #define     AS608_WAK_PORT                  GPIOB
@@ -52,8 +52,5 @@ uint8_t as608_empty_all_fingerprint(void);                          //清空所�
 uint8_t as608_find_fingerprints_num(void);                          //查找指纹个数函数
 
 void Uart8_SendData(uint8_t Data);
-void as608_send_head(void);
-
-extern uint8_t test;
 
 #endif

@@ -1,4 +1,8 @@
 /obj
 .settings/language.settings.xml
 .settings/org.eclipse.core.resources.prefs
+<<<<<<< HEAD
 .settings/org.eclipse.cdt.codan.core.prefs
+=======
+.settings/language.settings.xml
+>>>>>>> note
