@@ -52,8 +52,5 @@ uint8_t as608_empty_all_fingerprint(void);                          //清空所有指
 uint8_t as608_find_fingerprints_num(void);                          //查找指纹个数函数
 
 void Uart8_SendData(uint8_t Data);
-void as608_send_head(void);
-uint8_t PS_WriteNotepad(uint8_t PageID);
-uint32_t PS_ReadNotepad(uint8_t PageID);
 
 #endif

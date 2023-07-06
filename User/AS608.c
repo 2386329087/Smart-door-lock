@@ -124,7 +124,7 @@ void EXTI15_10_IRQHandler(void)
 /***************************************************************************
 描述: 发送包头
 ****************************************************************************/
-void as608_send_head(void)
+static void as608_send_head(void)
 {
     Uart8_SendData(AS608_HEAD >> 8);
     Uart8_SendData(AS608_HEAD);
@@ -133,7 +133,7 @@ void as608_send_head(void)
 /***************************************************************************
 描述: 发送芯片地址
 ****************************************************************************/
-void as608_send_address(void)
+static void as608_send_address(void)
 {
     Uart8_SendData(AS608_ADDR >> 24);
     Uart8_SendData(AS608_ADDR >> 16);
@@ -144,7 +144,7 @@ void as608_send_address(void)
 /***************************************************************************
 描述: 发送包标识
 ****************************************************************************/
-void as608_send_logo(uint8_t logo)
+static void as608_send_logo(uint8_t logo)
 {
     Uart8_SendData(logo);
 }
@@ -152,7 +152,7 @@ void as608_send_logo(uint8_t logo)
 /***************************************************************************
 描述: 发送包长度
 ****************************************************************************/
-void as608_send_length(uint16_t length)
+static void as608_send_length(uint16_t length)
 {
     Uart8_SendData(length >> 8);
     Uart8_SendData(length);
@@ -161,7 +161,7 @@ void as608_send_length(uint16_t length)
 /***************************************************************************
 描述: 发送指令码
 ****************************************************************************/
-void as608_send_cmd(uint8_t cmd)
+static void as608_send_cmd(uint8_t cmd)
 {
     Uart8_SendData(cmd);
 }
@@ -169,7 +169,7 @@ void as608_send_cmd(uint8_t cmd)
 /***************************************************************************
 描述: 发送校验和
 ****************************************************************************/
-void as608_send_checksum(uint16_t checksum)
+static void as608_send_checksum(uint16_t checksum)
 {
     Uart8_SendData(checksum >> 8);
     Uart8_SendData(checksum);
@@ -178,7 +178,7 @@ void as608_send_checksum(uint16_t checksum)
 /***************************************************************************
 描述: 发送BufferID
 ****************************************************************************/
-void as608_send_BufferID(uint8_t BufferID)
+static void as608_send_BufferID(uint8_t BufferID)
 {
     Uart8_SendData(BufferID);
 }
@@ -186,7 +186,7 @@ void as608_send_BufferID(uint8_t BufferID)
 /***************************************************************************
 描述: 发送PageID
 ****************************************************************************/
-void as608_send_PageID(uint8_t PageID)
+static void as608_send_PageID(uint8_t PageID)
 {
     Uart8_SendData(PageID);
 }
@@ -194,7 +194,7 @@ void as608_send_PageID(uint8_t PageID)
 /***************************************************************************
 描述: 发送StartPage
 ****************************************************************************/
-void as608_send_StartPage(uint16_t StartPage)
+static void as608_send_StartPage(uint16_t StartPage)
 {
     Uart8_SendData(StartPage >> 8);
     Uart8_SendData(StartPage);
@@ -203,7 +203,7 @@ void as608_send_StartPage(uint16_t StartPage)
 /***************************************************************************
 描述: 发送PageNum
 ****************************************************************************/
-void as608_send_PageNum(uint16_t PageNum)
+static void as608_send_PageNum(uint16_t PageNum)
 {
     Uart8_SendData(PageNum >> 8);
     Uart8_SendData(PageNum);
@@ -212,95 +212,12 @@ void as608_send_PageNum(uint16_t PageNum)
 /***************************************************************************
 描述: 发送个数
 ****************************************************************************/
-void as608_send_N(uint16_t N)
+static void as608_send_N(uint16_t N)
 {
     Uart8_SendData(N >> 8);
     Uart8_SendData(N);
 }
 
-void as608_WriteNotepad(uint8_t Data)
-{
-    Uart8_SendData(Data);
-}
-
-/***************************************************************************
-描述: 写记事本
-参数: PageID 1~15 ,Data 32位  指令代码:18H
-返回: 00H: 表示 OK；     01H:收包错误
-****************************************************************************/
-uint8_t PS_WriteNotepad(uint8_t PageID)
-{
-    uint8_t result; // 存放结果
-    uint8_t i;
-    uint16_t temp = 0;
-
-    CLEAR_BUFFER; // 清空缓冲区
-
-    as608_send_head();         // 发送包头
-    as608_send_address();      // 发送芯片地址
-    as608_send_logo(0x01);     // 发送包标识
-    as608_send_length(0x36);   // 发送包长度
-    as608_send_cmd(0x18);      // 发送指令码
-    as608_send_PageID(PageID); // 发送页ID
-    for (i = 0; i < 32; i++)
-    {
-        as608_WriteNotepad(as608_WriteNotepad_data[i]);
-        temp += as608_WriteNotepad_data[i];
-    }
-    temp = 0x01 + 0x36 + 0x18 + PageID + temp;
-    as608_send_checksum(temp); // 发送校验和
-    OPEN_UART8_RECEIVE;        // 开启串口接收
-
-    result = as608_detection_data(300, NULL); // 检测指纹模块数据 3秒时间
-    if (result == 0XFF)
-        result = 0x01;
-
-    return result;
-}
-
-/***************************************************************************
-描述: 读记事本
-参数: 无                   指令代码:02H
-返回: 00H: 录入指纹成功     01H:收包错误    02H:无手指 03H:录入不成功
-****************************************************************************/
-uint32_t PS_ReadNotepad(uint8_t PageID)
-{
-    uint32_t result = 0x0000; // 存放结果
-    char *data;
-    uint16_t wait_time = 300;
-
-    CLEAR_BUFFER; // 清空缓冲区
-
-    as608_send_head();         // 发送包头
-    as608_send_address();      // 发送芯片地址
-    as608_send_logo(0x01);     // 发送包标识
-    as608_send_length(0x04);   // 发送包长度
-    as608_send_cmd(0x19);      // 发送指令码
-    as608_send_PageID(PageID); // 发送页ID
-    as608_send_checksum(0x05); // 发送校验和
-    OPEN_UART8_RECEIVE;        // 开启串口接收
-
-    while (wait_time--)
-    {
-        Delay_Ms(10);
-        // 匹配数据帧头
-        data = strstr((char *)as608_receive_data, (char *)check_head);
-        if (data != NULL)
-        {
-            result |= data[10];
-            result <<= 24;
-            result |= data[11];
-            result <<= 16;
-            result |= data[12];
-            result <<= 8;
-            result |= data[13];
-            break;
-        }
-    }
-    CLOSE_UART8_RECEIVE; // 禁止串口接收
-
-    return result;
-}
 
 /***************************************************************************
 描述: 获取手指指纹图像 存放于图像缓冲区
