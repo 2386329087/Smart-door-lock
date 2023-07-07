@@ -37,8 +37,8 @@ void lvgl_tick_task(void *pvParameters)
 {
     while(1)
     {
-        lv_tick_inc(2);
-        vTaskDelay(pdMS_TO_TICKS(2));
+        lv_tick_inc(1);
+        vTaskDelay(pdMS_TO_TICKS(1));
     }
 }
 
@@ -51,7 +51,7 @@ void lvgl_timer_task(void *pvParameters)
     while(1)
     {
         lv_timer_handler();
-        vTaskDelay(pdMS_TO_TICKS(33));
+        vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
 void task1(void *pvParameters)
@@ -95,8 +95,8 @@ int main(void)
     
 
     uart2_mutex_handler= xSemaphoreCreateMutex();
-    xTaskCreate(lvgl_tick_task,"lvgl_tick_task",512,NULL,14,&lvgl_tick_Task_Handler);
-    xTaskCreate(lvgl_timer_task,"lvgl_timer_task",2100,NULL,5,&lvgl_timer_Task_Handler);
+    xTaskCreate(lvgl_tick_task,"lvgl_tick_task",100,NULL,14,&lvgl_tick_Task_Handler);
+    xTaskCreate(lvgl_timer_task,"lvgl_timer_task",1000,NULL,5,&lvgl_timer_Task_Handler);
     xTaskCreate(task1,"task1",256,NULL,5,&Task1_Handler);
     vTaskStartScheduler();
 
