@@ -842,7 +842,7 @@ void LCD_ShowString(u16 x, u16 y, u32 size, u8 bkgd, const char *fmt, ...)
  * @return   0: display success
  *          -1: the image is too large
  */
-void LCD_ShowImage(u16 x, u16 y, u16 width, u16 height, const u8 *p)
+void LCD_ShowImage(u16 x, u16 y, u16 width, u16 height, const u16 *p)
 {
     u16 i = 0;
 
@@ -853,8 +853,9 @@ void LCD_ShowImage(u16 x, u16 y, u16 width, u16 height, const u8 *p)
     }
 
     LCD_AddressSetWrite(x, y, x + width - 1, y + height - 1);
-    for (i = 0; i < width * height * 2; i++)
+    for (i = 0; i < width * height ; i++)
     {
+        *(__IO u8 *)LCD_DATA = p[i]>>8;
         *(__IO u8 *)LCD_DATA = p[i];
     }
 }

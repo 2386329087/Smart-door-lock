@@ -69,7 +69,7 @@ void LCD_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2, u8 inFill);
 
 void LCD_ShowNum(u16 x, u16 y, u32 num, u8 len, u32 size, u8 bkground);
 void LCD_ShowString(u16 x, u16 y, u32 size, u8 bkground, const char *fmt, ...);
-void LCD_ShowImage(u16 x, u16 y, u16 length, u16 wide, const u8 *p);
+void LCD_ShowImage(u16 x, u16 y, u16 length, u16 wide, const u16 *p);
 void LCD_OverlayImage(u16 x, u16 y, u16 width, u16 height, u8 rotate, u8 flip, const u8 *p);
 
 void LCD_EnterSleep(void);
