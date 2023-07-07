@@ -22,9 +22,8 @@ void ui_Screen2_screen_init(void);
 void ui_event_Screen2(lv_event_t * e);
 lv_obj_t * ui_Screen2;
 lv_obj_t * ui_Label1;
-lv_obj_t * ui_TextArea3;
-lv_obj_t * ui_Slider2;
 lv_obj_t * ui_Switch2;
+lv_obj_t * ui_Image2;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////

@@ -24,11 +24,27 @@ void submit_password(lv_event_t * e)
     }
     
 }
-
+uint8_t my_img_data[128];
+lv_img_dsc_t my_img_dsc = {
+        .header.always_zero = 0,
+        .header.w = 8,
+        .header.h = 8,
+        .data_size = 8 * 8 * LV_COLOR_DEPTH / 8,
+        .header.cf = LV_IMG_CF_TRUE_COLOR,          /*Set the color format*/
+        .data = my_img_data,
+};
 void screen2_init(lv_event_t * e)
 {
+    
 	lv_group_remove_all_objs(lv_group_get_default());
-    lv_group_add_obj(lv_group_get_default(),ui_TextArea3);
-    lv_group_add_obj(lv_group_get_default(),ui_Slider2);
     lv_group_add_obj(lv_group_get_default(),ui_Switch2);
+    
+    for (int i = 0; i < 128; i++)
+    {
+        my_img_data[i]=31;
+    }
+    
+    
+    
+    lv_img_set_src(ui_Image2,&my_img_dsc);
 }
