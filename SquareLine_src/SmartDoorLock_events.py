@@ -6,3 +6,7 @@ def screen1_init(event_struct):
 def submit_password(event_struct):
     return
 
+
+def screen2_init(event_struct):
+    return
+

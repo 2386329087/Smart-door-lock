@@ -19,8 +19,12 @@ lv_obj_t * ui_Label2;
 
 // SCREEN: ui_Screen2
 void ui_Screen2_screen_init(void);
+void ui_event_Screen2(lv_event_t * e);
 lv_obj_t * ui_Screen2;
 lv_obj_t * ui_Label1;
+lv_obj_t * ui_TextArea3;
+lv_obj_t * ui_Slider2;
+lv_obj_t * ui_Switch2;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -48,6 +52,14 @@ void ui_event_Keyboard2(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_READY) {
         submit_password(e);
+    }
+}
+void ui_event_Screen2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        screen2_init(e);
     }
 }
 

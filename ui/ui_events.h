@@ -12,6 +12,7 @@ extern "C" {
 
 void screen1_init(lv_event_t * e);
 void submit_password(lv_event_t * e);
+void screen2_init(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

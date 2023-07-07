@@ -24,3 +24,11 @@ void submit_password(lv_event_t * e)
     }
     
 }
+
+void screen2_init(lv_event_t * e)
+{
+	lv_group_remove_all_objs(lv_group_get_default());
+    lv_group_add_obj(lv_group_get_default(),ui_TextArea3);
+    lv_group_add_obj(lv_group_get_default(),ui_Slider2);
+    lv_group_add_obj(lv_group_get_default(),ui_Switch2);
+}

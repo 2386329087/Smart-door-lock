@@ -125,7 +125,7 @@ static void keypad_init(void)
     GPIO_InitTypeDef i;
     i.GPIO_Mode=GPIO_Mode_IN_FLOATING;
     i.GPIO_Speed=GPIO_Speed_50MHz;
-    i.GPIO_Pin=GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3;
+    i.GPIO_Pin=GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5;
     GPIO_Init(GPIOE,&i);
     i.GPIO_Pin=GPIO_Pin_13|GPIO_Pin_6;
     GPIO_Init(GPIOD,&i);
@@ -158,6 +158,12 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
             case 5:
                 act_key = LV_KEY_ENTER;
                 break;
+            case 6:
+                act_key = LV_KEY_UP;
+                break;
+            case 7:
+                act_key = LV_KEY_DOWN;
+                break;
         }
 
         last_key = act_key;
@@ -173,8 +179,10 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 static uint32_t keypad_get_key(void)
 {
     /*Your code comes here*/
-    if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1)==0)return 2;
-    else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2)==0)return 1;
+    if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)==0)return 2;
+    else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_5)==0)return 1;
+    else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1)==0)return 6;
+    else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2)==0)return 7;
     else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)==0)return 4;
     else if (GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==0)return 3;
     else if (GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_13)==0)return 5;

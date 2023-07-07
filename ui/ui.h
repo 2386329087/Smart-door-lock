@@ -24,8 +24,12 @@ extern lv_obj_t * ui_Keyboard2;
 extern lv_obj_t * ui_Label2;
 // SCREEN: ui_Screen2
 void ui_Screen2_screen_init(void);
+void ui_event_Screen2(lv_event_t * e);
 extern lv_obj_t * ui_Screen2;
 extern lv_obj_t * ui_Label1;
+extern lv_obj_t * ui_TextArea3;
+extern lv_obj_t * ui_Slider2;
+extern lv_obj_t * ui_Switch2;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_FONT_DECLARE(ui_font_chinese);
