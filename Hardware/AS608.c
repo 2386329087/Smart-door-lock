@@ -754,7 +754,7 @@ uint8_t as608_add_fingerprint(uint16_t PageID)
         case 1:
             printf("请放置手指\r\n");
             if (as608_detection_finger(800))
-                return 0x02;        // 等待手指按下
+                return 0x01;        // 等待手指按下
             result = PS_GetImage(); // 获取指纹图像
             if (result)
             {
@@ -846,7 +846,7 @@ uint16_t as608_verify_fingerprint(void)
         case 1:
             printf("请放置手指\r\n");
             if (as608_detection_finger(800))
-                return 0x02;        // 等待手指按下
+                return 0x0;        // 等待手指按下
             result = PS_GetImage(); // 获取指纹图像
             if (result)
             {

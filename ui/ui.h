@@ -14,24 +14,44 @@ extern "C" {
 
 #include "ui_helpers.h"
 #include "ui_events.h"
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-void ui_event_Screen1(lv_event_t * e);
-extern lv_obj_t * ui_Screen1;
+// SCREEN: ui_start
+void ui_start_screen_init(void);
+void ui_event_start(lv_event_t * e);
+extern lv_obj_t * ui_start;
+extern lv_obj_t * ui_Label4;
+// SCREEN: ui_userScreen
+void ui_userScreen_screen_init(void);
+void ui_event_userScreen(lv_event_t * e);
+extern lv_obj_t * ui_userScreen;
+void ui_event_enterpassword(lv_event_t * e);
+extern lv_obj_t * ui_enterpassword;
+extern lv_obj_t * ui_Label3;
+void ui_event_camera(lv_event_t * e);
+extern lv_obj_t * ui_camera;
+extern lv_obj_t * ui_Label5;
+extern lv_obj_t * ui_Label7;
+// SCREEN: ui_passwordScreen
+void ui_passwordScreen_screen_init(void);
+void ui_event_passwordScreen(lv_event_t * e);
+extern lv_obj_t * ui_passwordScreen;
 extern lv_obj_t * ui_TextArea2;
 void ui_event_Keyboard2(lv_event_t * e);
 extern lv_obj_t * ui_Keyboard2;
 extern lv_obj_t * ui_Label2;
-// SCREEN: ui_Screen2
-void ui_Screen2_screen_init(void);
-void ui_event_Screen2(lv_event_t * e);
-extern lv_obj_t * ui_Screen2;
+// SCREEN: ui_adminScreen
+void ui_adminScreen_screen_init(void);
+void ui_event_adminScreen(lv_event_t * e);
+extern lv_obj_t * ui_adminScreen;
+void ui_event_Button1(lv_event_t * e);
+extern lv_obj_t * ui_Button1;
 extern lv_obj_t * ui_Label1;
-extern lv_obj_t * ui_Switch2;
-extern lv_obj_t * ui_Image2;
+// SCREEN: ui_whiteScreen
+void ui_whiteScreen_screen_init(void);
+extern lv_obj_t * ui_whiteScreen;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_FONT_DECLARE(ui_font_chinese);
+LV_FONT_DECLARE(ui_font_chinese24);
 
 void ui_init(void);
 

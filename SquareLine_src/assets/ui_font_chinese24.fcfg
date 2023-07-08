@@ -1,0 +1,16 @@
+{
+  "codename": "chinese24",
+  "ttf_path": "\\assets\\微软雅黑.ttf",
+  "bin_path": "\\assets\\ui_font_chinese24.bin",
+  "c_path": "\\assets\\ui_font_chinese24.c",
+  "cfg_path": "\\assets\\ui_font_chinese24.fcfg",
+  "size": 24,
+  "bpp": 2,
+  "letters": 0,
+  "ranges": [
+    "0x20-0x7f"
+  ],
+  "symbols": "智能门锁按入指纹以继续正在识别成功失败",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}

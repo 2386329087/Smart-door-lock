@@ -8,22 +8,44 @@
 
 ///////////////////// VARIABLES ////////////////////
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-void ui_event_Screen1(lv_event_t * e);
-lv_obj_t * ui_Screen1;
+// SCREEN: ui_start
+void ui_start_screen_init(void);
+void ui_event_start(lv_event_t * e);
+lv_obj_t * ui_start;
+lv_obj_t * ui_Label4;
+
+// SCREEN: ui_userScreen
+void ui_userScreen_screen_init(void);
+void ui_event_userScreen(lv_event_t * e);
+lv_obj_t * ui_userScreen;
+void ui_event_enterpassword(lv_event_t * e);
+lv_obj_t * ui_enterpassword;
+lv_obj_t * ui_Label3;
+void ui_event_camera(lv_event_t * e);
+lv_obj_t * ui_camera;
+lv_obj_t * ui_Label5;
+lv_obj_t * ui_Label7;
+
+// SCREEN: ui_passwordScreen
+void ui_passwordScreen_screen_init(void);
+void ui_event_passwordScreen(lv_event_t * e);
+lv_obj_t * ui_passwordScreen;
 lv_obj_t * ui_TextArea2;
 void ui_event_Keyboard2(lv_event_t * e);
 lv_obj_t * ui_Keyboard2;
 lv_obj_t * ui_Label2;
 
-// SCREEN: ui_Screen2
-void ui_Screen2_screen_init(void);
-void ui_event_Screen2(lv_event_t * e);
-lv_obj_t * ui_Screen2;
+// SCREEN: ui_adminScreen
+void ui_adminScreen_screen_init(void);
+void ui_event_adminScreen(lv_event_t * e);
+lv_obj_t * ui_adminScreen;
+void ui_event_Button1(lv_event_t * e);
+lv_obj_t * ui_Button1;
 lv_obj_t * ui_Label1;
-lv_obj_t * ui_Switch2;
-lv_obj_t * ui_Image2;
+
+// SCREEN: ui_whiteScreen
+void ui_whiteScreen_screen_init(void);
+lv_obj_t * ui_whiteScreen;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -37,12 +59,47 @@ lv_obj_t * ui____initial_actions0;
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
-void ui_event_Screen1(lv_event_t * e)
+void ui_event_start(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOADED) {
+        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 1000);
+    }
+}
+void ui_event_userScreen(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
-        screen1_init(e);
+        userScreen_init(e);
+    }
+}
+void ui_event_enterpassword(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(ui_passwordScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+    }
+}
+void ui_event_camera(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        click_camera_open(e);
+    }
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        click_camera_close(e);
+    }
+}
+void ui_event_passwordScreen(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        passwordScreen_init(e);
     }
 }
 void ui_event_Keyboard2(lv_event_t * e)
@@ -53,12 +110,20 @@ void ui_event_Keyboard2(lv_event_t * e)
         submit_password(e);
     }
 }
-void ui_event_Screen2(lv_event_t * e)
+void ui_event_adminScreen(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
-        screen2_init(e);
+        adminScreen_init(e);
+    }
+}
+void ui_event_Button1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        add_fingerprint(e);
     }
 }
 
@@ -70,8 +135,11 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_Screen1_screen_init();
-    ui_Screen2_screen_init();
+    ui_start_screen_init();
+    ui_userScreen_screen_init();
+    ui_passwordScreen_screen_init();
+    ui_adminScreen_screen_init();
+    ui_whiteScreen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_Screen1);
+    lv_disp_load_scr(ui_start);
 }
