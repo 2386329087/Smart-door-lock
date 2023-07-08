@@ -56,15 +56,15 @@ void lvgl_timer_task(void *pvParameters)
 }
 void task1(void *pvParameters)
 {
-    printf("dht11:%d\n",DHT11_Init()); 
-    uint8_t t=3,h=3;
+    DHT11_Init(); 
+    uint8_t t,h;
     while(1)
     {
-        printf("read:%d\n",DHT11_Read_Data(&t,&h));
+        DHT11_Read_Data(&t,&h);
         if(xSemaphoreTake(uart2_mutex_handler,pdMS_TO_TICKS(100))==pdPASS){
             printf("t:%d h:%d\n",t,h);   
             xSemaphoreGive(uart2_mutex_handler);
-        }
+        }   
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
