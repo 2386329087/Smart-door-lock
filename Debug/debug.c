@@ -15,7 +15,7 @@
 #if(USE_FREERTOS)
 #include "FreeRTOS.h"
 #include "task.h"
-
+#include "timer.h"
 #else
 static uint8_t  p_us = 0;
 static uint16_t p_ms = 0;
@@ -31,7 +31,7 @@ static uint16_t p_ms = 0;
 void Delay_Init(void)
 {
     #if(USE_FREERTOS)
-
+    TIM3_Init();
     #else
     p_us = SystemCoreClock / 8000000;
     p_ms = (uint16_t)p_us * 1000;
@@ -48,11 +48,10 @@ void Delay_Init(void)
  *
  * @return  None
  */
-void Delay_Us(uint32_t n)
+void Delay_Us(uint16_t n)
 {
     #if(USE_FREERTOS)
-    uint32_t i=144*n;
-    while(--i);
+    TIM3_Delayus(n);
     #else
     uint32_t i;
 

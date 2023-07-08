@@ -23,7 +23,7 @@
 #include "lv_port_indev.h"
 #include "semphr.h"
 #include "ui.h" 
-#include "keyboard.h"
+#include "DHT11.h"
 /* Global define */
 
 
@@ -56,16 +56,16 @@ void lvgl_timer_task(void *pvParameters)
 }
 void task1(void *pvParameters)
 {
-    keyboard_Pin_Init();
-    uint8_t r=1;
+    printf("dht11:%d\n",DHT11_Init()); 
+    uint8_t t=3,h=3;
     while(1)
     {
-        r= keyboard_uint_scan();
+        printf("read:%d\n",DHT11_Read_Data(&t,&h));
         if(xSemaphoreTake(uart2_mutex_handler,pdMS_TO_TICKS(100))==pdPASS){
-            printf("key:%d\n",r);   
+            printf("t:%d h:%d\n",t,h);   
             xSemaphoreGive(uart2_mutex_handler);
         }
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
@@ -87,6 +87,7 @@ int main(void)
 	printf("SystemClk:%d\r\n",SystemCoreClock);
 	printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 	printf("FreeRTOS Kernel Version:%s\r\n",tskKERNEL_VERSION_NUMBER);
+    
     lv_init();
     
     group=lv_group_create();
@@ -97,7 +98,7 @@ int main(void)
     uart2_mutex_handler= xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task,"lvgl_tick_task",100,NULL,14,&lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task,"lvgl_timer_task",1000,NULL,5,&lvgl_timer_Task_Handler);
-    xTaskCreate(task1,"task1",256,NULL,5,&Task1_Handler);
+    xTaskCreate(task1,"task1",256,NULL,13,&Task1_Handler);
     vTaskStartScheduler();
 
 	while(1)
