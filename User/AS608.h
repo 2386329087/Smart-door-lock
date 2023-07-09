@@ -7,16 +7,16 @@
 #define OPEN_UART8_RECEIVE     USART_ITConfig(UART8, USART_IT_RXNE, ENABLE)
 #define CLOSE_UART8_RECEIVE    USART_ITConfig(UART8, USART_IT_RXNE, DISABLE)
 
-#define     AS608_WAK_RCC                   RCC_APB2Periph_GPIOB
-#define     AS608_WAK_PORT                  GPIOB
-#define     AS608_WAK_PIN                   GPIO_Pin_0
+#define     AS608_WAK_RCC                   RCC_APB2Periph_GPIOE
+#define     AS608_WAK_PORT                  GPIOE
+#define     AS608_WAK_PIN                   GPIO_Pin_13
 
-#define     AS608_WAK_EXTILINE_PORT         GPIO_PortSourceGPIOB
-#define     AS608_WAK_EXTILINE_PIN          GPIO_PinSource0
+#define     AS608_WAK_EXTILINE_PORT         GPIO_PortSourceGPIOE
+#define     AS608_WAK_EXTILINE_PIN          GPIO_PinSource13
 
-#define     AS608_WAK_EXTILINE_NUMBER       EXTI_Line0
+#define     AS608_WAK_EXTILINE_NUMBER       EXTI_Line13
 
-#define     AS608_WAK_NVIC_CHANNEL          EXTI0_IRQn
+#define     AS608_WAK_NVIC_CHANNEL          EXTI15_10_IRQn
 
 
 #define     FINGER_EXIST        1
@@ -29,28 +29,30 @@
 #define     CharBuffer1     0x01
 #define     CharBuffer2     0x02
 
-extern uint8_t as608_receive_data[128]; //´æ·ÅÖ¸ÎÆ·µ»ØĞÅÏ¢
+extern uint8_t as608_receive_data[128]; //å­˜æ”¾æŒ‡çº¹è¿”å›ä¿¡æ¯
 extern uint8_t as608_receive_count;
 
-extern uint16_t ID;                         //´æ·ÅIDºÅ ·½±ã½øĞĞÉ¾³ı²Ù×÷
-extern uint16_t NUM;                        //´æ·Å¸öÊı ·½±ã½øĞĞÉ¾³ı²Ù×÷
+extern uint16_t ID;                         //å­˜æ”¾IDå· æ–¹ä¾¿è¿›è¡Œåˆ é™¤æ“ä½œ
+extern uint16_t NUM;                        //å­˜æ”¾ä¸ªæ•° æ–¹ä¾¿è¿›è¡Œåˆ é™¤æ“ä½œ
 extern uint8_t finger_status;
 
 void AS608_PIN_Init(void);
 
 void as60x_wak_init(void);
 
-uint8_t as608_detection_finger(uint16_t wait_time);                     //¼ì²âÊÖÖ¸ÊÇ·ñÔÚÄ£¿éÉÏ
-uint8_t as608_detection_data(uint16_t wait_time,uint16_t **ID_OR_NUM);  //¼ì²âÖ¸ÎÆÄ£¿é·µ»ØµÄÊı¾İ
-uint8_t as608_detection_checknum(char *data,uint16_t **ID_OR_NUM);      //¼ì²âÊı¾İ°ü¼ìÑéºÍÊÇ·ñ×¼È·
+uint8_t as608_detection_finger(uint16_t wait_time);                     //æ£€æµ‹æ‰‹æŒ‡æ˜¯å¦åœ¨æ¨¡å—ä¸Š
+uint8_t as608_detection_data(uint16_t wait_time,uint16_t *ID_OR_NUM);  //æ£€æµ‹æŒ‡çº¹æ¨¡å—è¿”å›çš„æ•°æ®
+uint8_t as608_detection_checknum(char *data,uint16_t *ID_OR_NUM);      //æ£€æµ‹æ•°æ®åŒ…æ£€éªŒå’Œæ˜¯å¦å‡†ç¡®
 
 
-uint8_t as608_add_fingerprint(uint16_t PageID);                     //Â¼ÈëÖ¸ÎÆº¯Êı
-uint16_t as608_verify_fingerprint(void);                                //ÑéÖ¤Ö¸ÎÆº¯Êı
-uint8_t as608_delete_fingerprint(void);                             //É¾³ıÖ¸ÎÆº¯Êı
-uint8_t as608_empty_all_fingerprint(void);                          //Çå¿ÕËùÓĞÖ¸ÎÆº¯Êı
-uint8_t as608_find_fingerprints_num(void);                          //²éÕÒÖ¸ÎÆ¸öÊıº¯Êı
+uint8_t as608_add_fingerprint(uint16_t PageID,void (*p)(uint8_t));      //å½•å…¥æŒ‡çº¹å‡½æ•°
+uint16_t as608_verify_fingerprint(void);                               //éªŒè¯æŒ‡çº¹å‡½æ•°
+uint8_t as608_delete_fingerprint(void);                             //åˆ é™¤æŒ‡çº¹å‡½æ•°
+uint8_t as608_empty_all_fingerprint(void);                          //æ¸…ç©ºæ‰€æœ‰æŒ‡çº¹å‡½æ•°
+uint8_t as608_find_fingerprints_num(void);                          //æŸ¥æ‰¾æŒ‡çº¹ä¸ªæ•°å‡½æ•°
 
 void Uart8_SendData(uint8_t Data);
+uint8_t PS_Empty(void);
+uint8_t as608_detection_finger(uint16_t wait_time);
 
 #endif

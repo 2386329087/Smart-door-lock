@@ -25,7 +25,7 @@
 #include "ov.h"
 #include "AP3216C.h"
 #include "DHT11.h"
-
+#include "timer.h"
 /* Global typedef */
 
 /* Global define */
@@ -42,7 +42,7 @@
  */
 int main(void)
 {
-    uint8_t i;
+    uint16_t i;
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
@@ -53,18 +53,27 @@ int main(void)
 	printf("This is printf example\r\n");
 
 	AS608_PIN_Init();
+	printf("This is printf2\r\n");
+//
+//	keyboard_Pin_Init();
+//
+//	AP3216C_Init();
+//
+//	DHT11_Init();
 
-	keyboard_Pin_Init();
+//	Delay_test();
+//	TIM3_Init();
 
-	AP3216C_Init();
-
-	DHT11_Init();
+//	for (i = 1; i < 30; ++i)
+//	{
+//	    as608_add_fingerprint(i);
+//	    printf("ID:%d\r\n",i);
+//    }
 
 	while(1)
     {
-	    i=keyboard_uint_scan();
-	    printf("%d\r\n",i);
-	    Delay_Ms(500);
+//	    as608_add_fingerprint(1);
+	    as608_verify_fingerprint();
+//	    as608_empty_all_fingerprint();
 	}
 }
-
