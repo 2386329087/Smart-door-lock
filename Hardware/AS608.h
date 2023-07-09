@@ -36,6 +36,9 @@ extern uint16_t ID;                         //存放ID号 方便进行删除操�
 extern uint16_t NUM;                        //存放个数 方便进行删除操作
 extern uint8_t finger_status;
 
+extern uint8_t PS_WriteNotepad_code[32];   //存放要发送的记事本数据
+extern uint8_t PS_ReadNotepad_code[32];    //存放接受到的记事本数据
+
 void AS608_PIN_Init(void);
 
 void as60x_wak_init(void);
@@ -52,7 +55,7 @@ uint8_t as608_empty_all_fingerprint(void);                          //清空所�
 uint8_t as608_find_fingerprints_num(void);                          //查找指纹个数函数
 
 void Uart8_SendData(uint8_t Data);
-uint8_t PS_Empty(void);
-uint8_t as608_detection_finger(uint16_t wait_time);
+uint8_t PS_WriteNotepad(uint8_t *Data);
+uint8_t PS_ReadNotepad(uint8_t *Data);
 
 #endif
