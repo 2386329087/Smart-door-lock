@@ -6,7 +6,7 @@
 #include "ui.h"
 #include "FreeRTOS.h"
 #include "task.h"
-
+#include "timers.h"
 #include "AS608.h"
 void submit_password(lv_event_t * e)
 {
@@ -53,16 +53,19 @@ void passwordScreen_init(lv_event_t * e)
 	lv_group_remove_all_objs(lv_group_get_default());
     lv_group_add_obj(lv_group_get_default(),ui_Keyboard2);
 }
-
+extern TimerHandle_t quit_timer_handler;
 void adminScreen_init(lv_event_t * e)
 {
 	lv_group_remove_all_objs(lv_group_get_default());
     lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);
     lv_group_add_obj(lv_group_get_default(),ui_emptyallfingerprintButton);
+    xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
+    
 }
 extern void add_fingerprint_task(void *pvParameters);
 void add_fingerprint(lv_event_t * e)
 {
+    xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
 	xTaskCreate(add_fingerprint_task,"add_fingerprint_task",200,NULL,13,NULL);
 }
 
@@ -74,5 +77,6 @@ void userScreen_Deinit(lv_event_t * e)
 
 void empty_all_fingerprint(lv_event_t * e)
 {
+    xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
 	as608_empty_all_fingerprint();
 }

@@ -18,6 +18,7 @@
 #include "debug.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "timers.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
 #include "lv_port_indev.h"
@@ -37,7 +38,7 @@
 lv_group_t *group;
 TaskHandle_t lvgl_tick_Task_Handler;
 TaskHandle_t lvgl_timer_Task_Handler;
-
+TimerHandle_t quit_timer_handler;
 SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler;
 void lvgl_tick_task(void *pvParameters)
 {
@@ -168,6 +169,9 @@ void add_fingerprint_task(void *pvParameters){
         )
     vTaskDelete(NULL);
 }
+void quit_timer_callback(){
+    lv_scr_load_anim(ui_userScreen,LV_SCR_LOAD_ANIM_MOVE_RIGHT,500,0,false);
+}
 /*********************************************************************
  * @fn      main
  *
@@ -197,7 +201,7 @@ int main(void)
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 5, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 64, NULL, 9, NULL);
-
+    quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*30),pdFALSE,NULL,quit_timer_callback);
     vTaskStartScheduler();
 
     while (1)
