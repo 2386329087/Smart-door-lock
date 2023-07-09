@@ -1,6 +1,6 @@
 #include "PWM.h"
 
-void PWM_Init(void)
+void Servo_Init(void)
 {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -18,7 +18,7 @@ void PWM_Init(void)
     TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
     TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInitStructure.TIM_Period = 20000 - 1;       //ARR
-    TIM_TimeBaseInitStructure.TIM_Prescaler = 72 - 1;       //PSC
+    TIM_TimeBaseInitStructure.TIM_Prescaler = 144 - 1;       //PSC
     TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;
     TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);
 

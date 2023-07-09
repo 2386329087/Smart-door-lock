@@ -4,6 +4,6 @@
 #include "debug.h"
 
 void Servo_SetAngle(float Angle);
-void PWM_Init(void);
+void Servo_Init(void);
 
 #endif

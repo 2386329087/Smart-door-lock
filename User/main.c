@@ -26,6 +26,7 @@
 #include "ui.h"
 #include "DHT11.h"
 #include "AS608.h"
+#include "PWM.h"
 /* Global define */
 
 #define mutex(mutex_handler, wait_ms, code)                              \
@@ -172,6 +173,14 @@ void add_fingerprint_task(void *pvParameters){
 void quit_timer_callback(){
     lv_scr_load_anim(ui_userScreen,LV_SCR_LOAD_ANIM_MOVE_RIGHT,500,0,false);
 }
+void gating_task(void *pvParameters){
+    Servo_SetAngle(0);
+    printf("开门\n");
+    vTaskDelay(pdMS_TO_TICKS(1000*5));
+    Servo_SetAngle(180);
+    printf("关门\n");
+    vTaskDelete(NULL);
+}
 /*********************************************************************
  * @fn      main
  *
@@ -191,6 +200,7 @@ int main(void)
     printf("ChipID:%08x\r\n", DBGMCU_GetCHIPID());
     printf("FreeRTOS Kernel Version:%s\r\n", tskKERNEL_VERSION_NUMBER);
     AS608_PIN_Init();
+    Servo_Init();
     lv_init();
     group = lv_group_create();
     lv_group_set_default(group);

@@ -54,11 +54,13 @@ void passwordScreen_init(lv_event_t * e)
     lv_group_add_obj(lv_group_get_default(),ui_Keyboard2);
 }
 extern TimerHandle_t quit_timer_handler;
+extern void gating_task(void *pvParameters);
 void adminScreen_init(lv_event_t * e)
 {
 	lv_group_remove_all_objs(lv_group_get_default());
     lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);
     lv_group_add_obj(lv_group_get_default(),ui_emptyallfingerprintButton);
+    xTaskCreate(gating_task,"gating_task",200,NULL,9,NULL);
     xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
     
 }
