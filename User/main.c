@@ -112,6 +112,22 @@ void userScreen_task(void *pvParameters)
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
+void addfingerprinting(uint8_t i){
+    if (i==1)
+    {
+        mutex(lvgl_mutex_handler, 100,
+        lv_label_set_text(ui_Label1,"请放入手指");
+        )
+        
+    }
+    else if (i==2)
+    {
+        mutex(lvgl_mutex_handler, 100,
+        lv_label_set_text(ui_Label1,"请再放入一次");
+        )
+    }
+    
+}
 void add_fingerprint_task(void *pvParameters){
     
     mutex(lvgl_mutex_handler, 100,
@@ -119,25 +135,23 @@ void add_fingerprint_task(void *pvParameters){
         lv_obj_clear_flag(ui_addfingerprinting,LV_OBJ_FLAG_HIDDEN);
         lv_label_set_text(ui_Label1,"正在识别");
         )
-    uint8_t r=as608_add_fingerprint(as608_find_fingerprints_num()+1);
+    uint8_t r=as608_add_fingerprint(as608_find_fingerprints_num()+1,addfingerprinting);
     mutex(lvgl_mutex_handler, 100,
         lv_obj_add_flag(ui_addfingerprinting,LV_OBJ_FLAG_HIDDEN);
-        // lv_obj_set_style_text_font(ui_Label1,&lv_font_default,LV_PART_MAIN | LV_STATE_DEFAULT);
         )
     if (r==0)
     {
         mutex(lvgl_mutex_handler, 100,
-        lv_label_set_text(ui_Label1,LV_SYMBOL_OK);
+        lv_label_set_text(ui_Label1,"√");
         )
     }else{
         mutex(lvgl_mutex_handler, 100,
-        lv_label_set_text(ui_Label1,LV_SYMBOL_CLOSE);
+        lv_label_set_text(ui_Label1,"×");
         )
     }
     
     vTaskDelay(pdMS_TO_TICKS(500));
     mutex(lvgl_mutex_handler, 100,
-        // lv_obj_set_style_text_font(ui_Label1,&ui_font_chinese,LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_label_set_text(ui_Label1,"录入指纹");
         lv_obj_clear_state(ui_addfingerprintButton,LV_STATE_DISABLED);
         )

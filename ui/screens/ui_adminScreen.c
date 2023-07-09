@@ -55,7 +55,7 @@ void ui_adminScreen_screen_init(void)
     ui_emptyallfingerprintButton = lv_btn_create(ui_adminScreen);
     lv_obj_set_width(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);   /// 100
     lv_obj_set_height(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);    /// 50
-    lv_obj_set_align(ui_emptyallfingerprintButton, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_emptyallfingerprintButton, LV_ALIGN_TOP_RIGHT);
     lv_obj_add_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 

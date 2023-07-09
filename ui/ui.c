@@ -88,7 +88,7 @@ void ui_event_enterpassword(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(ui_passwordScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        _ui_screen_change(ui_passwordScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 300, 0);
     }
 }
 void ui_event_camera(lv_event_t * e)
@@ -116,6 +116,9 @@ void ui_event_Keyboard2(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_READY) {
         submit_password(e);
+    }
+    if(event_code == LV_EVENT_CANCEL) {
+        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 300, 0);
     }
 }
 void ui_event_adminScreen(lv_event_t * e)

@@ -1162,7 +1162,7 @@
                       {
                         "nid": -725687282,
                         "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 500,
+                        "integer": 300,
                         "InheritedType": 6
                       },
                       {
@@ -3126,6 +3126,82 @@
                         "strtype": "CALL FUNCTION/Dont_export_function",
                         "strval": "False",
                         "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": 1986261102,
+                "strtype": "KEYBOARD/EventHandler",
+                "strval": "CANCEL",
+                "childs": [
+                  {
+                    "nid": -151254799,
+                    "strtype": "_custom/name",
+                    "strval": "Event11",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1888593835,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1163852367,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 150619059,
+                    "strtype": "_custom/action",
+                    "strval": "CHANGE SCREEN",
+                    "childs": [
+                      {
+                        "nid": 804776143,
+                        "strtype": "CHANGE SCREEN/Name",
+                        "strval": "CHANGE SCREEN",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -165501818,
+                        "strtype": "CHANGE SCREEN/Call",
+                        "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 752710075,
+                        "strtype": "CHANGE SCREEN/CallC",
+                        "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1162156566,
+                        "strtype": "CHANGE SCREEN/Screen_to",
+                        "strval": "GUID65375706-920077S3492189",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 524706300,
+                        "strtype": "CHANGE SCREEN/Fade_mode",
+                        "strval": "MOVE_RIGHT",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 1264916667,
+                        "strtype": "CHANGE SCREEN/Speed",
+                        "integer": 300,
+                        "InheritedType": 6
+                      },
+                      {
+                        "nid": 142253570,
+                        "strtype": "CHANGE SCREEN/Delay",
+                        "InheritedType": 6
                       }
                     ],
                     "InheritedType": 10
@@ -5173,7 +5249,7 @@
               {
                 "nid": -243944301,
                 "strtype": "OBJECT/Align",
-                "strval": "CENTER",
+                "strval": "TOP_RIGHT",
                 "InheritedType": 3
               },
               {
@@ -5903,7 +5979,7 @@
     "theme_color2": 0,
     "exportFolderPath": "E:\\DOC\\git\\Smart-door-lock\\ui",
     "projectExportFolderPath": "",
-    "backup_cnt": 11,
+    "backup_cnt": 13,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

@@ -10,7 +10,7 @@
   "ranges": [
     "0x20-0x7f"
   ],
-  "symbols": "请输入密码正确错误主界面摄像头指纹录正在识别清空库",
+  "symbols": "请输入密码正确错误主界面摄像头指纹录正在识别清空库请放入手再一次√×",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }
