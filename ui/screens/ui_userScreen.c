@@ -47,6 +47,19 @@ void ui_userScreen_screen_init(void)
     lv_obj_set_style_text_opa(ui_Label7, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Label7, &ui_font_chinese24, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_temp = lv_label_create(ui_userScreen);
+    lv_obj_set_width(ui_temp, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_temp, LV_SIZE_CONTENT);    /// 1
+    lv_label_set_text(ui_temp, "温度:26°C");
+    lv_obj_set_style_text_font(ui_temp, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_humi = lv_label_create(ui_userScreen);
+    lv_obj_set_width(ui_humi, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_humi, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_humi, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_humi, "湿度:100%");
+    lv_obj_set_style_text_font(ui_humi, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_enterpassword, ui_event_enterpassword, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_camera, ui_event_camera, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_userScreen, ui_event_userScreen, LV_EVENT_ALL, NULL);

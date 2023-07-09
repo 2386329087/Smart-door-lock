@@ -20,15 +20,18 @@ void submit_password(lv_event_t * e)
     }
     
 }
+TaskHandle_t fingerprint_recognition_Task_Handler;
 TaskHandle_t userScreen_Task_Handler;
+extern void fingerprint_recognition_task(void *pvParameters);
 extern void userScreen_task(void *pvParameters);
 void userScreen_init(lv_event_t * e)
 {
 	lv_group_remove_all_objs(lv_group_get_default());
     lv_group_add_obj(lv_group_get_default(),ui_enterpassword);
     lv_group_add_obj(lv_group_get_default(),ui_camera);
-    xTaskCreate(userScreen_task,"userScreen_task",200,NULL,10,&userScreen_Task_Handler);
-
+    xTaskCreate(fingerprint_recognition_task,"fingerprint_recognition_task",200,NULL,10,&fingerprint_recognition_Task_Handler);
+    xTaskCreate(userScreen_task,"userScreen_task",200,NULL,6,&userScreen_Task_Handler);
+    
 }
 
 void click_camera_open(lv_event_t * e)
@@ -65,6 +68,7 @@ void add_fingerprint(lv_event_t * e)
 
 void userScreen_Deinit(lv_event_t * e)
 {
+    vTaskDelete(fingerprint_recognition_Task_Handler);
     vTaskDelete(userScreen_Task_Handler);
 }
 

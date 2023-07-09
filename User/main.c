@@ -66,19 +66,30 @@ void lvgl_timer_task(void *pvParameters)
 uint8_t temp, humi;
 void dht11_task(void *pvParameters)
 {
+    
     DHT11_Init();
     while (1)
     {
         mutex(dht11_mutex_handler, 100,
               DHT11_Read_Data(&temp, &humi);)
-
-            mutex(uart2_mutex_handler, 100,
-                  printf("t:%d h:%d\n", temp, humi);)
-
-                vTaskDelay(pdMS_TO_TICKS(2000));
+        
+        
+        vTaskDelay(pdMS_TO_TICKS(2000));
     }
 }
-void userScreen_task(void *pvParameters)
+void userScreen_task(void *pvParameters){
+    while (1)
+    {
+        mutex(dht11_mutex_handler, 100,
+        mutex(lvgl_mutex_handler,100,
+        lv_label_set_text_fmt(ui_temp,"温度:%d°C",temp);
+        lv_label_set_text_fmt(ui_humi,"湿度:%d%%",humi);
+        ))
+        vTaskDelay(2000);
+    }
+    
+}
+void fingerprint_recognition_task(void *pvParameters)
 {
 
     while (1)
@@ -185,7 +196,7 @@ int main(void)
     lvgl_mutex_handler = xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 5, &lvgl_timer_Task_Handler);
-    xTaskCreate(dht11_task, "dht11_task", 128, NULL, 5, NULL);
+    xTaskCreate(dht11_task, "dht11_task", 64, NULL, 9, NULL);
 
     vTaskStartScheduler();
 

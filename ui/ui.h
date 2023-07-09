@@ -30,6 +30,8 @@ void ui_event_camera(lv_event_t * e);
 extern lv_obj_t * ui_camera;
 extern lv_obj_t * ui_Label5;
 extern lv_obj_t * ui_Label7;
+extern lv_obj_t * ui_temp;
+extern lv_obj_t * ui_humi;
 // SCREEN: ui_passwordScreen
 void ui_passwordScreen_screen_init(void);
 void ui_event_passwordScreen(lv_event_t * e);

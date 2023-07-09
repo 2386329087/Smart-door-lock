@@ -25,6 +25,8 @@ void ui_event_camera(lv_event_t * e);
 lv_obj_t * ui_camera;
 lv_obj_t * ui_Label5;
 lv_obj_t * ui_Label7;
+lv_obj_t * ui_temp;
+lv_obj_t * ui_humi;
 
 // SCREEN: ui_passwordScreen
 void ui_passwordScreen_screen_init(void);
