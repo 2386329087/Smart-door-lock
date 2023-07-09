@@ -26,6 +26,7 @@
 #include "AP3216C.h"
 #include "DHT11.h"
 #include "timer.h"
+#include "PWM.h"
 /* Global typedef */
 
 /* Global define */
@@ -42,7 +43,7 @@
  */
 int main(void)
 {
-    uint16_t i;
+    uint32_t i=0x1234,p;
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
@@ -58,22 +59,23 @@ int main(void)
 //	keyboard_Pin_Init();
 //
 //	AP3216C_Init();
-//
+
 //	DHT11_Init();
 
 //	Delay_test();
 //	TIM3_Init();
 
-//	for (i = 1; i < 30; ++i)
-//	{
-//	    as608_add_fingerprint(i);
-//	    printf("ID:%d\r\n",i);
-//    }
+//	PWM_Init();
+
+	PS_WriteNotepad_code[31]=0x02;
+
+	PS_WriteNotepad(PS_WriteNotepad_code);
+	PS_ReadNotepad(PS_ReadNotepad_code);
+	printf("%d\r\n",PS_ReadNotepad_code[31]);
 
 	while(1)
     {
-//	    as608_add_fingerprint(1);
-	    as608_verify_fingerprint();
-//	    as608_empty_all_fingerprint();
+//	    Delay_Ms(1000);
+
 	}
 }

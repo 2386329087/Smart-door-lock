@@ -5,7 +5,9 @@ uint8_t test;
 
 uint8_t as608_receive_data[128]; // 存放指纹返回信息
 uint8_t as608_receive_count;
-uint8_t as608_WriteNotepad_data[32];
+
+uint8_t PS_WriteNotepad_code[32];
+uint8_t PS_ReadNotepad_code[32];
 
 uint8_t finger_status; // 存放手指状态    0:无手指按下 1:有手指按
 
@@ -220,6 +222,14 @@ static void as608_send_N(uint16_t N)
 {
     Uart8_SendData(N>>8);
     Uart8_SendData(N);
+}
+
+/***************************************************************************
+描述: 发送记事本数据
+****************************************************************************/
+static void as608_send_WriteNotepad(uint8_t Data)
+{
+    Uart8_SendData(Data);
 }
 
 /***************************************************************************
@@ -532,6 +542,76 @@ uint8_t PS_ValidTempleteNum(uint16_t *NUM)
     return result;
 }
 
+/***************************************************************************
+描述: 写记事本
+参数: Data:记事本数据          指令代码:18H
+返回: 00H: 写入成功   01H:收包错误
+****************************************************************************/
+uint8_t PS_WriteNotepad(uint8_t *Data)
+{
+    uint8_t result;             //存放结果
+    uint8_t i;
+    uint16_t temp=0;
+
+        CLEAR_BUFFER;               //清空缓冲区
+
+        as608_send_head();          //发送包头
+        as608_send_address();       //发送芯片地址
+        as608_send_logo(0x01);      //发送包标识
+        as608_send_length(36);    //发送包长度
+        as608_send_cmd(0x18);       //发送指令码
+        as608_send_BufferID(0x01);
+        for (i = 0; i < 32; i++)
+        {
+            as608_send_WriteNotepad(Data[i]);
+            temp+=Data[i];
+        }
+        temp=0x01+36+0x18+0x01+temp;
+        as608_send_checksum(temp);  //发送校验和
+        OPEN_UART8_RECEIVE;        //开启串口接收
+
+        result = as608_detection_data(300,NULL);    //检测指纹模块数据 3秒时间
+        if(result == 0XFF)  result = 0x01;
+        return result;
+}
+
+uint8_t PS_ReadNotepad(uint8_t *Data)
+{
+    uint8_t result=1;                 //存放结果
+    uint16_t temp;
+    uint16_t wait_time=300;
+    char *data;
+    uint8_t i;
+
+        CLEAR_BUFFER;                   //清空缓冲区
+        as608_send_head();              //发送包头
+        as608_send_address();           //发送芯片地址
+        as608_send_logo(0x01);          //发送包标识
+        as608_send_length(0x04);        //发送包长度
+        as608_send_cmd(0x19);           //发送指令码
+        as608_send_BufferID(0x01);      //发送页ID
+        temp=0x01+0x04+0x19+0x01;
+        as608_send_checksum(temp);      //发送校验和
+        OPEN_UART8_RECEIVE;            //开启串口接收
+
+        while(wait_time--)
+        {
+                Delay_Ms(10);
+                //匹配数据帧头
+                data = strstr((char *)as608_receive_data,(char *)check_head);
+                if(data != NULL)
+                {
+                    for(i=0;i<32;i++)
+                    {
+                        Data[i]=data[10+i];
+                    }
+                    result=0;
+                    break;
+                }
+        }
+        CLOSE_UART8_RECEIVE;           //禁止串口接收
+        return result;
+}
 
 #if 1
 /***************************************************************************
