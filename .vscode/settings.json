@@ -6,6 +6,8 @@
         "keyboard.h": "c",
         "semphr.h": "c",
         "lv_port_disp.h": "c",
-        "lvgl.h": "c"
+        "lvgl.h": "c",
+        "ui.h": "c",
+        "functional": "c"
     }
 }

@@ -39,9 +39,14 @@ lv_obj_t * ui_Label2;
 void ui_adminScreen_screen_init(void);
 void ui_event_adminScreen(lv_event_t * e);
 lv_obj_t * ui_adminScreen;
-void ui_event_Button1(lv_event_t * e);
-lv_obj_t * ui_Button1;
+lv_obj_t * ui_Panel2;
+void ui_event_addfingerprintButton(lv_event_t * e);
+lv_obj_t * ui_addfingerprintButton;
 lv_obj_t * ui_Label1;
+lv_obj_t * ui_addfingerprinting;
+void ui_event_emptyallfingerprintButton(lv_event_t * e);
+lv_obj_t * ui_emptyallfingerprintButton;
+lv_obj_t * ui_Label8;
 
 // SCREEN: ui_whiteScreen
 void ui_whiteScreen_screen_init(void);
@@ -73,6 +78,9 @@ void ui_event_userScreen(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         userScreen_init(e);
+    }
+    if(event_code == LV_EVENT_SCREEN_UNLOADED) {
+        userScreen_Deinit(e);
     }
 }
 void ui_event_enterpassword(lv_event_t * e)
@@ -118,12 +126,20 @@ void ui_event_adminScreen(lv_event_t * e)
         adminScreen_init(e);
     }
 }
-void ui_event_Button1(lv_event_t * e)
+void ui_event_addfingerprintButton(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         add_fingerprint(e);
+    }
+}
+void ui_event_emptyallfingerprintButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        empty_all_fingerprint(e);
     }
 }
 

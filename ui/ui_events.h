@@ -11,12 +11,14 @@ extern "C" {
 #endif
 
 void userScreen_init(lv_event_t * e);
+void userScreen_Deinit(lv_event_t * e);
 void click_camera_open(lv_event_t * e);
 void click_camera_close(lv_event_t * e);
 void passwordScreen_init(lv_event_t * e);
 void submit_password(lv_event_t * e);
 void adminScreen_init(lv_event_t * e);
 void add_fingerprint(lv_event_t * e);
+void empty_all_fingerprint(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

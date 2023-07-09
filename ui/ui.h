@@ -42,9 +42,14 @@ extern lv_obj_t * ui_Label2;
 void ui_adminScreen_screen_init(void);
 void ui_event_adminScreen(lv_event_t * e);
 extern lv_obj_t * ui_adminScreen;
-void ui_event_Button1(lv_event_t * e);
-extern lv_obj_t * ui_Button1;
+extern lv_obj_t * ui_Panel2;
+void ui_event_addfingerprintButton(lv_event_t * e);
+extern lv_obj_t * ui_addfingerprintButton;
 extern lv_obj_t * ui_Label1;
+extern lv_obj_t * ui_addfingerprinting;
+void ui_event_emptyallfingerprintButton(lv_event_t * e);
+extern lv_obj_t * ui_emptyallfingerprintButton;
+extern lv_obj_t * ui_Label8;
 // SCREEN: ui_whiteScreen
 void ui_whiteScreen_screen_init(void);
 extern lv_obj_t * ui_whiteScreen;

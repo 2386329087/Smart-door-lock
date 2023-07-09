@@ -10,7 +10,7 @@
   "ranges": [
     "0x20-0x7f"
   ],
-  "symbols": "智能门锁按入指纹以继续正在识别成功失败",
+  "symbols": "智能门锁按入指纹以继续正在识别成功失败未检测到",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }

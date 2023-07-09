@@ -38,3 +38,11 @@ def adminScreen_init(event_struct):
 def add_fingerprint(event_struct):
     return
 
+
+def userScreen_Deinit(event_struct):
+    return
+
+
+def empty_all_fingerprint(event_struct):
+    return
+
