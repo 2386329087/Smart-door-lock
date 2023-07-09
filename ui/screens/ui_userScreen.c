@@ -51,6 +51,8 @@ void ui_userScreen_screen_init(void)
     lv_obj_set_width(ui_temp, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_temp, LV_SIZE_CONTENT);    /// 1
     lv_label_set_text(ui_temp, "温度:26°C");
+    lv_obj_set_style_text_color(ui_temp, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_temp, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_temp, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_humi = lv_label_create(ui_userScreen);

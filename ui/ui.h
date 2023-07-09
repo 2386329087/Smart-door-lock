@@ -14,6 +14,10 @@ extern "C" {
 
 #include "ui_helpers.h"
 #include "ui_events.h"
+void left_Animation(lv_obj_t * TargetObject, int delay);
+void right_Animation(lv_obj_t * TargetObject, int delay);
+void opacity_Animation(lv_obj_t * TargetObject, int delay);
+void keyboard_down_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_start
 void ui_start_screen_init(void);
 void ui_event_start(lv_event_t * e);

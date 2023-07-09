@@ -199,7 +199,7 @@ int main(void)
     dht11_mutex_handler = xSemaphoreCreateMutex();
     lvgl_mutex_handler = xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
-    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 5, &lvgl_timer_Task_Handler);
+    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1500, NULL, 5, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 64, NULL, 9, NULL);
     quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*30),pdFALSE,NULL,quit_timer_callback);
     vTaskStartScheduler();
