@@ -681,8 +681,9 @@ uint8_t as608_detection_data(uint16_t wait_time,uint16_t *ID_OR_NUM)
 /***************************************************************************
 描述: 添加指纹 函数
 返回: 0: 录入指纹成功   1: 录入指纹失败
+函数指针：1：请放置手指    2：请再放置手指
 ****************************************************************************/
-uint8_t as608_add_fingerprint(uint16_t PageID)
+uint8_t as608_add_fingerprint(uint16_t PageID,void (*p)(uint8_t))
 {
     uint8_t result;                 //录入的结果
     uint8_t add_stage = 1;          //录入的阶段
@@ -694,6 +695,7 @@ uint8_t as608_add_fingerprint(uint16_t PageID)
             //第一阶段 获取第一次指纹图像 并且生成特征图
             case 1:
                 printf("请放置手指\r\n");
+                p(1);
                 if(as608_detection_finger(800)) return 0x02;    //等待手指按下
                 result = PS_GetImage(); //获取指纹图像
                 if(result) {as608_output_result_message(result);return 1;}
@@ -705,6 +707,7 @@ uint8_t as608_add_fingerprint(uint16_t PageID)
             //第二阶段 获取第二次指纹图像 并且生成特征图
             case 2:
                 printf("请再放置手指\r\n");
+                p(2);
                 if(as608_detection_finger(800)) return 0x02;    //等待手指按下
                 result = PS_GetImage(); //获取指纹图像
                 if(result)  {as608_output_result_message(result);return 1;}

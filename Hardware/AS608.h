@@ -45,7 +45,7 @@ uint8_t as608_detection_data(uint16_t wait_time,uint16_t *ID_OR_NUM);  //检测�
 uint8_t as608_detection_checknum(char *data,uint16_t *ID_OR_NUM);      //检测数据包检验和是否准确
 
 
-uint8_t as608_add_fingerprint(uint16_t PageID);                     //录入指纹函数
+uint8_t as608_add_fingerprint(uint16_t PageID,void (*p)(uint8_t));      //录入指纹函数
 uint16_t as608_verify_fingerprint(void);                               //验证指纹函数
 uint8_t as608_delete_fingerprint(void);                             //删除指纹函数
 uint8_t as608_empty_all_fingerprint(void);                          //清空所有指纹函数
