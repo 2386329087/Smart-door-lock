@@ -65,13 +65,17 @@ int main(void)
 //	Delay_test();
 //	TIM3_Init();
 
-//	PWM_Init();
+	PWM_Init();
 
-	PS_WriteNotepad_code[31]=0x02;
+	Servo_SetAngle(0);
+	Delay_Ms(1000);
+	Servo_SetAngle(180);
 
-	PS_WriteNotepad(PS_WriteNotepad_code);
-	PS_ReadNotepad(PS_ReadNotepad_code);
-	printf("%d\r\n",PS_ReadNotepad_code[31]);
+//	PS_WriteNotepad_code[31]=0x02;
+//
+//	PS_WriteNotepad(PS_WriteNotepad_code);
+//	PS_ReadNotepad(PS_ReadNotepad_code);
+//	printf("%d\r\n",PS_ReadNotepad_code[31]);
 
 	while(1)
     {
