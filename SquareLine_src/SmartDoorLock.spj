@@ -595,56 +595,6 @@
                   }
                 ],
                 "InheritedType": 10
-              },
-              {
-                "nid": -75084654,
-                "strtype": "_custom/action",
-                "strval": "PLAY ANIMATION",
-                "childs": [
-                  {
-                    "nid": 133391799,
-                    "strtype": "PLAY ANIMATION/Name",
-                    "strval": "PLAY ANIMATION",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -860207520,
-                    "strtype": "PLAY ANIMATION/FunctionName",
-                    "strval": "opacity_Animation",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 918822660,
-                    "strtype": "PLAY ANIMATION/Animation",
-                    "strval": "opacity",
-                    "InheritedType": 8
-                  },
-                  {
-                    "nid": -212898488,
-                    "strtype": "PLAY ANIMATION/Target",
-                    "strval": "GUID82336863-919651S6142189",
-                    "InheritedType": 9
-                  },
-                  {
-                    "nid": 1865774206,
-                    "strtype": "PLAY ANIMATION/Delay",
-                    "integer": 200,
-                    "InheritedType": 6
-                  },
-                  {
-                    "nid": -1090143925,
-                    "strtype": "PLAY ANIMATION/Call",
-                    "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 855190052,
-                    "strtype": "PLAY ANIMATION/CallC",
-                    "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 10
               }
             ],
             "InheritedType": 4
@@ -7743,7 +7693,7 @@
     "theme_color2": 0,
     "exportFolderPath": "E:\\DOC\\git\\Smart-door-lock\\ui",
     "projectExportFolderPath": "",
-    "backup_cnt": 19,
+    "backup_cnt": 20,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

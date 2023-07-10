@@ -27,6 +27,8 @@
 #include "DHT11.h"
 #include "AS608.h"
 #include "PWM.h"
+#include "lcd_st7789.h"
+#include "AP3216C.h"
 /* Global define */
 
 #define mutex(mutex_handler, wait_ms, code)                              \
@@ -40,7 +42,54 @@ lv_group_t *group;
 TaskHandle_t lvgl_tick_Task_Handler;
 TaskHandle_t lvgl_timer_Task_Handler;
 TimerHandle_t quit_timer_handler;
-SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler;
+SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler,ap3216c_mutex_handler;
+//红外，距离，光敏
+uint16_t infrared,distance,photosensitive;
+//温度，湿度
+uint8_t temp, humi;
+void wake_up_task(void *pvParameters){
+    
+    uint16_t dis;
+    uint8_t r;
+    while (1)
+    {
+        
+        mutex(ap3216c_mutex_handler,100,
+            dis=distance;
+        )
+        r=0;
+        if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)==0)r=2;
+        else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_5)==0)r= 1;
+        else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1)==0)r= 6;
+        else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2)==0)r= 7;
+        else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)==0)r= 4;
+        else if (GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==0)r= 3;
+        else if (GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_13)==0)r= 5;
+        if (dis>20||r!=0)
+        {
+            vTaskDelay(pdMS_TO_TICKS(200));
+            LCD_ExitSleep();
+            lv_disp_trig_activity(NULL);
+            lv_obj_invalidate(lv_scr_act());//使其无效以重绘画面
+            // vTaskResume(lvgl_tick_Task_Handler);
+            vTaskResume(lvgl_timer_Task_Handler);
+            vTaskDelete(NULL);
+        }
+        vTaskDelay(pdMS_TO_TICKS(210));
+    }
+    
+}
+void ap3216c_task(void *pvParameters){
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    AP3216C_Init();
+    while (1)
+    {
+        mutex(ap3216c_mutex_handler,100,
+        AP3216C_ReadData(&infrared,&distance,&photosensitive);
+        )
+        vTaskDelay(pdMS_TO_TICKS(200));
+    }
+}
 void lvgl_tick_task(void *pvParameters)
 {
     while (1)
@@ -61,11 +110,19 @@ void lvgl_timer_task(void *pvParameters)
     while (1)
     {
         mutex(lvgl_mutex_handler, 100,
-              lv_timer_handler();)
+            if(lv_disp_get_inactive_time(NULL)<10000){
+                lv_timer_handler();
+            }else{
+                // vTaskSuspend(lvgl_tick_Task_Handler);
+                LCD_EnterSleep();
+                xTaskCreate(wake_up_task,"wake_up_task",128,NULL,8,NULL);
+                vTaskSuspend(NULL);
+            }
+            )
             vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
-uint8_t temp, humi;
+
 void dht11_task(void *pvParameters)
 {
     
@@ -99,7 +156,8 @@ void fingerprint_recognition_task(void *pvParameters)
         if (as608_detection_finger(10) == 0)
         {
             mutex(lvgl_mutex_handler, 100,
-                  lv_label_set_text(ui_Label7, "正在识别");)
+                lv_disp_trig_activity(NULL);
+                lv_label_set_text(ui_Label7, "正在识别");)
             uint16_t r=as608_verify_fingerprint();
             if (r == 0)
             {
@@ -199,7 +257,9 @@ int main(void)
     printf("SystemClk:%d\r\n", SystemCoreClock);
     printf("ChipID:%08x\r\n", DBGMCU_GetCHIPID());
     printf("FreeRTOS Kernel Version:%s\r\n", tskKERNEL_VERSION_NUMBER);
+    
     AS608_PIN_Init();
+    
     Servo_Init();
     lv_init();
     group = lv_group_create();
@@ -208,9 +268,11 @@ int main(void)
     uart2_mutex_handler = xSemaphoreCreateMutex();
     dht11_mutex_handler = xSemaphoreCreateMutex();
     lvgl_mutex_handler = xSemaphoreCreateMutex();
+    ap3216c_mutex_handler= xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
-    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1500, NULL, 5, &lvgl_timer_Task_Handler);
+    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1300, NULL, 5, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 64, NULL, 9, NULL);
+    xTaskCreate(ap3216c_task,"ap3216c_task",128,NULL,6,NULL);
     quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*30),pdFALSE,NULL,quit_timer_callback);
     vTaskStartScheduler();
 

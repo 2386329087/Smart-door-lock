@@ -38,14 +38,13 @@ void click_camera_open(lv_event_t * e)
 {
 	disp_disable_update();
     ov_display_enable();
-    _ui_screen_change(ui_whiteScreen, LV_SCR_LOAD_ANIM_OVER_BOTTOM, 500, 0);
 }
 
 void click_camera_close(lv_event_t * e)
 {
     ov_display_disable();
 	disp_enable_update();
-    _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_OVER_BOTTOM, 500, 200 );
+    lv_obj_invalidate(lv_scr_act());//使其无效以重绘画面
 }
 
 void passwordScreen_init(lv_event_t * e)
@@ -58,6 +57,8 @@ extern void gating_task(void *pvParameters);
 void adminScreen_init(lv_event_t * e)
 {
 	lv_group_remove_all_objs(lv_group_get_default());
+
+    lv_group_add_obj(lv_group_get_default(),ui_backButton);
     lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);
     lv_group_add_obj(lv_group_get_default(),ui_emptyallfingerprintButton);
     xTaskCreate(gating_task,"gating_task",200,NULL,9,NULL);

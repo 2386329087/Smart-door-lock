@@ -9,6 +9,7 @@
         "lvgl.h": "c",
         "ui.h": "c",
         "functional": "c",
-        "timers.h": "c"
+        "timers.h": "c",
+        "ap3216c.h": "c"
     }
 }

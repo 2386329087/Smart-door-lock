@@ -3,35 +3,35 @@
 #include "IIC.h"
 
 /**
- * @brief	³õÊ¼»¯AP3216C
+ * @brief	åˆå§‹åŒ–AP3216C
  *
  * @param   void
  *
- * @return  u8		0,³õÊ¼»¯³É¹¦
- *					1,³õÊ¼»¯Ê§°Ü
+ * @return  u8		0,åˆå§‹åŒ–æˆåŠŸ
+ *					1,åˆå§‹åŒ–å¤±è´¥
  */
 u8 AP3216C_Init(void)
 {
     u8 temp = 0;
-    IIC_Init(200000,0x02);         				//³õÊ¼»¯IIC
-    AP3216C_WriteOneByte(0x00, 0X04);	//¸´Î»AP3216C
-    Delay_Ms(50);						//AP33216C¸´Î»ÖÁÉÙ10ms
-    AP3216C_WriteOneByte(0x00, 0X03);	//¿ªÆôALS¡¢PS+IR
+    IIC_Init(200000,0x02);         				//åˆå§‹åŒ–IIC
+    AP3216C_WriteOneByte(0x00, 0X04);	//å¤ä½AP3216C
+    Delay_Ms(50);						//AP33216Cå¤ä½è‡³å°‘10ms
+    AP3216C_WriteOneByte(0x00, 0X03);	//å¼€å¯ALSã€PS+IR
 
-    temp = AP3216C_ReadOneByte(0X00);		//¶ÁÈ¡¸Õ¸ÕĞ´½øÈ¥µÄ0X03
+    temp = AP3216C_ReadOneByte(0X00);		//è¯»å–åˆšåˆšå†™è¿›å»çš„0X03
 
-    if(temp == 0X03)return 0;				//AP3216CÕı³£
+    if(temp == 0X03)return 0;				//AP3216Cæ­£å¸¸
 
-    else return 1;						//AP3216CÊ§°Ü
+    else return 1;						//AP3216Cå¤±è´¥
 }
 
 /**
- * @brief	¶ÁÈ¡AP3216CµÄÊı¾İ,¶ÁÈ¡Ô­Ê¼Êı¾İ£¬°üÀ¨ALS,PSºÍIR
- *			×¢Òâ£¡Èç¹ûÍ¬Ê±´ò¿ªALS,IR+PSµÄ»°Á½´ÎÊı¾İ¶ÁÈ¡µÄÊ±¼ä¼ä¸ôÒª´óÓÚ112.5ms
+ * @brief	è¯»å–AP3216Cçš„æ•°æ®,è¯»å–åŸå§‹æ•°æ®ï¼ŒåŒ…æ‹¬ALS,PSå’ŒIR
+ *			æ³¨æ„ï¼å¦‚æœåŒæ—¶æ‰“å¼€ALS,IR+PSçš„è¯ä¸¤æ¬¡æ•°æ®è¯»å–çš„æ—¶é—´é—´éš”è¦å¤§äº112.5ms
  *
- * @param   ir	ºìÍâÊı¾İ
- * @param   ps	¾àÀëÊı¾İ
- * @param   als	¹âÃôÊı¾İ
+ * @param   ir	çº¢å¤–æ•°æ®
+ * @param   ps	è·ç¦»æ•°æ®
+ * @param   als	å…‰æ•æ•°æ®
  *
  * @return  void
  */
@@ -42,29 +42,29 @@ void AP3216C_ReadData(u16* ir, u16* ps, u16* als)
 
     for(i = 0; i < 6; i++)
     {
-        buf[i] = AP3216C_ReadOneByte(0X0A + i);		//Ñ­»·¶ÁÈ¡ËùÓĞ´«¸ĞÆ÷Êı¾İ
+        buf[i] = AP3216C_ReadOneByte(0X0A + i);		//å¾ªç¯è¯»å–æ‰€æœ‰ä¼ æ„Ÿå™¨æ•°æ®
     }
 
-    if(buf[0] & 0X80)*ir = 0;						//IR_OFÎ»Îª1,ÔòÊı¾İÎŞĞ§
+    if(buf[0] & 0X80)*ir = 0;						//IR_OFä½ä¸º1,åˆ™æ•°æ®æ— æ•ˆ
 
-    else *ir = ((u16)buf[1] << 2) | (buf[0] & 0X03); 	//¶ÁÈ¡IR´«¸ĞÆ÷µÄÊı¾İ
+    else *ir = ((u16)buf[1] << 2) | (buf[0] & 0X03); 	//è¯»å–IRä¼ æ„Ÿå™¨çš„æ•°æ®
 
-    *als = ((u16)buf[3] << 8) | buf[2];				//¶ÁÈ¡ALS´«¸ĞÆ÷µÄÊı¾İ
+    *als = ((u16)buf[3] << 8) | buf[2];				//è¯»å–ALSä¼ æ„Ÿå™¨çš„æ•°æ®
 
-    if(buf[4] & 0x40)*ps = 0;    					//IR_OFÎ»Îª1,ÔòÊı¾İÎŞĞ§
+    if(buf[4] & 0x40)*ps = 0;    					//IR_OFä½ä¸º1,åˆ™æ•°æ®æ— æ•ˆ
 
-    else *ps = ((u16)(buf[5] & 0X3F) << 4) | (buf[4] & 0X0F); //¶ÁÈ¡PS´«¸ĞÆ÷µÄÊı¾İ
+    else *ps = ((u16)(buf[5] & 0X3F) << 4) | (buf[4] & 0X0F); //è¯»å–PSä¼ æ„Ÿå™¨çš„æ•°æ®
 }
 
 /**
- * @brief	IICĞ´Ò»¸ö×Ö½Ú
+ * @brief	IICå†™ä¸€ä¸ªå­—èŠ‚
  *
- * @param   reg		¼Ä´æÆ÷µØÖ·
- * @param   data	ÒªĞ´ÈëµÄÊı¾İ
+ * @param   reg		å¯„å­˜å™¨åœ°å€
+ * @param   data	è¦å†™å…¥çš„æ•°æ®
  *
- * @return  u8		0,Õı³£
- *                  1 - ³¬Ê±
- *                  ÆäËû,´íÎó´úÂë
+ * @return  u8		0,æ­£å¸¸
+ *                  1 - è¶…æ—¶
+ *                  å…¶ä»–,é”™è¯¯ä»£ç 
  */
 u8 AP3216C_WriteOneByte(u8 reg, u8 data)
 {
@@ -77,21 +77,21 @@ u8 AP3216C_WriteOneByte(u8 reg, u8 data)
             res = 1;
             break;
         }
-        I2C_Send7bitAddress(I2C2,((AP3216C_ADDR << 1) | 0),I2C_Direction_Transmitter);//·¢ËÍÆ÷¼şµØÖ·+Ğ´ÃüÁî
+        I2C_Send7bitAddress(I2C2,((AP3216C_ADDR << 1) | 0),I2C_Direction_Transmitter);//å‘é€å™¨ä»¶åœ°å€+å†™å‘½ä»¤
 
-        if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED ) ){  //µÈ´ıÓ¦´ğ
+        if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED ) ){  //ç­‰å¾…åº”ç­”
             res = 1;
             break;
         }
-        I2C_SendData(I2C2,reg);     //Ğ´¼Ä´æÆ÷µØÖ·
+        I2C_SendData(I2C2,reg);     //å†™å¯„å­˜å™¨åœ°å€
 
-        if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_BYTE_TRANSMITTED ) ){  //µÈ´ıÓ¦´ğ
+        if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_BYTE_TRANSMITTED ) ){  //ç­‰å¾…åº”ç­”
             res = 1;
             break;
         }
 
         while( I2C_GetFlagStatus( I2C2, I2C_FLAG_TXE ) ==  RESET );
-        I2C_SendData(I2C2,data);      //·¢ËÍÊı¾İ
+        I2C_SendData(I2C2,data);      //å‘é€æ•°æ®
 
         while( I2C_GetFlagStatus( I2C2, I2C_FLAG_TXE ) ==  RESET );
         break;
@@ -101,11 +101,11 @@ u8 AP3216C_WriteOneByte(u8 reg, u8 data)
 }
 
 /**
- * @brief	IIC¶ÁÒ»¸ö×Ö½Ú
+ * @brief	IICè¯»ä¸€ä¸ªå­—èŠ‚
  *
- * @param   reg		¼Ä´æÆ÷µØÖ·
+ * @param   reg		å¯„å­˜å™¨åœ°å€
  *
- * @return  u8		¶Áµ½µÄÊı¾İ
+ * @return  u8		è¯»åˆ°çš„æ•°æ®
  */
 u8 AP3216C_ReadOneByte(u8 reg)
 {
@@ -116,24 +116,24 @@ u8 AP3216C_ReadOneByte(u8 reg)
     I2C_GenerateSTART( I2C2, ENABLE );
 
     if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_MODE_SELECT ) )return 1;
-    I2C_Send7bitAddress(I2C2,(AP3216C_ADDR << 1) | 0X00,I2C_Direction_Transmitter); //·¢ËÍÆ÷¼şµØÖ·+Ğ´ÃüÁî
+    I2C_Send7bitAddress(I2C2,(AP3216C_ADDR << 1) | 0X00,I2C_Direction_Transmitter); //å‘é€å™¨ä»¶åœ°å€+å†™å‘½ä»¤
 
-    if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED ) )return 1;  //µÈ´ıÓ¦´ğ
-    I2C_SendData(I2C2,reg);         //Ğ´¼Ä´æÆ÷µØÖ·
+    if(IIC_WaitEvent( I2C2, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED ) )return 1;  //ç­‰å¾…åº”ç­”
+    I2C_SendData(I2C2,reg);         //å†™å¯„å­˜å™¨åœ°å€
 
     I2C_GenerateSTART( I2C2, ENABLE );
     while( !I2C_CheckEvent( I2C2, I2C_EVENT_MASTER_MODE_SELECT ) );
 
-    I2C_Send7bitAddress(I2C2,((AP3216C_ADDR << 1) | 0x01),I2C_Direction_Receiver);//·¢ËÍÆ÷¼şµØÖ·+¶ÁÃüÁî
-    while( !I2C_CheckEvent( I2C2, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED ) ); //µÈ´ıÓ¦´ğ
+    I2C_Send7bitAddress(I2C2,((AP3216C_ADDR << 1) | 0x01),I2C_Direction_Receiver);//å‘é€å™¨ä»¶åœ°å€+è¯»å‘½ä»¤
+    while( !I2C_CheckEvent( I2C2, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED ) ); //ç­‰å¾…åº”ç­”
 
     I2C_AcknowledgeConfig( I2C2, DISABLE );
 
     while( I2C_GetFlagStatus( I2C2, I2C_FLAG_RXNE ) ==  RESET );
-    res = I2C_ReceiveData( I2C2 ); //¶ÁÊı¾İ,·¢ËÍnACK
+    res = I2C_ReceiveData( I2C2 ); //è¯»æ•°æ®,å‘é€nACK
 
 
-    I2C_GenerateSTOP( I2C2, ENABLE );//²úÉúÒ»¸öÍ£Ö¹Ìõ¼ş
+    I2C_GenerateSTOP( I2C2, ENABLE );//äº§ç”Ÿä¸€ä¸ªåœæ­¢æ¡ä»¶
     return res;
 }
 

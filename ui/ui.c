@@ -53,6 +53,9 @@ lv_obj_t * ui_addfingerprinting;
 void ui_event_emptyallfingerprintButton(lv_event_t * e);
 lv_obj_t * ui_emptyallfingerprintButton;
 lv_obj_t * ui_Label8;
+void ui_event_backButton(lv_event_t * e);
+lv_obj_t * ui_backButton;
+lv_obj_t * ui_Label9;
 
 // SCREEN: ui_whiteScreen
 void ui_whiteScreen_screen_init(void);
@@ -278,6 +281,14 @@ void ui_event_emptyallfingerprintButton(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         empty_all_fingerprint(e);
+    }
+}
+void ui_event_backButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
 
