@@ -53,15 +53,15 @@ void ui_event_addfingerprintButton(lv_event_t * e);
 extern lv_obj_t * ui_addfingerprintButton;
 extern lv_obj_t * ui_Label1;
 extern lv_obj_t * ui_addfingerprinting;
+void ui_event_ChangePasswordButton(lv_event_t * e);
+extern lv_obj_t * ui_ChangePasswordButton;
+extern lv_obj_t * ui_Label6;
 void ui_event_emptyallfingerprintButton(lv_event_t * e);
 extern lv_obj_t * ui_emptyallfingerprintButton;
 extern lv_obj_t * ui_Label8;
 void ui_event_backButton(lv_event_t * e);
 extern lv_obj_t * ui_backButton;
 extern lv_obj_t * ui_Label9;
-// SCREEN: ui_whiteScreen
-void ui_whiteScreen_screen_init(void);
-extern lv_obj_t * ui_whiteScreen;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_FONT_DECLARE(ui_font_chinese);

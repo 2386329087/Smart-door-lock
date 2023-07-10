@@ -46,3 +46,19 @@ def userScreen_Deinit(event_struct):
 def empty_all_fingerprint(event_struct):
     return
 
+
+def ChangePassword(event_struct):
+    return
+
+
+def CancelPasswordInput(event_struct):
+    return
+
+
+def userScreen_inputPassword_button(event_struct):
+    return
+
+
+def ChangePasswordButton(event_struct):
+    return
+

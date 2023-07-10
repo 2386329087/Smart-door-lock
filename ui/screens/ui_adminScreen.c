@@ -52,6 +52,20 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_style_arc_opa(ui_addfingerprinting, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_arc_width(ui_addfingerprinting, 5, LV_PART_INDICATOR | LV_STATE_DEFAULT);
 
+    ui_ChangePasswordButton = lv_btn_create(ui_Panel2);
+    lv_obj_set_width(ui_ChangePasswordButton, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ChangePasswordButton, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_ChangePasswordButton, LV_ALIGN_BOTTOM_MID);
+    lv_obj_add_flag(ui_ChangePasswordButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_ChangePasswordButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Label6 = lv_label_create(ui_ChangePasswordButton);
+    lv_obj_set_width(ui_Label6, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label6, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Label6, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label6, "修改密码");
+    lv_obj_set_style_text_font(ui_Label6, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     ui_emptyallfingerprintButton = lv_btn_create(ui_adminScreen);
     lv_obj_set_width(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);   /// 100
     lv_obj_set_height(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);    /// 50
@@ -60,6 +74,12 @@ void ui_adminScreen_screen_init(void)
     lv_obj_clear_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0xFF4F4F), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0x85FF64), LV_PART_MAIN | LV_STATE_USER_1);
+    lv_obj_set_style_bg_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_USER_1);
+    lv_obj_set_style_shadow_color(ui_emptyallfingerprintButton, lv_color_hex(0x007DFF), LV_PART_MAIN | LV_STATE_USER_1);
+    lv_obj_set_style_shadow_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_USER_1);
+    lv_obj_set_style_shadow_width(ui_emptyallfingerprintButton, 20, LV_PART_MAIN | LV_STATE_USER_1);
+    lv_obj_set_style_shadow_spread(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_USER_1);
 
     ui_Label8 = lv_label_create(ui_emptyallfingerprintButton);
     lv_obj_set_width(ui_Label8, LV_SIZE_CONTENT);   /// 1
@@ -82,6 +102,7 @@ void ui_adminScreen_screen_init(void)
     lv_label_set_text(ui_Label9, "返回");
 
     lv_obj_add_event_cb(ui_addfingerprintButton, ui_event_addfingerprintButton, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ChangePasswordButton, ui_event_ChangePasswordButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_emptyallfingerprintButton, ui_event_emptyallfingerprintButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_backButton, ui_event_backButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_adminScreen, ui_event_adminScreen, LV_EVENT_ALL, NULL);

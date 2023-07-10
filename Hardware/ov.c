@@ -664,10 +664,8 @@ void ov_display_enable(void)
 
 void ov_display_disable(void)
 {
-    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, DISABLE);
-    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DVP, DISABLE);
     DMA_Cmd(DMA2_Channel5, DISABLE);
-
-    LCD_reset();
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DVP, DISABLE);
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, DISABLE);
     LCD_Clear(BLACK);
 }

@@ -28,7 +28,7 @@ void ui_userScreen_screen_init(void)
     lv_obj_set_width(ui_camera, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_camera, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_camera, LV_ALIGN_BOTTOM_RIGHT);
-    lv_obj_add_flag(ui_camera, LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_add_flag(ui_camera, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_camera, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_Label5 = lv_label_create(ui_camera);

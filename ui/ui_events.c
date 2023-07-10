@@ -8,9 +8,12 @@
 #include "task.h"
 #include "timers.h"
 #include "AS608.h"
-void submit_password(lv_event_t * e)
-{
-	if (strcmp(lv_textarea_get_text(ui_TextArea2),"123")==0)
+void (*submitPasswordPointer)();
+void (*cancelPasswordInputPointer)();
+extern uint8_t PS_ReadNotepad_code[32];    //存放接受到的记事本数据
+void VerificationAdministrator(){
+    PS_ReadNotepad(&PS_ReadNotepad_code);
+    if (strcmp(lv_textarea_get_text(ui_TextArea2),PS_ReadNotepad_code)==0)
     {
         lv_label_set_text(ui_Label2,"密码正确");
         lv_scr_load_anim(ui_adminScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 500, false);
@@ -18,7 +21,33 @@ void submit_password(lv_event_t * e)
     }else{
         lv_label_set_text(ui_Label2,"密码错误");
     }
+}
+void cancelVerificationAdministrator(){
+    lv_scr_load_anim(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 400, 0, false);
+}
+extern uint8_t PS_WriteNotepad_code[32];   //存放要发送的记事本数据
+void ChangePassword()
+{
+    strcpy(PS_WriteNotepad_code,lv_textarea_get_text(ui_TextArea2));
+    uint8_t r=PS_WriteNotepad(&PS_WriteNotepad_code);
+    if (r==0)
+    {
+        lv_label_set_text(ui_Label2,"修改成功");
+        lv_scr_load_anim(ui_adminScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 300, 1000, false);
+    }else{
+        lv_label_set_text(ui_Label2,"修改失败");
+    }
     
+}
+void cancelChangePassword()
+{
+    lv_scr_load_anim(ui_adminScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 400, 0, false);
+}
+//提交密码
+void submit_password(lv_event_t * e)
+{
+	submitPasswordPointer();
+    lv_textarea_set_text(ui_TextArea2,"");
 }
 TaskHandle_t fingerprint_recognition_Task_Handler;
 TaskHandle_t userScreen_Task_Handler;
@@ -33,24 +62,23 @@ void userScreen_init(lv_event_t * e)
     xTaskCreate(userScreen_task,"userScreen_task",200,NULL,6,&userScreen_Task_Handler);
     
 }
-
+extern TaskHandle_t lvgl_tick_Task_Handler;
+extern TaskHandle_t lvgl_timer_Task_Handler;
+extern void camera_task(void *pvParameters);
 void click_camera_open(lv_event_t * e)
 {
-	disp_disable_update();
-    ov_display_enable();
+    
+	
+    xTaskCreate(camera_task,"camera_task",128,NULL,14,NULL);
 }
 
-void click_camera_close(lv_event_t * e)
-{
-    ov_display_disable();
-	disp_enable_update();
-    lv_obj_invalidate(lv_scr_act());//使其无效以重绘画面
-}
 
 void passwordScreen_init(lv_event_t * e)
 {
 	lv_group_remove_all_objs(lv_group_get_default());
     lv_group_add_obj(lv_group_get_default(),ui_Keyboard2);
+    lv_textarea_set_text(ui_TextArea2,"");
+    
 }
 extern TimerHandle_t quit_timer_handler;
 extern void gating_task(void *pvParameters);
@@ -59,8 +87,10 @@ void adminScreen_init(lv_event_t * e)
 	lv_group_remove_all_objs(lv_group_get_default());
 
     lv_group_add_obj(lv_group_get_default(),ui_backButton);
-    lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);
+    
     lv_group_add_obj(lv_group_get_default(),ui_emptyallfingerprintButton);
+    lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);
+    lv_group_add_obj(lv_group_get_default(),ui_ChangePasswordButton);
     xTaskCreate(gating_task,"gating_task",200,NULL,9,NULL);
     xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
     
@@ -82,4 +112,26 @@ void empty_all_fingerprint(lv_event_t * e)
 {
     xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
 	as608_empty_all_fingerprint();
+}
+
+
+//取消输入密码
+void CancelPasswordInput(lv_event_t * e)
+{
+	cancelPasswordInputPointer();
+}
+
+void userScreen_inputPassword_button(lv_event_t * e)
+{
+	submitPasswordPointer=VerificationAdministrator;
+    cancelPasswordInputPointer=cancelVerificationAdministrator;
+    lv_label_set_text(ui_Label2,"登入");
+}
+
+void ChangePasswordButton(lv_event_t * e)
+{
+	submitPasswordPointer=ChangePassword;
+    cancelPasswordInputPointer=cancelChangePassword;
+    xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
+    lv_label_set_text(ui_Label2,"修改密码");
 }
