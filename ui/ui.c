@@ -225,8 +225,8 @@ void ui_event_enterpassword(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        userScreen_inputPassword_button(e);
         _ui_screen_change(ui_passwordScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 300, 0);
+        userScreen_inputPassword_button(e);
     }
 }
 void ui_event_camera(lv_event_t * e)
@@ -288,14 +288,9 @@ void ui_event_emptyallfingerprintButton(lv_event_t * e)
     if(event_code == LV_EVENT_LONG_PRESSED) {
         empty_all_fingerprint(e);
         _ui_label_set_property(ui_Label8, _UI_LABEL_PROPERTY_TEXT, "已清空");
-        _ui_state_modify(ui_emptyallfingerprintButton, LV_STATE_USER_1, _UI_MODIFY_STATE_ADD);
     }
     if(event_code == LV_EVENT_RELEASED) {
         _ui_label_set_property(ui_Label8, _UI_LABEL_PROPERTY_TEXT, "清空指纹库");
-        _ui_state_modify(ui_emptyallfingerprintButton, LV_STATE_USER_1, _UI_MODIFY_STATE_REMOVE);
-    }
-    if(event_code == LV_EVENT_PRESSED) {
-        _ui_label_set_property(ui_Label8, _UI_LABEL_PROPERTY_TEXT, "按住");
     }
 }
 void ui_event_backButton(lv_event_t * e)
@@ -303,7 +298,8 @@ void ui_event_backButton(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 300, 0);
+        backButton(e);
     }
 }
 

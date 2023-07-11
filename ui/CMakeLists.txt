@@ -4,6 +4,7 @@ SET(SOURCES screens/ui_start.c
     screens/ui_adminScreen.c
     ui.c
     ui_helpers.c
+    ui_events.c
     fonts/ui_font_chinese.c
     fonts/ui_font_chinese24.c)
 

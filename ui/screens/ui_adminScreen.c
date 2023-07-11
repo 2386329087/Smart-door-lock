@@ -72,14 +72,8 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_align(ui_emptyallfingerprintButton, LV_ALIGN_TOP_RIGHT);
     lv_obj_add_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0xFF4F4F), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0xFF4A4A), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0x85FF64), LV_PART_MAIN | LV_STATE_USER_1);
-    lv_obj_set_style_bg_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_USER_1);
-    lv_obj_set_style_shadow_color(ui_emptyallfingerprintButton, lv_color_hex(0x007DFF), LV_PART_MAIN | LV_STATE_USER_1);
-    lv_obj_set_style_shadow_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_USER_1);
-    lv_obj_set_style_shadow_width(ui_emptyallfingerprintButton, 20, LV_PART_MAIN | LV_STATE_USER_1);
-    lv_obj_set_style_shadow_spread(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_USER_1);
 
     ui_Label8 = lv_label_create(ui_emptyallfingerprintButton);
     lv_obj_set_width(ui_Label8, LV_SIZE_CONTENT);   /// 1
@@ -93,13 +87,13 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_height(ui_backButton, LV_SIZE_CONTENT);    /// 1
     lv_obj_add_flag(ui_backButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_backButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_text_font(ui_backButton, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label9 = lv_label_create(ui_backButton);
     lv_obj_set_width(ui_Label9, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label9, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label9, "返回");
+    lv_obj_set_style_text_font(ui_Label9, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_addfingerprintButton, ui_event_addfingerprintButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ChangePasswordButton, ui_event_ChangePasswordButton, LV_EVENT_ALL, NULL);

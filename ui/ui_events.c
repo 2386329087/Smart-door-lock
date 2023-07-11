@@ -135,3 +135,9 @@ void ChangePasswordButton(lv_event_t * e)
     xTimerReset(quit_timer_handler,pdMS_TO_TICKS(100));
     lv_label_set_text(ui_Label2,"修改密码");
 }
+
+void backButton(lv_event_t * e)
+{
+	xTimerStop(quit_timer_handler,pdMS_TO_TICKS(100));
+    
+}

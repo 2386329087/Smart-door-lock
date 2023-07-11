@@ -21,6 +21,7 @@ void adminScreen_init(lv_event_t * e);
 void add_fingerprint(lv_event_t * e);
 void ChangePasswordButton(lv_event_t * e);
 void empty_all_fingerprint(lv_event_t * e);
+void backButton(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/
