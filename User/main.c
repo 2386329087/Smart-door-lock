@@ -87,7 +87,7 @@ void ap3216c_task(void *pvParameters){
         mutex(ap3216c_mutex_handler,100,
         AP3216C_ReadData(&infrared,&distance,&photosensitive);
         )
-        // printf("dis:%d\n",distance);
+        printf("dis:%d\n",distance);
         vTaskDelay(pdMS_TO_TICKS(200));
     }
 }
@@ -243,6 +243,7 @@ void camera_task(void *pvParameters){
     vTaskSuspend(lvgl_tick_Task_Handler);   
     )
     ov_display_enable();
+    AP3216C_Init(); 
     uint8_t r=0;
     while (1)
     {
@@ -266,6 +267,7 @@ void camera_task(void *pvParameters){
             )
             vTaskDelete(NULL);
         }
+        vTaskDelay(100);
         
     }
 
@@ -295,7 +297,7 @@ int main(void)
     lvgl_mutex_handler = xSemaphoreCreateMutex();
     ap3216c_mutex_handler= xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
-    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1300, NULL, 5, &lvgl_timer_Task_Handler);
+    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 700, NULL, 5, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 9, NULL);
     xTaskCreate(ap3216c_task,"ap3216c_task",128,NULL,6,NULL);
     quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*30),pdFALSE,NULL,quit_timer_callback);

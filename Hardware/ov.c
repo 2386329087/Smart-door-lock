@@ -10,6 +10,7 @@
 #include "ov.h"
 #include "ov2640_regs.h"
 #include "lcd_st7789.h"
+
 /*********************************************************************
  * @fn      SCCB_GPIO_Init
  *
@@ -654,12 +655,10 @@ void ov_display_enable(void)
     DMA_Cmd(DMA2_Channel5, ENABLE);
 
     LCD_Clear(BLACK);
-
     OV2640_Init();
-        RGB565_Mode_Init();
+    
+    RGB565_Mode_Init();
     LCD_AddressSetWrite(0, 0, LCD_W - 1, LCD_H - 1);
-        DMA_SRAMLCD_Init((u32)RGB565_DVPDMAaddr0); // DMA2
-        DVP_Init();
 }
 
 void ov_display_disable(void)

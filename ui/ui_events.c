@@ -69,7 +69,7 @@ void click_camera_open(lv_event_t * e)
 {
     
 	
-    xTaskCreate(camera_task,"camera_task",128,NULL,14,NULL);
+    xTaskCreate(camera_task,"camera_task",128,NULL,13,NULL);
 }
 
 
