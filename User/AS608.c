@@ -544,10 +544,11 @@ uint8_t PS_ValidTempleteNum(uint16_t *NUM)
 
 /***************************************************************************
 描述: 写记事本
-参数: Data:记事本数据          指令代码:18H
+参数: Data:记事本发送区指针          指令代码:18H
+     PageID:0~15;
 返回: 00H: 写入成功   01H:收包错误
 ****************************************************************************/
-uint8_t PS_WriteNotepad(uint8_t *Data)
+uint8_t PS_WriteNotepad(uint8_t *Data,uint8_t PageID)
 {
     uint8_t result;             //存放结果
     uint8_t i;
@@ -560,7 +561,7 @@ uint8_t PS_WriteNotepad(uint8_t *Data)
         as608_send_logo(0x01);      //发送包标识
         as608_send_length(36);    //发送包长度
         as608_send_cmd(0x18);       //发送指令码
-        as608_send_BufferID(0x01);
+        as608_send_BufferID(PageID);
         for (i = 0; i < 32; i++)
         {
             as608_send_WriteNotepad(Data[i]);
@@ -575,7 +576,13 @@ uint8_t PS_WriteNotepad(uint8_t *Data)
         return result;
 }
 
-uint8_t PS_ReadNotepad(uint8_t *Data)
+/***************************************************************************
+描述: 读记事本
+参数: Data:记事本接收区指针         指令代码:18H
+     PageID:0~15;
+返回: 00H: 写入成功   01H:收包错误
+****************************************************************************/
+uint8_t PS_ReadNotepad(uint8_t *Data,uint8_t PageID)
 {
     uint8_t result=1;                 //存放结果
     uint16_t temp;
@@ -589,7 +596,7 @@ uint8_t PS_ReadNotepad(uint8_t *Data)
         as608_send_logo(0x01);          //发送包标识
         as608_send_length(0x04);        //发送包长度
         as608_send_cmd(0x19);           //发送指令码
-        as608_send_BufferID(0x01);      //发送页ID
+        as608_send_BufferID(PageID);      //发送页ID
         temp=0x01+0x04+0x19+0x01;
         as608_send_checksum(temp);      //发送校验和
         OPEN_UART8_RECEIVE;            //开启串口接收
@@ -611,6 +618,20 @@ uint8_t PS_ReadNotepad(uint8_t *Data)
         }
         CLOSE_UART8_RECEIVE;           //禁止串口接收
         return result;
+}
+
+void WriteNotepad_32byte(uint8_t *Data,uint8_t PageID,uint8_t size)
+{
+    uint8_t i;
+
+    uint8_t WriteNotepad[32];
+
+    for (i =0; i < size; ++i)
+    {
+        WriteNotepad[32-(size-i)]=Data[i];
+    }
+
+    PS_WriteNotepad(WriteNotepad,PageID);
 }
 
 #if 1

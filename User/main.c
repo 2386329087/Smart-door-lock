@@ -53,8 +53,12 @@ int main(void)
 	printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 	printf("This is printf example\r\n");
 
-	AS608_PIN_Init();
-	printf("This is printf2\r\n");
+	LCD_Init();
+	LCD_Clear(WHITE);
+	LCD_SetColor(WHITE, RED);
+
+//	AS608_PIN_Init();
+//	printf("This is printf2\r\n");
 //
 //	keyboard_Pin_Init();
 //
@@ -65,17 +69,13 @@ int main(void)
 //	Delay_test();
 //	TIM3_Init();
 
-	PWM_Init();
+//	PWM_Init();
 
-	Servo_SetAngle(0);
-	Delay_Ms(1000);
-	Servo_SetAngle(180);
-
-//	PS_WriteNotepad_code[31]=0x02;
-//
-//	PS_WriteNotepad(PS_WriteNotepad_code);
-//	PS_ReadNotepad(PS_ReadNotepad_code);
-//	printf("%d\r\n",PS_ReadNotepad_code[31]);
+	LCD_DisplayOn();
+	LCD_ShowString(0, 0, 32,0,"test");
+	delay_ms(2000);
+	LCD_DisplayOff();
+	LCD_ShowString(0, 0, 32,0,"test");
 
 	while(1)
     {
