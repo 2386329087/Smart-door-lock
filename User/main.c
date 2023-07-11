@@ -29,6 +29,7 @@
 #include "PWM.h"
 #include "lcd_st7789.h"
 #include "AP3216C.h"
+#include "queue.h"
 /* Global define */
 
 #define mutex(mutex_handler, wait_ms, code)                              \
@@ -42,9 +43,10 @@ lv_group_t *group;
 TaskHandle_t lvgl_tick_Task_Handler;
 TaskHandle_t lvgl_timer_Task_Handler;
 TimerHandle_t quit_timer_handler;
-SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler,ap3216c_mutex_handler;
-//红外，距离，光敏
-uint16_t infrared,distance,photosensitive;
+SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler;
+QueueHandle_t ap3216c_queue_handler;
+
+
 //温度，湿度
 uint8_t temp, humi;
 void wake_up_task(void *pvParameters){
@@ -53,11 +55,10 @@ void wake_up_task(void *pvParameters){
     uint8_t r;
     while (1)
     {
-        
-        mutex(ap3216c_mutex_handler,100,
-            dis=distance;
-        )
         r=0;
+        dis=0;
+        xQueueReceive(ap3216c_queue_handler,&dis,pdMS_TO_TICKS(10));
+        xQueueReceive(ap3216c_queue_handler,&dis,pdMS_TO_TICKS(200));
         if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)==0)r=2;
         else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_5)==0)r= 1;
         else if (GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1)==0)r= 6;
@@ -67,7 +68,6 @@ void wake_up_task(void *pvParameters){
         else if (GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_13)==0)r= 5;
         if (dis>20||r!=0)
         {
-            vTaskDelay(pdMS_TO_TICKS(200));
             LCD_ExitSleep();
             lv_disp_trig_activity(NULL);
             lv_obj_invalidate(lv_scr_act());//使其无效以重绘画面
@@ -75,20 +75,21 @@ void wake_up_task(void *pvParameters){
             vTaskResume(lvgl_timer_Task_Handler);
             vTaskDelete(NULL);
         }
-        vTaskDelay(pdMS_TO_TICKS(210));
     }
     
 }
 void ap3216c_task(void *pvParameters){
     vTaskDelay(pdMS_TO_TICKS(2000));
     AP3216C_Init();
+    //红外，距离，光敏
+    uint16_t infrared,distance,photosensitive;
     while (1)
     {
-        mutex(ap3216c_mutex_handler,100,
+        
         AP3216C_ReadData(&infrared,&distance,&photosensitive);
-        )
+        xQueueSend(ap3216c_queue_handler,&distance,0);
         printf("dis:%d\n",distance);
-        vTaskDelay(pdMS_TO_TICKS(200));
+        vTaskDelay(pdMS_TO_TICKS(120));
     }
 }
 void lvgl_tick_task(void *pvParameters)
@@ -295,7 +296,7 @@ int main(void)
     uart2_mutex_handler = xSemaphoreCreateMutex();
     dht11_mutex_handler = xSemaphoreCreateMutex();
     lvgl_mutex_handler = xSemaphoreCreateMutex();
-    ap3216c_mutex_handler= xSemaphoreCreateMutex();
+    ap3216c_queue_handler= xQueueCreate(1,sizeof(uint16_t));
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 700, NULL, 5, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 9, NULL);
