@@ -76,11 +76,11 @@ int main(void)
 	esp8266_Init();
 	get_true_time(Time,Date,Week);
 	printf("%s\r\n%s\r\n%s\r\n",Time,Date,Week);
-	printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
-
+//	printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
 	while(1)
-    {
-//	    Delay_Ms(1000);
+    {   system_time_increase();
+	    printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
+	    Delay_Ms(1000);
 
 	}
 }
