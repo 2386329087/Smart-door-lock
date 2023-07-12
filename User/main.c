@@ -73,12 +73,13 @@ int main(void)
 
 //	PWM_Init();
 
-	esp8266_Init();
+	esp8266_Init("Redmi K40","15813991772");
 	get_true_time(Time,Date,Week);
 	printf("%s\r\n%s\r\n%s\r\n",Time,Date,Week);
-//	printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
+
 	while(1)
-    {   system_time_increase();
+    {
+	    system_time_increase();
 	    printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
 	    Delay_Ms(1000);
 
