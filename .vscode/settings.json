@@ -10,6 +10,7 @@
         "ui.h": "c",
         "functional": "c",
         "timers.h": "c",
-        "ap3216c.h": "c"
+        "ap3216c.h": "c",
+        "ch32v30x.h": "c"
     }
 }

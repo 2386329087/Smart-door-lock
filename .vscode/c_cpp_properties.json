@@ -11,7 +11,7 @@
                 "_UNICODE",
                 "LV_LVGL_H_INCLUDE_SIMPLE"
             ],
-            "compilerPath": "D:\\MinGW\\bin\\gcc.exe",
+            "compilerPath": "D:/MinGW/bin/gcc.exe",
             "cStandard": "c11",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "windows-gcc-x86"

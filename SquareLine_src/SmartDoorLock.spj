@@ -545,7 +545,7 @@
                   {
                     "nid": -1626386587,
                     "strtype": "CHANGE SCREEN/Delay",
-                    "integer": 1000,
+                    "integer": 2000,
                     "InheritedType": 6
                   }
                 ],
@@ -590,6 +590,56 @@
                     "nid": -1300574097,
                     "strtype": "BAR_PROPERTY/Value",
                     "strval": "",
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 10
+              },
+              {
+                "nid": 1412624878,
+                "strtype": "_event/action",
+                "strval": "PLAY ANIMATION",
+                "childs": [
+                  {
+                    "nid": 305264014,
+                    "strtype": "PLAY ANIMATION/Name",
+                    "strval": "PLAY ANIMATION",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1775234850,
+                    "strtype": "PLAY ANIMATION/FunctionName",
+                    "strval": "left_Animation",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1216622891,
+                    "strtype": "PLAY ANIMATION/Animation",
+                    "strval": "left",
+                    "InheritedType": 8
+                  },
+                  {
+                    "nid": 1035270725,
+                    "strtype": "PLAY ANIMATION/Target",
+                    "strval": "GUID82336863-919651S6142189",
+                    "InheritedType": 9
+                  },
+                  {
+                    "nid": -6125308,
+                    "strtype": "PLAY ANIMATION/Delay",
+                    "integer": 300,
+                    "InheritedType": 6
+                  },
+                  {
+                    "nid": 1798069952,
+                    "strtype": "PLAY ANIMATION/Call",
+                    "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1961226646,
+                    "strtype": "PLAY ANIMATION/CallC",
+                    "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
                     "InheritedType": 10
                   }
                 ],
@@ -6777,7 +6827,7 @@
                   },
                   {
                     "nid": -1237585727,
-                    "strtype": "_custom/action",
+                    "strtype": "_event/action",
                     "strval": "LABEL_PROPERTY",
                     "childs": [
                       {
@@ -6825,7 +6875,7 @@
               {
                 "disabled": false,
                 "nid": -1437523940,
-                "strtype": "BUTTON/EventHandler",
+                "strtype": "_event/EventHandler",
                 "strval": "RELEASED",
                 "childs": [
                   {
@@ -6848,7 +6898,7 @@
                   },
                   {
                     "nid": -1009183410,
-                    "strtype": "_custom/action",
+                    "strtype": "_event/action",
                     "strval": "LABEL_PROPERTY",
                     "childs": [
                       {
@@ -7510,7 +7560,7 @@
                   },
                   {
                     "nid": 1028679590,
-                    "strtype": "_custom/action",
+                    "strtype": "_event/action",
                     "strval": "CALL FUNCTION",
                     "childs": [
                       {
@@ -7797,7 +7847,7 @@
               },
               {
                 "nid": -707353120,
-                "strtype": "_custom/action",
+                "strtype": "_event/action",
                 "strval": "LABEL_PROPERTY",
                 "childs": [
                   {
@@ -7861,7 +7911,7 @@
     {
       "propertyAnimations": [
         {
-          "Path": 4,
+          "Path": 2,
           "KeyFrames": [
             {
               "Value": -110,
@@ -7936,7 +7986,7 @@
             {
               "nid": -377440629,
               "strtype": "PROPERTYANIMATION/Path",
-              "strval": "overshoot",
+              "strval": "ease_out",
               "InheritedType": 3
             },
             {
@@ -8015,12 +8065,12 @@
             },
             {
               "Value": 255,
-              "Time": 300.0,
+              "Time": 400.0,
               "InheritedType": 1
             }
           ],
           "TimeReference": 0,
-          "ValueReference": 1,
+          "ValueReference": 0,
           "EarlyApply": true,
           "ImageSet": "",
           "PlaybackTime": 0,
@@ -8064,7 +8114,7 @@
             {
               "nid": -1084291654,
               "strtype": "PROPERTYANIMATION/AbsoluteReference",
-              "strval": "False",
+              "strval": "True",
               "InheritedType": 2
             },
             {
@@ -8075,7 +8125,7 @@
             {
               "nid": -1095478427,
               "strtype": "PROPERTYANIMATION/Duration",
-              "integer": 300,
+              "integer": 400,
               "InheritedType": 6
             },
             {
@@ -8960,7 +9010,7 @@
     "theme_color2": 0,
     "exportFolderPath": "E:\\DOC\\git\\Smart-door-lock\\ui",
     "projectExportFolderPath": "",
-    "backup_cnt": 29,
+    "backup_cnt": 31,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",
