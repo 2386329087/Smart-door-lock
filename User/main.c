@@ -17,7 +17,6 @@
  This example demonstrates using USART1(PA9) as a print debug port output.
 
 */
-
 #include "debug.h"
 #include "lcd_st7789.h"
 #include "keyboard.h"
@@ -27,6 +26,7 @@
 #include "DHT11.h"
 #include "timer.h"
 #include "PWM.h"
+#include "esp8266.h"
 /* Global typedef */
 
 /* Global define */
@@ -43,7 +43,9 @@
  */
 int main(void)
 {
-    uint32_t i=0x1234,p;
+    char Time[100];
+    char Date[100];
+    char Week[100];
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
@@ -71,11 +73,10 @@ int main(void)
 
 //	PWM_Init();
 
-	LCD_DisplayOn();
-	LCD_ShowString(0, 0, 32,0,"test");
-	delay_ms(2000);
-	LCD_DisplayOff();
-	LCD_ShowString(0, 0, 32,0,"test");
+	esp8266_Init();
+	get_true_time(Time,Date,Week);
+	printf("%s\r\n%s\r\n%s\r\n",Time,Date,Week);
+	printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
 
 	while(1)
     {
