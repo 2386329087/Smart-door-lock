@@ -229,7 +229,7 @@ void TIM6_Init( u16 arr, u16 psc)
 void system_time_increase(void)
 {
     TIME.msec++;
-    if(TIME.msec >= 2)  //0.5s进入中断一次，2次就是1s
+    if(TIME.msec >= 1)  //0.5s进入中断一次，2次就是1s
     {
         TIME.msec = 0;
         TIME.second++;//秒进位
@@ -301,27 +301,27 @@ void esp8266_Init(void)
     DMA_INIT();
     USARTx_CFG();                                                 /* USART INIT */
     USART_DMACmd(UART6,USART_DMAReq_Tx|USART_DMAReq_Rx,ENABLE);
+//    TIM6_Init( 5000-1, 14400-1 );
 
     // 退出透传
-        while (uartWriteWiFi("+++", 3));
-        Delay_Ms(100);
+    while (uartWriteWiFi("+++", 3));
+    Delay_Ms(100);
+    while(uartWriteWiFiStr("AT+CIPCLOSE\r\n")==RESET);
+    Delay_Ms(100);
     // 查询 WiFi 模块是否正常工作
     uartWriteWiFi("AT\r\n",4);
     Delay_Ms(100);
     // 查询 打开AT回显
     uartWriteWiFi("ATE1\r\n",6);
     Delay_Ms(100);
-//    // 设为 Station 模式
-//    while(uartWriteWiFiStr("AT+CWMODE=1\r\n")==RESET);
-//    Delay_Ms(100);
-//    // 复位WiFi模块
-//    while(uartWriteWiFiStr("AT+RST\r\n")==RESET);
-//    Delay_Ms(300);
+    // 设为 Station 模式
+    while(uartWriteWiFiStr("AT+CWMODE=1\r\n")==RESET);
+    Delay_Ms(100);
     // 设为单连接模式
     while(uartWriteWiFiStr("AT+CIPMUX=0\r\n")==RESET);
     Delay_Ms(100);
     // 连接一个名为 SSID、密码为 PASSWORD 的 WiFi 网络，
-    while(uartWriteWiFiStr("AT+CWJAP=\"Redmi K40\",\"15813991772\"\r\n")==RESET);
+    while(uartWriteWiFiStr("AT+CWJAP=\"Li\",\"15813991772\"\r\n")==RESET);
     Delay_Ms(4000);
     //打印之前收到的信息
     int num = uartAvailableWiFi();
@@ -339,9 +339,9 @@ void esp8266_Init(void)
         uartReadWiFi(buffer , num);
         printf("Revceived:\r\n%s",buffer);
     }
-    Delay_Ms(5000);
+    Delay_Ms(1000);
     //连接服务器
-    while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"api.k780.com\",80\r\n")==RESET);
+    while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"api.k780.com\",88\r\n")==RESET);
     Delay_Ms(500);
     //开启透传模式
     while(uartWriteWiFiStr("AT+CIPMODE=1\r\n")==RESET);
