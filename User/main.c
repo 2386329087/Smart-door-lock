@@ -30,6 +30,7 @@
 #include "lcd_st7789.h"
 #include "AP3216C.h"
 #include "queue.h"
+#include "esp8266.h"
 /* Global define */
 
 #define mutex(mutex_handler, wait_ms, code)                              \
@@ -43,9 +44,8 @@ lv_group_t *group;
 TaskHandle_t lvgl_tick_Task_Handler;
 TaskHandle_t lvgl_timer_Task_Handler;
 TimerHandle_t quit_timer_handler;
-SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler;
+SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler,timer_mutex_handler;
 QueueHandle_t ap3216c_queue_handler;
-
 
 //温度，湿度
 uint8_t temp, humi;
@@ -88,7 +88,7 @@ void ap3216c_task(void *pvParameters){
         
         AP3216C_ReadData(&infrared,&distance,&photosensitive);
         xQueueSend(ap3216c_queue_handler,&distance,0);
-        printf("dis:%d\n",distance);
+        // printf("dis:%d\n",distance);
         vTaskDelay(pdMS_TO_TICKS(120));
     }
 }
@@ -268,10 +268,20 @@ void camera_task(void *pvParameters){
             )
             vTaskDelete(NULL);
         }
-        vTaskDelay(100);
+        vTaskDelay(100);    
+    }   
+}
+#include "ui.h"
+//时钟线程
+void time_task(void *pvParameters){
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    
+    while (1)
+    {
         
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
-
+    
     
 }
 int main(void)
@@ -297,10 +307,12 @@ int main(void)
     dht11_mutex_handler = xSemaphoreCreateMutex();
     lvgl_mutex_handler = xSemaphoreCreateMutex();
     ap3216c_queue_handler= xQueueCreate(1,sizeof(uint16_t));
+    timer_mutex_handler=xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 700, NULL, 1, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 6, NULL);
     xTaskCreate(ap3216c_task,"ap3216c_task",128,NULL,6,NULL);
+    xTaskCreate(time_task,"time_task",500,NULL,10,NULL);
     quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*30),pdFALSE,NULL,quit_timer_callback);
     vTaskStartScheduler();
 
