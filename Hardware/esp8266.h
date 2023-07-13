@@ -14,8 +14,9 @@ typedef struct _TDateTime  //时间结构体
 extern char timeout;
 extern TDateTime TIME;
 
-void esp8266_Init(void);
+void esp8266_Init(char *ID,char *Password);
 void system_time_increase(void);
 void get_true_time(char *Time,char *Date,char *Week);
+
 
 #endif

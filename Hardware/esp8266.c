@@ -296,8 +296,12 @@ void get_true_time(char *Time,char *Date,char *Week)
 * Input          : None
 * Return         : None
 *******************************************************************************/
-void esp8266_Init(void)
+void esp8266_Init(char *ID,char *Password)
 {
+    char WIFI_change[]="AT+CWJAP=\"Li\",\"15813991772\"\r\n";
+    sprintf(WIFI_change,"AT+CWJAP=\"%s\",\"%s\"\r\n",ID,Password);
+    printf("%s\r\n",WIFI_change);
+
     DMA_INIT();
     USARTx_CFG();                                                 /* USART INIT */
     USART_DMACmd(UART6,USART_DMAReq_Tx|USART_DMAReq_Rx,ENABLE);
@@ -306,6 +310,7 @@ void esp8266_Init(void)
     // 退出透传
     while (uartWriteWiFi("+++", 3));
     Delay_Ms(100);
+    //断开与服务器的连接
     while(uartWriteWiFiStr("AT+CIPCLOSE\r\n")==RESET);
     Delay_Ms(100);
     // 查询 WiFi 模块是否正常工作
@@ -321,19 +326,10 @@ void esp8266_Init(void)
     while(uartWriteWiFiStr("AT+CIPMUX=0\r\n")==RESET);
     Delay_Ms(100);
     // 连接一个名为 SSID、密码为 PASSWORD 的 WiFi 网络，
-    while(uartWriteWiFiStr("AT+CWJAP=\"Li\",\"15813991772\"\r\n")==RESET);
+    while(uartWriteWiFiStr(WIFI_change)==RESET);
     Delay_Ms(4000);
     //打印之前收到的信息
     int num = uartAvailableWiFi();
-    if (num > 0 ){
-        char buffer[1024]={"\0"};
-        uartReadWiFi(buffer , num);
-        printf("Revceived:\r\n%s",buffer);
-    }
-    //等待后续回复
-//    while(uartAvailableWiFi()==0);
-    Delay_Ms(2000);
-    num = uartAvailableWiFi();
     if (num > 0 ){
         char buffer[1024]={"\0"};
         uartReadWiFi(buffer , num);
@@ -349,6 +345,12 @@ void esp8266_Init(void)
     //AT+CIPMODE=1并且作为客户端模式下，进入透传模式(需要支持硬件流控，否则大量数据情况下会丢数据)模块收到指令后先换行返回”>”，然后会发送串口接收到的数据。
     while(uartWriteWiFiStr("AT+CIPSEND\r\n")==RESET);
     Delay_Ms(100);
+        num = uartAvailableWiFi();
+        if (num > 0 ){
+            char buffer[1024]={"\0"};
+            uartReadWiFi(buffer , num);
+            printf("Revceived:\r\n%s",buffer);
+        }
 }
 
 /********************************************************************
