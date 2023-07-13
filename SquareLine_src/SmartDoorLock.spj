@@ -8547,7 +8547,7 @@
                 "strtype": "OBJECT/Size",
                 "intarray": [
                   100,
-                  167
+                  141
                 ],
                 "InheritedType": 7
               },
@@ -8751,7 +8751,7 @@
               {
                 "nid": 188750583,
                 "strtype": "LABEL/Text",
-                "strval": "info\\ninfo1\\na\\na\\na\\na\\na\\n\\na\\n\\na\\n\\naaaaaaaaaaaaa",
+                "strval": "info",
                 "InheritedType": 10
               },
               {
@@ -8772,6 +8772,18 @@
                           255
                         ],
                         "InheritedType": 7
+                      },
+                      {
+                        "nid": -1288583067,
+                        "strtype": "_style/Text_Align",
+                        "strval": "CENTER",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 533089023,
+                        "strtype": "_style/Text_Decor",
+                        "strval": "NONE",
+                        "InheritedType": 3
                       },
                       {
                         "nid": -1119173437,
@@ -10442,7 +10454,7 @@
     "theme_color2": 0,
     "exportFolderPath": "E:\\DOC\\git\\Smart-door-lock\\ui",
     "projectExportFolderPath": "",
-    "backup_cnt": 46,
+    "backup_cnt": 47,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

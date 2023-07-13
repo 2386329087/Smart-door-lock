@@ -116,13 +116,15 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_style_text_font(ui_Label9, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_infoLabel = lv_label_create(ui_adminScreen);
-    lv_obj_set_height(ui_infoLabel, 167);
+    lv_obj_set_height(ui_infoLabel, 141);
     lv_obj_set_width(ui_infoLabel, lv_pct(100));
     lv_obj_set_align(ui_infoLabel, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_infoLabel, LV_LABEL_LONG_SCROLL);
-    lv_label_set_text(ui_infoLabel, "info\ninfo1\na\na\na\na\na\n\na\n\na\n\naaaaaaaaaaaaa");
+    lv_label_set_text(ui_infoLabel, "info");
     lv_obj_set_style_text_color(ui_infoLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_infoLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_infoLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_decor(ui_infoLabel, LV_TEXT_DECOR_NONE, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_infoLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui_infoLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui_infoLabel, 1, LV_PART_MAIN | LV_STATE_DEFAULT);

@@ -290,14 +290,16 @@ void time_task(void *pvParameters){
 //显示信息线程
 void show_info_task(void *pvParameters){
     vTaskDelay(pdMS_TO_TICKS(3000));
-    char info[400];
+    // char info[400];
     while (1)
     {
-        vTaskList(info);
+        // vTaskList(info);
         mutex(lvgl_mutex_handler,100,
-        lv_label_set_text(ui_infoLabel,info);
+        // lv_label_set_text(ui_infoLabel,info);
+        lv_label_set_text_fmt(ui_infoLabel,"size:%d",xPortGetMinimumEverFreeHeapSize());
+        
         )
-        vTaskDelay(pdMS_TO_TICKS(5000));
+        vTaskDelay(pdMS_TO_TICKS(3000));
     }
     
 }
