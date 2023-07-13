@@ -60,6 +60,7 @@ lv_obj_t * ui_Label8;
 void ui_event_backButton(lv_event_t * e);
 lv_obj_t * ui_backButton;
 lv_obj_t * ui_Label9;
+lv_obj_t * ui_infoLabel;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -274,6 +275,7 @@ void ui_event_adminScreen(lv_event_t * e)
         right_Animation(ui_emptyallfingerprintButton, 600);
         opacity_Animation(ui_ChangePasswordButton, 600);
         opacity_Animation(ui_addfingerprintButton, 600);
+        opacity_Animation(ui_infoLabel, 1000);
     }
 }
 void ui_event_addfingerprintButton(lv_event_t * e)

@@ -257,14 +257,12 @@ void system_time_increase(void)
 * 输    入       : *Time,*Date,*Week
 *注     释       :此为数组指针，数组长度建议偏大设置
 ********************************************************************/
-void get_true_time(char *Time,char *Date,char *Week)
+void get_true_time(char *Date,char *Week)
 {
     char *begin1;                       //日期与时间的起始地址
     char *begin2;                       //星期的起始地址
     char *end2;                         //星期的结束地址
-    Time[100]='\0';              //时间字符串数组
-    Date[100]='\0';              //日期字符串数组
-    Week[100]='\0';              //星期字符串数组
+    char Time[100]="";              //时间字符串数组
     //访问该网站会反馈时间数据
     while(uartWriteWiFiStr("GET http://api.k780.com:88/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json\r\n")==RESET);
     Delay_Ms(500);

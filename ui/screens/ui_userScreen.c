@@ -82,6 +82,7 @@ void ui_userScreen_screen_init(void)
     lv_obj_set_style_text_color(ui_timeLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_timeLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui_timeLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_timeLabel, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_enterpassword, ui_event_enterpassword, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_camera, ui_event_camera, LV_EVENT_ALL, NULL);

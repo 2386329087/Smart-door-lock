@@ -63,6 +63,7 @@ extern lv_obj_t * ui_Label8;
 void ui_event_backButton(lv_event_t * e);
 extern lv_obj_t * ui_backButton;
 extern lv_obj_t * ui_Label9;
+extern lv_obj_t * ui_infoLabel;
 extern lv_obj_t * ui____initial_actions0;
 
 LV_FONT_DECLARE(ui_font_chinese);
