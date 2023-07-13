@@ -309,7 +309,7 @@ int main(void)
     ap3216c_queue_handler= xQueueCreate(1,sizeof(uint16_t));
     timer_mutex_handler=xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
-    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 700, NULL, 1, &lvgl_timer_Task_Handler);
+    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 1, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 6, NULL);
     xTaskCreate(ap3216c_task,"ap3216c_task",128,NULL,6,NULL);
     xTaskCreate(time_task,"time_task",500,NULL,10,NULL);

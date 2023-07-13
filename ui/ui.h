@@ -36,6 +36,7 @@ extern lv_obj_t * ui_Label5;
 extern lv_obj_t * ui_Label7;
 extern lv_obj_t * ui_temp;
 extern lv_obj_t * ui_humi;
+extern lv_obj_t * ui_timeLabel;
 // SCREEN: ui_passwordScreen
 void ui_passwordScreen_screen_init(void);
 void ui_event_passwordScreen(lv_event_t * e);
