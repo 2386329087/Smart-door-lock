@@ -46,7 +46,7 @@ TaskHandle_t lvgl_timer_Task_Handler;
 TimerHandle_t quit_timer_handler;
 SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler,timer_mutex_handler;
 QueueHandle_t ap3216c_queue_handler;
-
+char date[20],week[20];
 //温度，湿度
 uint8_t temp, humi;
 void wake_up_task(void *pvParameters){
@@ -111,7 +111,7 @@ void lvgl_timer_task(void *pvParameters)
     while (1)
     {
         mutex(lvgl_mutex_handler, 100,
-            if(lv_disp_get_inactive_time(NULL)<10000){
+            if(lv_disp_get_inactive_time(NULL)<20000){
                 lv_timer_handler();
             }else{
                 // vTaskSuspend(lvgl_tick_Task_Handler);
@@ -271,17 +271,36 @@ void camera_task(void *pvParameters){
         vTaskDelay(100);    
     }   
 }
-#include "ui.h"
+extern TDateTime TIME;
 //时钟线程
 void time_task(void *pvParameters){
     vTaskDelay(pdMS_TO_TICKS(2000));
-    
+    esp8266_Init("404","");
+    get_true_time(date,week);
+    printf("date:%s week:%s\n",date,week);
     while (1)
     {
-        
+        system_time_increase();
+        mutex(lvgl_mutex_handler,100,
+        lv_label_set_text_fmt(ui_timeLabel,"%02d:%02d:%02d",TIME.hour,TIME.minute,TIME.second);
+        )
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
-    
+}
+//显示信息线程
+void show_info_task(void *pvParameters){
+    vTaskDelay(pdMS_TO_TICKS(3000));
+    // char info[400];
+    while (1)
+    {
+        // vTaskList(info);
+        mutex(lvgl_mutex_handler,100,
+        // lv_label_set_text(ui_infoLabel,info);
+        lv_label_set_text_fmt(ui_infoLabel,"size:%d",xPortGetMinimumEverFreeHeapSize());
+        
+        )
+        vTaskDelay(pdMS_TO_TICKS(3000));
+    }
     
 }
 int main(void)
@@ -309,11 +328,12 @@ int main(void)
     ap3216c_queue_handler= xQueueCreate(1,sizeof(uint16_t));
     timer_mutex_handler=xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
-    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 700, NULL, 1, &lvgl_timer_Task_Handler);
+    xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 1, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 6, NULL);
     xTaskCreate(ap3216c_task,"ap3216c_task",128,NULL,6,NULL);
     xTaskCreate(time_task,"time_task",500,NULL,10,NULL);
-    quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*30),pdFALSE,NULL,quit_timer_callback);
+    xTaskCreate(show_info_task,"show_info_task",600,NULL,10,NULL);
+    quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*60),pdFALSE,NULL,quit_timer_callback);
     vTaskStartScheduler();
 
     while (1)

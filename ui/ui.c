@@ -31,6 +31,7 @@ lv_obj_t * ui_Label5;
 lv_obj_t * ui_Label7;
 lv_obj_t * ui_temp;
 lv_obj_t * ui_humi;
+lv_obj_t * ui_timeLabel;
 
 // SCREEN: ui_passwordScreen
 void ui_passwordScreen_screen_init(void);
@@ -59,6 +60,7 @@ lv_obj_t * ui_Label8;
 void ui_event_backButton(lv_event_t * e);
 lv_obj_t * ui_backButton;
 lv_obj_t * ui_Label9;
+lv_obj_t * ui_infoLabel;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -96,7 +98,7 @@ void left_Animation(lv_obj_t * TargetObject, int delay)
     PropertyAnimation_1_user_data->val = -1;
     lv_anim_t PropertyAnimation_1;
     lv_anim_init(&PropertyAnimation_1);
-    lv_anim_set_time(&PropertyAnimation_1, 400);
+    lv_anim_set_time(&PropertyAnimation_1, 500);
     lv_anim_set_user_data(&PropertyAnimation_1, PropertyAnimation_1_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_1, _ui_anim_callback_set_opacity);
     lv_anim_set_values(&PropertyAnimation_1, 0, 255);
@@ -141,7 +143,7 @@ void right_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_set_user_data(&PropertyAnimation_1, PropertyAnimation_1_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_1, _ui_anim_callback_set_x);
     lv_anim_set_values(&PropertyAnimation_1, 120, 0);
-    lv_anim_set_path_cb(&PropertyAnimation_1, lv_anim_path_overshoot);
+    lv_anim_set_path_cb(&PropertyAnimation_1, lv_anim_path_ease_out);
     lv_anim_set_delay(&PropertyAnimation_1, delay + 0);
     lv_anim_set_deleted_cb(&PropertyAnimation_1, _ui_anim_callback_free_user_data);
     lv_anim_set_playback_time(&PropertyAnimation_1, 0);
@@ -185,7 +187,7 @@ void keyboard_down_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_set_time(&PropertyAnimation_0, 500);
     lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_y);
-    lv_anim_set_values(&PropertyAnimation_0, 190, 0);
+    lv_anim_set_values(&PropertyAnimation_0, 180, 0);
     lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_ease_out);
     lv_anim_set_delay(&PropertyAnimation_0, delay + 0);
     lv_anim_set_deleted_cb(&PropertyAnimation_0, _ui_anim_callback_free_user_data);
@@ -205,8 +207,8 @@ void ui_event_start(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOADED) {
-        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 300, 2000);
-        left_Animation(ui_Label4, 300);
+        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 300, 1000);
+        opacity_Animation(ui_Label4, 100);
     }
 }
 void ui_event_userScreen(lv_event_t * e)
@@ -215,6 +217,12 @@ void ui_event_userScreen(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         userScreen_init(e);
+        left_Animation(ui_enterpassword, 300);
+        right_Animation(ui_camera, 300);
+        opacity_Animation(ui_Label7, 1300);
+        opacity_Animation(ui_humi, 1000);
+        opacity_Animation(ui_temp, 800);
+        opacity_Animation(ui_timeLabel, 900);
     }
     if(event_code == LV_EVENT_SCREEN_UNLOADED) {
         userScreen_Deinit(e);
@@ -243,6 +251,7 @@ void ui_event_passwordScreen(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         passwordScreen_init(e);
+        keyboard_down_Animation(ui_Keyboard2, 300);
     }
 }
 void ui_event_Keyboard2(lv_event_t * e)
@@ -262,6 +271,11 @@ void ui_event_adminScreen(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         adminScreen_init(e);
+        left_Animation(ui_backButton, 600);
+        right_Animation(ui_emptyallfingerprintButton, 600);
+        opacity_Animation(ui_ChangePasswordButton, 600);
+        opacity_Animation(ui_addfingerprintButton, 600);
+        opacity_Animation(ui_infoLabel, 1000);
     }
 }
 void ui_event_addfingerprintButton(lv_event_t * e)
@@ -298,7 +312,7 @@ void ui_event_backButton(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 300, 0);
+        _ui_screen_change(ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 400, 0);
         backButton(e);
     }
 }
