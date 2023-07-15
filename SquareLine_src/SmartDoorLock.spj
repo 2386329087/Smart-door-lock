@@ -122,6 +122,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 1510105572,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 164070533,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -173,6 +179,12 @@
                 "nid": -1848306377,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 1712595851,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -383,6 +395,12 @@
             "InheritedType": 2
           },
           {
+            "nid": -2054172852,
+            "strtype": "SCREEN/Overflow_visible",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
             "nid": 104917957,
             "strtype": "OBJECT/Flex_in_new_track",
             "strval": "False",
@@ -404,6 +422,12 @@
             "nid": 361982462,
             "strtype": "OBJECT/Scroll_momentum",
             "strval": "True",
+            "InheritedType": 2
+          },
+          {
+            "nid": -1297400646,
+            "strtype": "SCREEN/Scroll_with_arrow",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -469,6 +493,17 @@
           {
             "nid": 323481112,
             "strtype": "OBJECT/User_4",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
+            "nid": -763041027,
+            "strtype": "SCREEN/Screen",
+            "InheritedType": 1
+          },
+          {
+            "nid": 725407711,
+            "strtype": "SCREEN/Temporary",
             "strval": "False",
             "InheritedType": 2
           },
@@ -552,7 +587,7 @@
                   {
                     "nid": -1997655819,
                     "strtype": "CHANGE SCREEN/CallC",
-                    "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                    "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
                     "InheritedType": 10
                   },
                   {
@@ -805,6 +840,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": -366839085,
+                    "strtype": "LABEL/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": -477439196,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -856,6 +897,12 @@
                     "nid": -2044259252,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": 393994783,
+                    "strtype": "LABEL/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -1092,6 +1139,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 2076618898,
+                "strtype": "BUTTON/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 50209399,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -1143,6 +1196,12 @@
                 "nid": -1930264160,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": -1641959328,
+                "strtype": "BUTTON/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -1247,6 +1306,25 @@
                       }
                     ],
                     "InheritedType": 1
+                  },
+                  {
+                    "nid": -1370138973,
+                    "strtype": "_style/StyleState",
+                    "strval": "FOCUS_KEY",
+                    "childs": [
+                      {
+                        "nid": 1632347653,
+                        "strtype": "_style/Outline_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
+                        ],
+                        "InheritedType": 7
+                      }
+                    ],
+                    "InheritedType": 1
                   }
                 ],
                 "nid": 1047325171,
@@ -1298,7 +1376,7 @@
                       {
                         "nid": 341142047,
                         "strtype": "CHANGE SCREEN/CallC",
-                        "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                        "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
                         "InheritedType": 10
                       },
                       {
@@ -1491,6 +1569,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": 15965705,
+                    "strtype": "LABEL/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": -2004392223,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -1542,6 +1626,12 @@
                     "nid": -1986026720,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": -1402722980,
+                    "strtype": "LABEL/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -1777,6 +1867,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 180417249,
+                "strtype": "BUTTON/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": -721250389,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -1828,6 +1924,12 @@
                 "nid": -198411155,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 2000805367,
+                "strtype": "BUTTON/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -1927,6 +2029,25 @@
                         "intarray": [
                           0,
                           0
+                        ],
+                        "InheritedType": 7
+                      }
+                    ],
+                    "InheritedType": 1
+                  },
+                  {
+                    "nid": 1659537981,
+                    "strtype": "_style/StyleState",
+                    "strval": "FOCUS_KEY",
+                    "childs": [
+                      {
+                        "nid": 437073720,
+                        "strtype": "_style/Outline_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
                         ],
                         "InheritedType": 7
                       }
@@ -2123,6 +2244,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": -279279007,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": -35819333,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -2174,6 +2301,12 @@
                 "nid": 457785822,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": -1375473843,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -2424,6 +2557,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": -1800380878,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": -166971143,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -2475,6 +2614,12 @@
                 "nid": 203044287,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": -897881171,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -2724,6 +2869,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 399231095,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": -83239496,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -2775,6 +2926,12 @@
                 "nid": -588918738,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 768812727,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -3024,6 +3181,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": -1798125975,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 859462801,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -3075,6 +3238,12 @@
                 "nid": 1929131782,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 1303097986,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -3291,6 +3460,12 @@
             "InheritedType": 2
           },
           {
+            "nid": -1699995748,
+            "strtype": "SCREEN/Overflow_visible",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
             "nid": -8405703,
             "strtype": "OBJECT/Flex_in_new_track",
             "strval": "False",
@@ -3312,6 +3487,12 @@
             "nid": 409618230,
             "strtype": "OBJECT/Scroll_momentum",
             "strval": "True",
+            "InheritedType": 2
+          },
+          {
+            "nid": 125173061,
+            "strtype": "SCREEN/Scroll_with_arrow",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -3377,6 +3558,17 @@
           {
             "nid": 1397055319,
             "strtype": "OBJECT/User_4",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
+            "nid": 1238079887,
+            "strtype": "SCREEN/Screen",
+            "InheritedType": 1
+          },
+          {
+            "nid": -480467403,
+            "strtype": "SCREEN/Temporary",
             "strval": "False",
             "InheritedType": 2
           },
@@ -3968,6 +4160,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 292058172,
+                "strtype": "TEXTAREA/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 2024482012,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -4019,6 +4217,12 @@
                 "nid": 936303518,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 1176940950,
+                "strtype": "TEXTAREA/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -4299,6 +4503,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 1246330991,
+                "strtype": "KEYBOARD/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": -984450194,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -4350,6 +4560,12 @@
                 "nid": -1825100626,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": -295991782,
+                "strtype": "KEYBOARD/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -4700,6 +4916,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 1669795555,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 1076939084,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -4751,6 +4973,12 @@
                 "nid": 1507565878,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 59253437,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -4950,6 +5178,12 @@
             "InheritedType": 2
           },
           {
+            "nid": 1578965459,
+            "strtype": "SCREEN/Overflow_visible",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
             "nid": 299130656,
             "strtype": "OBJECT/Flex_in_new_track",
             "strval": "False",
@@ -4971,6 +5205,12 @@
             "nid": 1815736830,
             "strtype": "OBJECT/Scroll_momentum",
             "strval": "True",
+            "InheritedType": 2
+          },
+          {
+            "nid": -811829988,
+            "strtype": "SCREEN/Scroll_with_arrow",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -5036,6 +5276,17 @@
           {
             "nid": -801488365,
             "strtype": "OBJECT/User_4",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
+            "nid": 2039848946,
+            "strtype": "SCREEN/Screen",
+            "InheritedType": 1
+          },
+          {
+            "nid": 1454237374,
+            "strtype": "SCREEN/Temporary",
             "strval": "False",
             "InheritedType": 2
           },
@@ -5300,6 +5551,12 @@
                         "InheritedType": 2
                       },
                       {
+                        "nid": 527156460,
+                        "strtype": "LABEL/Overflow_visible",
+                        "strval": "False",
+                        "InheritedType": 2
+                      },
+                      {
                         "nid": 1119945926,
                         "strtype": "OBJECT/Flex_in_new_track",
                         "strval": "False",
@@ -5351,6 +5608,12 @@
                         "nid": -1357477035,
                         "strtype": "OBJECT/Scroll_chain",
                         "strval": "True",
+                        "InheritedType": 2
+                      },
+                      {
+                        "nid": 764259595,
+                        "strtype": "LABEL/Scroll_with_arrow",
+                        "strval": "False",
                         "InheritedType": 2
                       },
                       {
@@ -5587,6 +5850,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": 620834823,
+                    "strtype": "BUTTON/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": 317870371,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -5638,6 +5907,12 @@
                     "nid": -384089835,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": -1069628257,
+                    "strtype": "BUTTON/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -5737,6 +6012,25 @@
                             "intarray": [
                               0,
                               0
+                            ],
+                            "InheritedType": 7
+                          }
+                        ],
+                        "InheritedType": 1
+                      },
+                      {
+                        "nid": -446969878,
+                        "strtype": "_style/StyleState",
+                        "strval": "FOCUS_KEY",
+                        "childs": [
+                          {
+                            "nid": -2022144245,
+                            "strtype": "_style/Outline_Color",
+                            "intarray": [
+                              255,
+                              255,
+                              255,
+                              255
                             ],
                             "InheritedType": 7
                           }
@@ -5908,6 +6202,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": 1898726493,
+                    "strtype": "SPINNER/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": -1657138393,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -5935,6 +6235,12 @@
                     "nid": 1632899869,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": 1371608499,
+                    "strtype": "SPINNER/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -6174,6 +6480,12 @@
                         "InheritedType": 2
                       },
                       {
+                        "nid": 436111710,
+                        "strtype": "LABEL/Overflow_visible",
+                        "strval": "False",
+                        "InheritedType": 2
+                      },
+                      {
                         "nid": -1575756099,
                         "strtype": "OBJECT/Flex_in_new_track",
                         "strval": "False",
@@ -6225,6 +6537,12 @@
                         "nid": -1871142828,
                         "strtype": "OBJECT/Scroll_chain",
                         "strval": "True",
+                        "InheritedType": 2
+                      },
+                      {
+                        "nid": -1054822982,
+                        "strtype": "LABEL/Scroll_with_arrow",
+                        "strval": "False",
                         "InheritedType": 2
                       },
                       {
@@ -6461,6 +6779,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": -1447524222,
+                    "strtype": "BUTTON/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": -1507669651,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -6512,6 +6836,12 @@
                     "nid": -365448207,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": 1914527188,
+                    "strtype": "BUTTON/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -6616,6 +6946,25 @@
                           }
                         ],
                         "InheritedType": 1
+                      },
+                      {
+                        "nid": 1450357434,
+                        "strtype": "_style/StyleState",
+                        "strval": "FOCUS_KEY",
+                        "childs": [
+                          {
+                            "nid": -1164034157,
+                            "strtype": "_style/Outline_Color",
+                            "intarray": [
+                              255,
+                              255,
+                              255,
+                              255
+                            ],
+                            "InheritedType": 7
+                          }
+                        ],
+                        "InheritedType": 1
                       }
                     ],
                     "nid": -1180278755,
@@ -6705,7 +7054,7 @@
                           {
                             "nid": 212450976,
                             "strtype": "CHANGE SCREEN/CallC",
-                            "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                            "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
                             "InheritedType": 10
                           },
                           {
@@ -6738,8 +7087,7 @@
                     "InheritedType": 4
                   }
                 ],
-                "saved_objtypeKey": "BUTTON",
-                "tree_closed": true
+                "saved_objtypeKey": "BUTTON"
               }
             ],
             "locked": false,
@@ -6854,6 +7202,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 2139663289,
+                "strtype": "PANEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 436627649,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -6905,6 +7259,12 @@
                 "nid": 191582253,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 2144389118,
+                "strtype": "PANEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -7159,6 +7519,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": -136911652,
+                    "strtype": "LABEL/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": 577322472,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -7210,6 +7576,12 @@
                     "nid": -587767770,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": 547189172,
+                    "strtype": "LABEL/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -7446,6 +7818,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 1662823793,
+                "strtype": "BUTTON/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 1767856836,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -7497,6 +7875,12 @@
                 "nid": -252676537,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 1617656279,
+                "strtype": "BUTTON/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -7619,6 +8003,25 @@
                         "intarray": [
                           0,
                           0
+                        ],
+                        "InheritedType": 7
+                      }
+                    ],
+                    "InheritedType": 1
+                  },
+                  {
+                    "nid": 1470213563,
+                    "strtype": "_style/StyleState",
+                    "strval": "FOCUS_KEY",
+                    "childs": [
+                      {
+                        "nid": 616918211,
+                        "strtype": "_style/Outline_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
                         ],
                         "InheritedType": 7
                       }
@@ -7933,6 +8336,12 @@
                     "InheritedType": 2
                   },
                   {
+                    "nid": 1206825197,
+                    "strtype": "LABEL/Overflow_visible",
+                    "strval": "False",
+                    "InheritedType": 2
+                  },
+                  {
                     "nid": -1567847722,
                     "strtype": "OBJECT/Flex_in_new_track",
                     "strval": "False",
@@ -7984,6 +8393,12 @@
                     "nid": 280420583,
                     "strtype": "OBJECT/Scroll_chain",
                     "strval": "True",
+                    "InheritedType": 2
+                  },
+                  {
+                    "nid": 1773570877,
+                    "strtype": "LABEL/Scroll_with_arrow",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -8219,6 +8634,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": -1491926210,
+                "strtype": "BUTTON/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": -1726759677,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -8270,6 +8691,12 @@
                 "nid": -887847969,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": -481244970,
+                "strtype": "BUTTON/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -8373,6 +8800,25 @@
                       }
                     ],
                     "InheritedType": 1
+                  },
+                  {
+                    "nid": -1732997535,
+                    "strtype": "_style/StyleState",
+                    "strval": "FOCUS_KEY",
+                    "childs": [
+                      {
+                        "nid": 257133295,
+                        "strtype": "_style/Outline_Color",
+                        "intarray": [
+                          255,
+                          255,
+                          255,
+                          255
+                        ],
+                        "InheritedType": 7
+                      }
+                    ],
+                    "InheritedType": 1
                   }
                 ],
                 "nid": 993545909,
@@ -8424,7 +8870,7 @@
                       {
                         "nid": 766333292,
                         "strtype": "CHANGE SCREEN/CallC",
-                        "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                        "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
                         "InheritedType": 10
                       },
                       {
@@ -8543,11 +8989,11 @@
               },
               {
                 "nid": -1473010334,
-                "flags": 18,
+                "flags": 17,
                 "strtype": "OBJECT/Size",
                 "intarray": [
-                  100,
-                  141
+                  230,
+                  130
                 ],
                 "InheritedType": 7
               },
@@ -8612,6 +9058,12 @@
                 "InheritedType": 2
               },
               {
+                "nid": 979437960,
+                "strtype": "LABEL/Overflow_visible",
+                "strval": "False",
+                "InheritedType": 2
+              },
+              {
                 "nid": 456219424,
                 "strtype": "OBJECT/Flex_in_new_track",
                 "strval": "False",
@@ -8663,6 +9115,12 @@
                 "nid": -681375159,
                 "strtype": "OBJECT/Scroll_chain",
                 "strval": "True",
+                "InheritedType": 2
+              },
+              {
+                "nid": 1711057134,
+                "strtype": "LABEL/Scroll_with_arrow",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -8739,6 +9197,7 @@
               },
               {
                 "nid": 1144914755,
+                "flags": 1048576,
                 "strtype": "LABEL/Label",
                 "InheritedType": 1
               },
@@ -8896,6 +9355,12 @@
             "InheritedType": 2
           },
           {
+            "nid": 1945462375,
+            "strtype": "SCREEN/Overflow_visible",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
             "nid": 1979178529,
             "strtype": "OBJECT/Flex_in_new_track",
             "strval": "False",
@@ -8917,6 +9382,12 @@
             "nid": 1244666268,
             "strtype": "OBJECT/Scroll_momentum",
             "strval": "True",
+            "InheritedType": 2
+          },
+          {
+            "nid": 499721823,
+            "strtype": "SCREEN/Scroll_with_arrow",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -8982,6 +9453,17 @@
           {
             "nid": 1856593672,
             "strtype": "OBJECT/User_4",
+            "strval": "False",
+            "InheritedType": 2
+          },
+          {
+            "nid": 1999908492,
+            "strtype": "SCREEN/Screen",
+            "InheritedType": 1
+          },
+          {
+            "nid": -1323333139,
+            "strtype": "SCREEN/Temporary",
             "strval": "False",
             "InheritedType": 2
           },
@@ -9285,7 +9767,7 @@
               },
               {
                 "nid": 1531442128,
-                "strtype": "_custom/action",
+                "strtype": "_event/action",
                 "strval": "PLAY ANIMATION",
                 "childs": [
                   {
@@ -10444,7 +10926,7 @@
     "description": "",
     "board": "VS Code with SDL for development on PC",
     "board_version": "v1.0.1",
-    "editor_version": "1.3.0",
+    "editor_version": "1.3.1",
     "image": "",
     "force_export_images": false,
     "pointfilter": false,
@@ -10454,7 +10936,7 @@
     "theme_color2": 0,
     "exportFolderPath": "E:\\DOC\\git\\Smart-door-lock\\ui",
     "projectExportFolderPath": "",
-    "backup_cnt": 47,
+    "backup_cnt": 53,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

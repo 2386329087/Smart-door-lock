@@ -161,7 +161,8 @@ void fingerprint_recognition_task(void *pvParameters)
             {
                 mutex(lvgl_mutex_handler, 100,
                       lv_label_set_text(ui_Label7, "识别成功");
-                      _ui_screen_change(ui_adminScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 500);)
+                      lv_scr_load_anim(ui_adminScreen,LV_SCR_LOAD_ANIM_MOVE_LEFT,500,0,false);
+                      )
                       vTaskDelay(pdMS_TO_TICKS(1000));
 
             }
