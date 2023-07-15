@@ -27,6 +27,7 @@
 #include "timer.h"
 #include "PWM.h"
 #include "esp8266.h"
+#include "CH9141.h"
 /* Global typedef */
 
 /* Global define */
@@ -73,15 +74,11 @@ int main(void)
 
 //	PWM_Init();
 
-	esp8266_Init("Redmi K40","15813991772");
-	get_true_time(Time,Date,Week);
-	printf("%s\r\n%s\r\n%s\r\n",Time,Date,Week);
-
+	esp8266_Init_2("404", "");
+	Delay_Ms(1000);
+	uartWriteWiFiStr("TEST");
 	while(1)
     {
-	    system_time_increase();
-	    printf("%02d:%02d:%02d\r\n", TIME.hour,TIME.minute,TIME.second);
-	    Delay_Ms(1000);
 
 	}
 }
