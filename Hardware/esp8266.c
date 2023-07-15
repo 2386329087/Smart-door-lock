@@ -257,12 +257,14 @@ void system_time_increase(void)
 * 输    入       : *Time,*Date,*Week
 *注     释       :此为数组指针，数组长度建议偏大设置
 ********************************************************************/
-void get_true_time(char *Date,char *Week)
+void get_true_time(char *Time,char *Date,char *Week)
 {
     char *begin1;                       //日期与时间的起始地址
     char *begin2;                       //星期的起始地址
     char *end2;                         //星期的结束地址
-    char Time[100]="";              //时间字符串数组
+    Time[100]='\0';              //时间字符串数组
+    Date[100]='\0';              //日期字符串数组
+    Week[100]='\0';              //星期字符串数组
     //访问该网站会反馈时间数据
     while(uartWriteWiFiStr("GET http://api.k780.com:88/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json\r\n")==RESET);
     Delay_Ms(500);
@@ -336,6 +338,66 @@ void esp8266_Init(char *ID,char *Password)
     Delay_Ms(1000);
     //连接服务器
     while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"api.k780.com\",88\r\n")==RESET);
+    Delay_Ms(500);
+    //开启透传模式
+    while(uartWriteWiFiStr("AT+CIPMODE=1\r\n")==RESET);
+    Delay_Ms(100);
+    //AT+CIPMODE=1并且作为客户端模式下，进入透传模式(需要支持硬件流控，否则大量数据情况下会丢数据)模块收到指令后先换行返回”>”，然后会发送串口接收到的数据。
+    while(uartWriteWiFiStr("AT+CIPSEND\r\n")==RESET);
+    Delay_Ms(100);
+        num = uartAvailableWiFi();
+        if (num > 0 ){
+            char buffer[1024]={"\0"};
+            uartReadWiFi(buffer , num);
+            printf("Revceived:\r\n%s",buffer);
+        }
+}
+
+void esp8266_Init_2(char *ID,char *Password)
+{
+    char WIFI_change[]="AT+CWJAP=\"Li\",\"15813991772\"\r\n";
+    sprintf(WIFI_change,"AT+CWJAP=\"%s\",\"%s\"\r\n",ID,Password);
+    printf("%s\r\n",WIFI_change);
+
+    DMA_INIT();
+    USARTx_CFG();                                                 /* USART INIT */
+    USART_DMACmd(UART6,USART_DMAReq_Tx|USART_DMAReq_Rx,ENABLE);
+//    TIM6_Init( 5000-1, 14400-1 );
+
+    // 退出透传
+    while (uartWriteWiFi("+++", 3));
+    Delay_Ms(100);
+    // 查询 WiFi 模块是否正常工作
+        uartWriteWiFi("AT\r\n",4);
+        Delay_Ms(100);
+    //断开与服务器的连接
+    while(uartWriteWiFiStr("AT+CIPCLOSE\r\n")==RESET);
+    Delay_Ms(100);
+    // 查询 WiFi 模块是否正常工作
+    uartWriteWiFi("AT\r\n",4);
+    Delay_Ms(100);
+    // 查询 打开AT回显
+    uartWriteWiFi("ATE1\r\n",6);
+    Delay_Ms(100);
+    // 设为 Station 模式
+    while(uartWriteWiFiStr("AT+CWMODE=1\r\n")==RESET);
+    Delay_Ms(100);
+    // 设为单连接模式
+    while(uartWriteWiFiStr("AT+CIPMUX=0\r\n")==RESET);
+    Delay_Ms(100);
+    // 连接一个名为 SSID、密码为 PASSWORD 的 WiFi 网络，
+    while(uartWriteWiFiStr(WIFI_change)==RESET);
+    Delay_Ms(4000);
+    //打印之前收到的信息
+    int num = uartAvailableWiFi();
+    if (num > 0 ){
+        char buffer[1024]={"\0"};
+        uartReadWiFi(buffer , num);
+        printf("Revceived:\r\n%s",buffer);
+    }
+    Delay_Ms(1000);
+    //连接服务器
+    while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
     Delay_Ms(500);
     //开启透传模式
     while(uartWriteWiFiStr("AT+CIPMODE=1\r\n")==RESET);
