@@ -353,12 +353,17 @@ void esp8266_Init(char *ID,char *Password)
         }
 }
 
+/***************************************************************************
+描述:主从机初始化
+参数:  ID:WIFI名称       Password：WIFI密码
+返回: 无
+****************************************************************************/
 void esp8266_Init_2(char *ID,char *Password)
 {
     char WIFI_change[]="AT+CWJAP=\"Li\",\"15813991772\"\r\n";
     sprintf(WIFI_change,"AT+CWJAP=\"%s\",\"%s\"\r\n",ID,Password);
     printf("%s\r\n",WIFI_change);
-
+    uint8_t i=0;
     DMA_INIT();
     USARTx_CFG();                                                 /* USART INIT */
     USART_DMACmd(UART6,USART_DMAReq_Tx|USART_DMAReq_Rx,ENABLE);
@@ -399,6 +404,12 @@ void esp8266_Init_2(char *ID,char *Password)
     //连接服务器
     while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
     Delay_Ms(500);
+    while(esp8266_receive_judge("busy") && i<3)
+    {
+        i++;
+        while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
+        Delay_Ms(500);
+    }
     //开启透传模式
     while(uartWriteWiFiStr("AT+CIPMODE=1\r\n")==RESET);
     Delay_Ms(100);
@@ -411,6 +422,35 @@ void esp8266_Init_2(char *ID,char *Password)
             uartReadWiFi(buffer , num);
             printf("Revceived:\r\n%s",buffer);
         }
+}
+
+/***************************************************************************
+描述获取DMA缓冲区的数据，比较其中的字符串是否与参数相同
+参数:  字符串
+返回: 有:1      无:0
+****************************************************************************/
+uint8_t esp8266_receive_judge(char *str)
+{
+    char *data;
+    int num;
+    char buffer[1024]={"\0"};
+
+    Delay_Ms(100);
+
+    num = uartAvailableWiFi();
+            if (num > 0 )
+            {
+                memset(buffer,'\0',sizeof(buffer));
+                uartReadWiFi(buffer , num);
+                printf("Revceived:\r\n%s",buffer);
+            }
+
+            data=strstr(buffer,str);
+            if(data != NULL)
+            {
+                return 1;
+            }
+     return 0;
 }
 
 /********************************************************************
