@@ -8604,7 +8604,7 @@
                       {
                         "nid": -1078169153,
                         "strtype": "OBJECT/Disabled",
-                        "strval": "False",
+                        "strval": "True",
                         "InheritedType": 2
                       },
                       {
@@ -8669,6 +8669,25 @@
                               }
                             ],
                             "InheritedType": 1
+                          },
+                          {
+                            "nid": -1861306524,
+                            "strtype": "_style/StyleState",
+                            "strval": "DISABLED",
+                            "childs": [
+                              {
+                                "nid": -1030502663,
+                                "strtype": "_style/Bg_Color",
+                                "intarray": [
+                                  255,
+                                  255,
+                                  255,
+                                  50
+                                ],
+                                "InheritedType": 7
+                              }
+                            ],
+                            "InheritedType": 1
                           }
                         ],
                         "nid": -1141217123,
@@ -8686,7 +8705,27 @@
                       },
                       {
                         "part": "lv.PART.KNOB",
-                        "childs": [],
+                        "childs": [
+                          {
+                            "nid": 1205872193,
+                            "strtype": "_style/StyleState",
+                            "strval": "DISABLED",
+                            "childs": [
+                              {
+                                "nid": -1597352925,
+                                "strtype": "_style/Bg_Color",
+                                "intarray": [
+                                  255,
+                                  255,
+                                  255,
+                                  100
+                                ],
+                                "InheritedType": 7
+                              }
+                            ],
+                            "InheritedType": 1
+                          }
+                        ],
                         "nid": -2087865881,
                         "strtype": "SWITCH/Style_knob",
                         "strval": "lv.PART.KNOB, Rectangle, Pad",
@@ -9605,7 +9644,7 @@
                       {
                         "nid": 1260597277,
                         "strtype": "OBJECT/Disabled",
-                        "strval": "False",
+                        "strval": "True",
                         "InheritedType": 2
                       },
                       {
@@ -9670,6 +9709,25 @@
                               }
                             ],
                             "InheritedType": 1
+                          },
+                          {
+                            "nid": 1221765031,
+                            "strtype": "_style/StyleState",
+                            "strval": "DISABLED",
+                            "childs": [
+                              {
+                                "nid": 1081009016,
+                                "strtype": "_style/Bg_Color",
+                                "intarray": [
+                                  255,
+                                  255,
+                                  255,
+                                  50
+                                ],
+                                "InheritedType": 7
+                              }
+                            ],
+                            "InheritedType": 1
                           }
                         ],
                         "nid": -1841287666,
@@ -9687,7 +9745,27 @@
                       },
                       {
                         "part": "lv.PART.KNOB",
-                        "childs": [],
+                        "childs": [
+                          {
+                            "nid": -434468825,
+                            "strtype": "_style/StyleState",
+                            "strval": "DISABLED",
+                            "childs": [
+                              {
+                                "nid": 1622497631,
+                                "strtype": "_style/Bg_Color",
+                                "intarray": [
+                                  255,
+                                  255,
+                                  255,
+                                  100
+                                ],
+                                "InheritedType": 7
+                              }
+                            ],
+                            "InheritedType": 1
+                          }
+                        ],
                         "nid": -1465422828,
                         "strtype": "SWITCH/Style_knob",
                         "strval": "lv.PART.KNOB, Rectangle, Pad",
@@ -10025,7 +10103,6 @@
                   },
                   {
                     "nid": 230069618,
-                    "flags": 1048576,
                     "strtype": "OBJECT/States",
                     "InheritedType": 1
                   },
@@ -11723,48 +11800,98 @@
                 "InheritedType": 10
               },
               {
-                "nid": 1531442128,
-                "strtype": "_event/action",
+                "nid": -1395907121,
+                "strtype": "_custom/action",
                 "strval": "PLAY ANIMATION",
                 "childs": [
                   {
-                    "nid": -2032585467,
+                    "nid": -2033762929,
                     "strtype": "PLAY ANIMATION/Name",
                     "strval": "PLAY ANIMATION",
                     "InheritedType": 10
                   },
                   {
-                    "nid": 1451184178,
+                    "nid": 1819810045,
                     "strtype": "PLAY ANIMATION/FunctionName",
                     "strval": "opacity_Animation",
                     "InheritedType": 10
                   },
                   {
-                    "nid": 399093202,
+                    "nid": 619320447,
                     "strtype": "PLAY ANIMATION/Animation",
                     "strval": "opacity",
                     "InheritedType": 8
                   },
                   {
-                    "nid": 2075637477,
+                    "nid": 864952945,
                     "strtype": "PLAY ANIMATION/Target",
-                    "strval": "-",
+                    "strval": "GUID54359785-665276S8432196",
                     "InheritedType": 9
                   },
                   {
-                    "nid": -2063423594,
+                    "nid": -2022363455,
                     "strtype": "PLAY ANIMATION/Delay",
-                    "integer": 1000,
+                    "integer": 1200,
                     "InheritedType": 6
                   },
                   {
-                    "nid": 1551136104,
+                    "nid": 942653231,
                     "strtype": "PLAY ANIMATION/Call",
                     "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
                     "InheritedType": 10
                   },
                   {
-                    "nid": -1244442327,
+                    "nid": -477015190,
+                    "strtype": "PLAY ANIMATION/CallC",
+                    "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 10
+              },
+              {
+                "nid": 1708558966,
+                "strtype": "_custom/action",
+                "strval": "PLAY ANIMATION",
+                "childs": [
+                  {
+                    "nid": -1647603292,
+                    "strtype": "PLAY ANIMATION/Name",
+                    "strval": "PLAY ANIMATION",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1486579501,
+                    "strtype": "PLAY ANIMATION/FunctionName",
+                    "strval": "opacity_Animation",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -770722101,
+                    "strtype": "PLAY ANIMATION/Animation",
+                    "strval": "opacity",
+                    "InheritedType": 8
+                  },
+                  {
+                    "nid": 1455228122,
+                    "strtype": "PLAY ANIMATION/Target",
+                    "strval": "GUID20692195-609231S1852196",
+                    "InheritedType": 9
+                  },
+                  {
+                    "nid": 71873470,
+                    "strtype": "PLAY ANIMATION/Delay",
+                    "integer": 1000,
+                    "InheritedType": 6
+                  },
+                  {
+                    "nid": 1611857684,
+                    "strtype": "PLAY ANIMATION/Call",
+                    "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1567589946,
                     "strtype": "PLAY ANIMATION/CallC",
                     "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
                     "InheritedType": 10
@@ -12893,7 +13020,7 @@
     "theme_color2": 0,
     "exportFolderPath": "E:\\DOC\\git\\Smart-door-lock\\ui",
     "projectExportFolderPath": "",
-    "backup_cnt": 64,
+    "backup_cnt": 65,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

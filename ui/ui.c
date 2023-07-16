@@ -283,6 +283,8 @@ void ui_event_adminScreen(lv_event_t * e)
         right_Animation(ui_emptyallfingerprintButton, 600);
         opacity_Animation(ui_ChangePasswordButton, 600);
         opacity_Animation(ui_addfingerprintButton, 600);
+        opacity_Animation(ui_Panel4, 1200);
+        opacity_Animation(ui_Panel3, 1000);
     }
 }
 void ui_event_addfingerprintButton(lv_event_t * e)

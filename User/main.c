@@ -280,6 +280,10 @@ void time_task(void *pvParameters){
     get_true_time(date,week);
     printf("date:%s week:%s\n",date,week);
     esp8266_Init_2("404","");
+    mutex(lvgl_mutex_handler,1000,
+        lv_obj_clear_state(ui_ledSwitch,LV_STATE_DISABLED);
+        lv_obj_clear_state(ui_fanSwitch,LV_STATE_DISABLED);
+    )
     while (1)
     {
         system_time_increase();

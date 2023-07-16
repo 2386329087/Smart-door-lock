@@ -141,8 +141,14 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_width(ui_ledSwitch, 50);
     lv_obj_set_height(ui_ledSwitch, 25);
     lv_obj_set_align(ui_ledSwitch, LV_ALIGN_CENTER);
+    lv_obj_add_state(ui_ledSwitch, LV_STATE_DISABLED);       /// States
     lv_obj_set_style_bg_color(ui_ledSwitch, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_ledSwitch, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_ledSwitch, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DISABLED);
+    lv_obj_set_style_bg_opa(ui_ledSwitch, 50, LV_PART_MAIN | LV_STATE_DISABLED);
+
+    lv_obj_set_style_bg_color(ui_ledSwitch, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DISABLED);
+    lv_obj_set_style_bg_opa(ui_ledSwitch, 100, LV_PART_KNOB | LV_STATE_DISABLED);
 
     ui_Panel4 = lv_obj_create(ui_Panel1);
     lv_obj_set_width(ui_Panel4, LV_SIZE_CONTENT);   /// 100
@@ -171,8 +177,14 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_width(ui_fanSwitch, 50);
     lv_obj_set_height(ui_fanSwitch, 25);
     lv_obj_set_align(ui_fanSwitch, LV_ALIGN_CENTER);
+    lv_obj_add_state(ui_fanSwitch, LV_STATE_DISABLED);       /// States
     lv_obj_set_style_bg_color(ui_fanSwitch, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_fanSwitch, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_fanSwitch, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DISABLED);
+    lv_obj_set_style_bg_opa(ui_fanSwitch, 50, LV_PART_MAIN | LV_STATE_DISABLED);
+
+    lv_obj_set_style_bg_color(ui_fanSwitch, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DISABLED);
+    lv_obj_set_style_bg_opa(ui_fanSwitch, 100, LV_PART_KNOB | LV_STATE_DISABLED);
 
     ui_emptyallfingerprintButton = lv_btn_create(ui_adminScreen);
     lv_obj_set_width(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);   /// 1
