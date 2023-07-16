@@ -60,7 +60,15 @@ lv_obj_t * ui_Label8;
 void ui_event_backButton(lv_event_t * e);
 lv_obj_t * ui_backButton;
 lv_obj_t * ui_Label9;
-lv_obj_t * ui_infoLabel;
+lv_obj_t * ui_Panel1;
+lv_obj_t * ui_Panel3;
+lv_obj_t * ui_Label10;
+void ui_event_ledSwitch(lv_event_t * e);
+lv_obj_t * ui_ledSwitch;
+lv_obj_t * ui_Panel4;
+lv_obj_t * ui_Label11;
+void ui_event_fanSwitch(lv_event_t * e);
+lv_obj_t * ui_fanSwitch;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -275,7 +283,6 @@ void ui_event_adminScreen(lv_event_t * e)
         right_Animation(ui_emptyallfingerprintButton, 600);
         opacity_Animation(ui_ChangePasswordButton, 600);
         opacity_Animation(ui_addfingerprintButton, 600);
-        opacity_Animation(ui_infoLabel, 1000);
     }
 }
 void ui_event_addfingerprintButton(lv_event_t * e)
@@ -314,6 +321,28 @@ void ui_event_backButton(lv_event_t * e)
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_userScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 400, 0, &ui_userScreen_screen_init);
         backButton(e);
+    }
+}
+void ui_event_ledSwitch(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        led_enable(e);
+    }
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        led_disable(e);
+    }
+}
+void ui_event_fanSwitch(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        fan_enable(e);
+    }
+    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
+        fan_disable(e);
     }
 }
 

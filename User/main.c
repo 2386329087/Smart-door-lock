@@ -44,7 +44,7 @@ lv_group_t *group;
 TaskHandle_t lvgl_tick_Task_Handler;
 TaskHandle_t lvgl_timer_Task_Handler;
 TimerHandle_t quit_timer_handler;
-SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler,timer_mutex_handler;
+SemaphoreHandle_t uart2_mutex_handler, dht11_mutex_handler, lvgl_mutex_handler,timer_mutex_handler,esp8266_mutex_handler;
 QueueHandle_t ap3216c_queue_handler;
 char date[20],week[20];
 //温度，湿度
@@ -279,6 +279,7 @@ void time_task(void *pvParameters){
     esp8266_Init("404","");
     get_true_time(date,week);
     printf("date:%s week:%s\n",date,week);
+    esp8266_Init_2("404","");
     while (1)
     {
         system_time_increase();
@@ -295,13 +296,31 @@ void show_info_task(void *pvParameters){
     while (1)
     {
         // vTaskList(info);
-        mutex(lvgl_mutex_handler,100,
-        // lv_label_set_text(ui_infoLabel,info);
-        lv_label_set_text_fmt(ui_infoLabel,"size:%d",xPortGetMinimumEverFreeHeapSize());
+        // mutex(lvgl_mutex_handler,100,
+        // // lv_label_set_text(ui_infoLabel,info);
+        // lv_label_set_text_fmt(ui_infoLabel,"size:%d",xPortGetMinimumEverFreeHeapSize());
         
-        )
+        // )
         vTaskDelay(pdMS_TO_TICKS(3000));
     }
+    
+}
+
+void esp8266_control_task(void *pvParameters){
+    while (1)
+    {
+        mutex(esp8266_mutex_handler,50000,
+        while (uartWriteWiFiStr((char *)pvParameters)==0)
+        {
+            printf("send error\n");
+            vTaskDelay(pdMS_TO_TICKS(300));
+        }
+        printf("send:%s\n",(char *)pvParameters);
+        )
+        vTaskDelete(NULL);
+        
+    }
+    
     
 }
 int main(void)
@@ -328,6 +347,7 @@ int main(void)
     lvgl_mutex_handler = xSemaphoreCreateMutex();
     ap3216c_queue_handler= xQueueCreate(1,sizeof(uint16_t));
     timer_mutex_handler=xSemaphoreCreateMutex();
+    esp8266_mutex_handler=xSemaphoreCreateMutex();
     xTaskCreate(lvgl_tick_task, "lvgl_tick_task", 64, NULL, 14, &lvgl_tick_Task_Handler);
     xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 1, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 6, NULL);

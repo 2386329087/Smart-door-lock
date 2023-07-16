@@ -8,6 +8,7 @@
 #include "task.h"
 #include "timers.h"
 #include "AS608.h"
+#include "esp8266.h"
 void (*submitPasswordPointer)();
 void (*cancelPasswordInputPointer)();
 extern uint8_t PS_ReadNotepad_code[32];    //存放接受到的记事本数据
@@ -88,7 +89,10 @@ void adminScreen_init(lv_event_t * e)
 
     lv_group_add_obj(lv_group_get_default(),ui_backButton);
     
-    lv_group_add_obj(lv_group_get_default(),ui_emptyallfingerprintButton);
+    
+    lv_group_add_obj(lv_group_get_default(),ui_ledSwitch);
+    lv_group_add_obj(lv_group_get_default(),ui_fanSwitch);
+    
     lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);
     lv_group_add_obj(lv_group_get_default(),ui_ChangePasswordButton);
     xTaskCreate(gating_task,"gating_task",200,NULL,9,NULL);
@@ -140,4 +144,24 @@ void backButton(lv_event_t * e)
 {
 	xTimerStop(quit_timer_handler,pdMS_TO_TICKS(100));
     
+}
+extern void esp8266_control_task(void *pvParameters);
+void led_enable(lv_event_t * e)
+{
+	xTaskCreate(esp8266_control_task,"esp8266_control_task",256,"LED_ON",12,NULL);
+}
+
+void led_disable(lv_event_t * e)
+{
+	xTaskCreate(esp8266_control_task,"esp8266_control_task",256,"LED_OFF",12,NULL);
+}
+
+void fan_enable(lv_event_t * e)
+{
+	xTaskCreate(esp8266_control_task,"esp8266_control_task",256,"FAN_ON",12,NULL);
+}
+
+void fan_disable(lv_event_t * e)
+{
+	xTaskCreate(esp8266_control_task,"esp8266_control_task",256,"FAN_OFF",12,NULL);
 }

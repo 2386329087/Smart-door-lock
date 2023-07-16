@@ -66,3 +66,19 @@ def ChangePasswordButton(event_struct):
 def backButton(event_struct):
     return
 
+
+def led_enable(event_struct):
+    return
+
+
+def led_disable(event_struct):
+    return
+
+
+def fan_enable(event_struct):
+    return
+
+
+def fan_disable(event_struct):
+    return
+

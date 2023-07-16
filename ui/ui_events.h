@@ -22,6 +22,10 @@ void add_fingerprint(lv_event_t * e);
 void ChangePasswordButton(lv_event_t * e);
 void empty_all_fingerprint(lv_event_t * e);
 void backButton(lv_event_t * e);
+void led_enable(lv_event_t * e);
+void led_disable(lv_event_t * e);
+void fan_enable(lv_event_t * e);
+void fan_disable(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/
