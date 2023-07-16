@@ -310,6 +310,11 @@ void esp8266_Init(char *ID,char *Password)
     // 退出透传
     while (uartWriteWiFi("+++", 3));
     Delay_Ms(100);
+    // 查询 WiFi 模块是否正常工作
+        uartWriteWiFi("AT\r\n",4);
+        Delay_Ms(100);
+    while(uartWriteWiFiStr("AT+RST\r\n")==RESET);
+    Delay_Ms(100);
     //断开与服务器的连接
     while(uartWriteWiFiStr("AT+CIPCLOSE\r\n")==RESET);
     Delay_Ms(100);
@@ -364,9 +369,9 @@ void esp8266_Init_2(char *ID,char *Password)
     sprintf(WIFI_change,"AT+CWJAP=\"%s\",\"%s\"\r\n",ID,Password);
     printf("%s\r\n",WIFI_change);
     uint8_t i=0;
-    DMA_INIT();
-    USARTx_CFG();                                                 /* USART INIT */
-    USART_DMACmd(UART6,USART_DMAReq_Tx|USART_DMAReq_Rx,ENABLE);
+//    DMA_INIT();
+//    USARTx_CFG();                                                 /* USART INIT */
+//    USART_DMACmd(UART6,USART_DMAReq_Tx|USART_DMAReq_Rx,ENABLE);
 //    TIM6_Init( 5000-1, 14400-1 );
 
     // 退出透传
@@ -374,6 +379,8 @@ void esp8266_Init_2(char *ID,char *Password)
     Delay_Ms(100);
     // 查询 WiFi 模块是否正常工作
         uartWriteWiFi("AT\r\n",4);
+        Delay_Ms(100);
+        while(uartWriteWiFiStr("AT+RST\r\n")==RESET);
         Delay_Ms(100);
     //断开与服务器的连接
     while(uartWriteWiFiStr("AT+CIPCLOSE\r\n")==RESET);
@@ -402,14 +409,11 @@ void esp8266_Init_2(char *ID,char *Password)
     }
     Delay_Ms(1000);
     //连接服务器
-    while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
-    Delay_Ms(500);
-    while(esp8266_receive_judge("busy") && i<3)
-    {
-        i++;
+    do {
         while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
         Delay_Ms(500);
-    }
+    } while (esp8266_receive_judge("CONNECT")!=1);
+    Delay_Ms(500);
     //开启透传模式
     while(uartWriteWiFiStr("AT+CIPMODE=1\r\n")==RESET);
     Delay_Ms(100);
