@@ -44,6 +44,10 @@
  */
 int main(void)
 {
+    char time[20];
+    char date[20];
+    char week[20];
+
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
 	Delay_Init();
@@ -70,11 +74,15 @@ int main(void)
 
 //	PWM_Init();
 
+	esp8266_Init("404", "");
+	get_true_time(time,date,week);
+	printf("%s,%S,%S\r\n",time,date,week);
+
 	esp8266_Init_2("404", "");
 	Delay_Ms(1000);
-	uartWriteWiFiStr("LED_ON");
 	while(1)
     {
-
+	    while(uartWriteWiFiStr("LED_ON")==RESET);
+	    Delay_Ms(100);
 	}
 }
