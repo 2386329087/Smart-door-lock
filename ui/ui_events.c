@@ -89,8 +89,9 @@ void adminScreen_init(lv_event_t * e)
 
     lv_group_add_obj(lv_group_get_default(),ui_backButton);
     
-    
+    lv_group_add_obj(lv_group_get_default(),ui_emptyallfingerprintButton);
     lv_group_add_obj(lv_group_get_default(),ui_ledSwitch);
+    
     lv_group_add_obj(lv_group_get_default(),ui_fanSwitch);
     
     lv_group_add_obj(lv_group_get_default(),ui_addfingerprintButton);

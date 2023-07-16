@@ -54,9 +54,6 @@ lv_obj_t * ui_addfingerprinting;
 void ui_event_ChangePasswordButton(lv_event_t * e);
 lv_obj_t * ui_ChangePasswordButton;
 lv_obj_t * ui_Label6;
-void ui_event_emptyallfingerprintButton(lv_event_t * e);
-lv_obj_t * ui_emptyallfingerprintButton;
-lv_obj_t * ui_Label8;
 void ui_event_backButton(lv_event_t * e);
 lv_obj_t * ui_backButton;
 lv_obj_t * ui_Label9;
@@ -69,6 +66,9 @@ lv_obj_t * ui_Panel4;
 lv_obj_t * ui_Label11;
 void ui_event_fanSwitch(lv_event_t * e);
 lv_obj_t * ui_fanSwitch;
+void ui_event_emptyallfingerprintButton(lv_event_t * e);
+lv_obj_t * ui_emptyallfingerprintButton;
+lv_obj_t * ui_Label12;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -302,18 +302,6 @@ void ui_event_ChangePasswordButton(lv_event_t * e)
         _ui_screen_change(&ui_passwordScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 300, 0, &ui_passwordScreen_screen_init);
     }
 }
-void ui_event_emptyallfingerprintButton(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_LONG_PRESSED) {
-        empty_all_fingerprint(e);
-        _ui_label_set_property(ui_Label8, _UI_LABEL_PROPERTY_TEXT, "已清空");
-    }
-    if(event_code == LV_EVENT_RELEASED) {
-        _ui_label_set_property(ui_Label8, _UI_LABEL_PROPERTY_TEXT, "清空指纹库");
-    }
-}
 void ui_event_backButton(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -343,6 +331,18 @@ void ui_event_fanSwitch(lv_event_t * e)
     }
     if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
         fan_disable(e);
+    }
+}
+void ui_event_emptyallfingerprintButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        empty_all_fingerprint(e);
+        _ui_label_set_property(ui_Label12, _UI_LABEL_PROPERTY_TEXT, "已清空");
+    }
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_label_set_property(ui_Label12, _UI_LABEL_PROPERTY_TEXT, "清空指纹库");
     }
 }
 

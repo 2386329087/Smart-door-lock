@@ -80,28 +80,6 @@ void ui_adminScreen_screen_init(void)
     lv_label_set_text(ui_Label6, "修改密码");
     lv_obj_set_style_text_font(ui_Label6, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_emptyallfingerprintButton = lv_btn_create(ui_adminScreen);
-    lv_obj_set_width(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);   /// 100
-    lv_obj_set_height(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);    /// 50
-    lv_obj_set_align(ui_emptyallfingerprintButton, LV_ALIGN_TOP_RIGHT);
-    lv_obj_add_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui_emptyallfingerprintButton, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_width(ui_emptyallfingerprintButton, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_side(ui_emptyallfingerprintButton, LV_BORDER_SIDE_BOTTOM, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_width(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_spread(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Label8 = lv_label_create(ui_emptyallfingerprintButton);
-    lv_obj_set_width(ui_Label8, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label8, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label8, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label8, "清空指纹库");
-    lv_obj_set_style_text_font(ui_Label8, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_backButton = lv_btn_create(ui_adminScreen);
     lv_obj_set_width(ui_backButton, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_backButton, LV_SIZE_CONTENT);    /// 1
@@ -196,12 +174,36 @@ void ui_adminScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_fanSwitch, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_fanSwitch, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_emptyallfingerprintButton = lv_btn_create(ui_adminScreen);
+    lv_obj_set_width(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_emptyallfingerprintButton, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_emptyallfingerprintButton, 0);
+    lv_obj_set_y(ui_emptyallfingerprintButton, 1);
+    lv_obj_set_align(ui_emptyallfingerprintButton, LV_ALIGN_TOP_RIGHT);
+    lv_obj_add_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_emptyallfingerprintButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_emptyallfingerprintButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_emptyallfingerprintButton, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_emptyallfingerprintButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_emptyallfingerprintButton, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_side(ui_emptyallfingerprintButton, LV_BORDER_SIDE_BOTTOM, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_spread(ui_emptyallfingerprintButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Label12 = lv_label_create(ui_emptyallfingerprintButton);
+    lv_obj_set_width(ui_Label12, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label12, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Label12, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label12, "清空指纹库");
+    lv_obj_set_style_text_font(ui_Label12, &ui_font_chinese, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_addfingerprintButton, ui_event_addfingerprintButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ChangePasswordButton, ui_event_ChangePasswordButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_emptyallfingerprintButton, ui_event_emptyallfingerprintButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_backButton, ui_event_backButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ledSwitch, ui_event_ledSwitch, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_fanSwitch, ui_event_fanSwitch, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_emptyallfingerprintButton, ui_event_emptyallfingerprintButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_adminScreen, ui_event_adminScreen, LV_EVENT_ALL, NULL);
 
 }
