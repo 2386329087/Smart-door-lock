@@ -362,7 +362,7 @@ void esp8266_Init_2(char *ID,char *Password)
 {
     char WIFI_change[]="AT+CWJAP=\"Li\",\"15813991772\"\r\n";
     sprintf(WIFI_change,"AT+CWJAP=\"%s\",\"%s\"\r\n",ID,Password);
-    printf("%s\r\n",WIFI_change);
+    printf("ESP8266_INIT2:%s\r\n",WIFI_change);
     uint8_t i=0;
     DMA_INIT();
     USARTx_CFG();                                                 /* USART INIT */
@@ -420,7 +420,7 @@ void esp8266_Init_2(char *ID,char *Password)
         if (num > 0 ){
             char buffer[1024]={"\0"};
             uartReadWiFi(buffer , num);
-            printf("Revceived:\r\n%s",buffer);
+            printf("ESP_INIT2_Revceived:\r\n%s",buffer);
         }
 }
 

@@ -352,7 +352,7 @@ int main(void)
     xTaskCreate(lvgl_timer_task, "lvgl_timer_task", 1000, NULL, 1, &lvgl_timer_Task_Handler);
     xTaskCreate(dht11_task, "dht11_task", 128, NULL, 6, NULL);
     xTaskCreate(ap3216c_task,"ap3216c_task",128,NULL,6,NULL);
-    xTaskCreate(time_task,"time_task",500,NULL,10,NULL);
+    xTaskCreate(time_task,"time_task",1000,NULL,10,NULL);
     xTaskCreate(show_info_task,"show_info_task",600,NULL,10,NULL);
     quit_timer_handler=xTimerCreate("exit_timer",pdMS_TO_TICKS(1000*60),pdFALSE,NULL,quit_timer_callback);
     vTaskStartScheduler();
