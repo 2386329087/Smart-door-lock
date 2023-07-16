@@ -404,7 +404,7 @@ void esp8266_Init_2(char *ID,char *Password)
     //连接服务器
     while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
     Delay_Ms(500);
-    if(esp8266_receive_judge("busy") && i<3)
+    while(esp8266_receive_judge("busy") && i<3)
     {
         i++;
         while(uartWriteWiFiStr("AT+CIPSTART=\"TCP\",\"192.168.1.243\",333\r\n")==RESET);
