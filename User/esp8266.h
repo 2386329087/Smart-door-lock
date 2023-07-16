@@ -19,5 +19,6 @@ void esp8266_Init_2(char *ID,char *Password);
 void system_time_increase(void);
 void get_true_time(char *Time,char *Date,char *Week);
 FlagStatus uartWriteWiFiStr(char * str);
+uint8_t esp8266_receive_judge(char *str);
 
 #endif

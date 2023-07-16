@@ -44,10 +44,6 @@
  */
 int main(void)
 {
-    char Time[100];
-    char Date[100];
-    char Week[100];
-
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
 	Delay_Init();
@@ -76,7 +72,7 @@ int main(void)
 
 	esp8266_Init_2("404", "");
 	Delay_Ms(1000);
-	uartWriteWiFiStr("TEST");
+	uartWriteWiFiStr("LED_ON");
 	while(1)
     {
 
