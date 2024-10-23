@@ -1,5 +1,5 @@
 Mcu Type=CH32V30x
-Target Path=obj\æ™ºéšœé—¨é”-FreeRTOS.hex
+Target Path=obj\ÖÇÕÏÃÅËø-FreeRTOS.hex
 Address=0x08000000
 Erase All=true
 Program=true
